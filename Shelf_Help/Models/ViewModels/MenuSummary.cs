@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shelf_Help.Models
+namespace Shelf_Help.Models.ViewModels
 {
-    public class Menu
+    public class MenuSummary
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
@@ -17,5 +17,6 @@ namespace Shelf_Help.Models
         public MealType MenuType { get; set; }
         public List<FoodItem> Ingredients { get; set; }
 
+        // need to finish this 
     }
 }
