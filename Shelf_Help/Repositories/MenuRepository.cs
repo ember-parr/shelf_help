@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Shelf_Help.Repositories
 {
-    public class MenuRepository
+    public class MenuRepository : IMenuRepository
     {
         private ApplicationDbContext _context;
 
@@ -31,7 +31,7 @@ namespace Shelf_Help.Repositories
         public List<MenuSummary> GetUsersMenu(int userId)
         {
             return _context.Menu
-                .Include(m  => m.MenuType)
+                .Include(m => m.MenuType)
                 .Where(m => m.UserId == userId)
                 .OrderByDescending(m => m.Date)
                 .Select(m => new MenuSummary()
@@ -51,11 +51,11 @@ namespace Shelf_Help.Repositories
         }
 
         // get todays menu entries for current user
-        
-        
+
+
 
         // add a new menu entry to the database
-        public void Add (Menu menu)
+        public void Add(Menu menu)
         {
             _context.Add(menu);
             _context.SaveChanges();
@@ -63,7 +63,7 @@ namespace Shelf_Help.Repositories
 
 
         // update an existing menu entry in the database
-        public void Update (Menu menu)
+        public void Update(Menu menu)
         {
             var local = _context.Set<Menu>()
                 .Local
@@ -77,7 +77,9 @@ namespace Shelf_Help.Repositories
             _context.SaveChanges();
         }
 
-        public void Delete (int id)
+
+        // delete a menu entry
+        public void Delete(int id)
         {
             // I don't think i need any related info deleted....
             var MenuToDelete = _context.Menu
