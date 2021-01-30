@@ -11,5 +11,7 @@ namespace Shelf_Help.Repositories
         Menu GetById(int id);
         List<MenuSummary> GetUsersMenu(int userId);
         void Update(Menu menu);
+
+        List<IngredientsList> GetIngredients(int menuId);
     }
 }

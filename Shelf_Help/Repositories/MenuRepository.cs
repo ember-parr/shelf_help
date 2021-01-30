@@ -54,6 +54,20 @@ namespace Shelf_Help.Repositories
 
 
 
+
+        // get a menu entries food items
+        public List<IngredientsList> GetIngredients(int menuId)
+        {
+            return _context.Menu
+                .Select(m => new IngredientsList()
+                {
+                    FoodItem = m.Ingredients[0],
+                    IngredientCount = m.Ingredients.Count()
+                })
+                .ToList();
+
+        }
+
         // add a new menu entry to the database
         public void Add(Menu menu)
         {
