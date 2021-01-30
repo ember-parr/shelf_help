@@ -23,6 +23,7 @@ namespace Shelf_Help.Models
         public string Email { get; set; }
 
         [Required]
+        [DataType(DataType.PostalCode)]
         public int ZipCode { get; set; }
 
         [Required]
@@ -30,6 +31,7 @@ namespace Shelf_Help.Models
         public string Phone { get; set; }
 
         public List<FoodItem> FoodItems { get; set; }
+        public List<Menu> Menues { get; set; }
         
     }
 }

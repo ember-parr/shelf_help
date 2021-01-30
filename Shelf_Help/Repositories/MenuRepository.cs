@@ -24,5 +24,11 @@ namespace Shelf_Help.Repositories
                 .Where(m => m.Id == id)
                 .FirstOrDefault();
         }
+
+        public List<MenuSummary> Get()
+        {
+
+
+        }
     }
 }

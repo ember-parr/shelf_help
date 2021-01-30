@@ -14,9 +14,14 @@ namespace Shelf_Help.Models.ViewModels
         public int TypeId { get; set; }
         public int UserId { get; set; }
         public UserProfile UserProfile { get; set; }
-        public MealType MenuType { get; set; }
+        public MealType MealType { get; set; }
         public List<FoodItem> Ingredients { get; set; }
 
-        // need to finish this 
+        public string Instructions { get; set; }
+
+        public string ImageSource { get; set; }
+
+        // i might want to add a list of tips, or turn instructions into a list
+        // unsure what else is needed here. 
     }
 }
