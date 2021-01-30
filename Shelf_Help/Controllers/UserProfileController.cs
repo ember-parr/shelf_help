@@ -23,10 +23,17 @@ namespace Shelf_Help.Controllers
         }
 
         [HttpGet("{FirebaseUserId}")]
-        public IActionResult GetUserProfile(string FirebaseUserId)
+        public IActionResult GetUserProfile(string firebaseUserId)
         {
-            return Ok(_repo.GetByFirebaseUserId(FirebaseUserId));
+            var user = _repo.GetByFirebaseUserId(firebaseUserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
         }
+
 
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
@@ -37,5 +44,16 @@ namespace Shelf_Help.Controllers
                 new { FirebaseUserId = userProfile.FirebaseUserId },
                 userProfile);
         }
+
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _repo.GetByFirebaseUserId(firebaseUserId);
+        }
     }
 }
+
+
+
+// no need for a GetAll action on users. 
