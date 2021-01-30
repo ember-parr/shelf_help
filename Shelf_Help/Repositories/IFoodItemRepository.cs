@@ -9,5 +9,6 @@ namespace Shelf_Help.Repositories
         FoodItem GetById(int id);
         List<FoodItem> GetUsersFoodItems(int userId);
         void Update(FoodItem foodItem);
+        void Delete(int id);
     }
 }

@@ -57,5 +57,12 @@ namespace Shelf_Help.Repositories
             _context.Entry(foodItem).State = EntityState.Modified;
             _context.SaveChanges();
         }
+
+        public void Delete(int id)
+        {
+            var foodItem = GetById(id);
+            _context.FoodItem.Remove(foodItem);
+            _context.SaveChanges();
+        }
     }
 }
