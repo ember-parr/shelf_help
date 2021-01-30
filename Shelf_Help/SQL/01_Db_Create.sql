@@ -26,18 +26,18 @@ CREATE TABLE [UserProfile] (
 
 
 CREATE TABLE [Location] (
-  [Id] INTEGER PRIMARY KEY,
-  [Name] VARCHAR
+  [Id] INTEGER PRIMARY KEY IDENTITY,
+  [Name] VARCHAR (255)
 )
 
 
 CREATE TABLE [FoodItem] (
-  [Id] INTEGER PRIMARY KEY,
+  [Id] INTEGER PRIMARY KEY IDENTITY,
   [UserId] INTEGER,
   [LocationId] INTEGER,
   [Quantity] INTEGER,
   [Spoonacular_IngredientId] INTEGER,
-  [Measurement] VARCHAR,
+  [Measurement] VARCHAR (255),
 
   CONSTRAINT [FK_FoodItem_User] FOREIGN KEY ([UserId]) REFERENCES [UserProfile] ([Id]),
   CONSTRAINT [FK_FoodItem_Location] FOREIGN KEY ([LocationId]) REFERENCES [Location] ([Id])
@@ -45,13 +45,13 @@ CREATE TABLE [FoodItem] (
 
 
 CREATE TABLE [MealType] (
-  [Id] INTEGER PRIMARY KEY,
-  [Name] VARCHAR
+  [Id] INTEGER PRIMARY KEY IDENTITY,
+  [Name] VARCHAR (255)
 )
 
 
 CREATE TABLE [Menu] (
-  [Id] INTEGER PRIMARY KEY,
+  [Id] INTEGER PRIMARY KEY IDENTITY,
   [Date] DATETIME,
   [TypeId] INTEGER,
   [UserId] INTEGER,
@@ -63,3 +63,6 @@ CREATE TABLE [Menu] (
 )
 GO
 
+
+reconfigure;
+go
