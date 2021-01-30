@@ -10,28 +10,28 @@ using System.Threading.Tasks;
 
 namespace Shelf_Help.Repositories
 {
-    public class LocationRepository : ILocationRepository
+    public class MealTypeRepository : IMealTypeRepository
     {
         private ApplicationDbContext _context;
 
-        public LocationRepository(ApplicationDbContext context)
+        public MealTypeRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
         //get a location by id
-        public Location GetById(int id)
+        public MealType GetById(int id)
         {
-            return _context.Location
-                .Where(l => l.Id == id)
+            return _context.MealType
+                .Where(n => n.Id == id)
                 .FirstOrDefault();
         }
 
         // get all locations
-        public List<LocationOption> GetAll()
+        public List<MealOption> GetAll()
         {
-            return _context.Location
-                .Select(l => new LocationOption()
+            return _context.MealType
+                .Select(l => new MealOption()
                 {
                     Id = l.Id,
                     Name = l.Name
