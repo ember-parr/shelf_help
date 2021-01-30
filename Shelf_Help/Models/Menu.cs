@@ -28,5 +28,7 @@ namespace Shelf_Help.Models
         public MealType MenuType { get; set; }
         public List<FoodItem> Ingredients { get; set; }
 
+        public string MealName { get; set; }
+
     }
 }

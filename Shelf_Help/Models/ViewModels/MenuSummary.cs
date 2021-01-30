@@ -17,7 +17,7 @@ namespace Shelf_Help.Models.ViewModels
         public MealType MealType { get; set; }
         public List<FoodItem> Ingredients { get; set; }
 
-        public string Instructions { get; set; }
+        public string MealName { get; set; }
 
         public string ImageSource { get; set; }
 
