@@ -28,15 +28,9 @@ namespace Shelf_Help.Repositories
         }
 
         // get all locations
-        public List<LocationOption> GetAll()
+        public List<Location> GetAll()
         {
-            return _context.Location
-                .Select(l => new LocationOption()
-                {
-                    Id = l.Id,
-                    Name = l.Name
-                })
-                .ToList();
+            return _context.Location.ToList();
         }
     }
 }

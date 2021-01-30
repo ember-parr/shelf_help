@@ -6,7 +6,7 @@ namespace Shelf_Help.Repositories
 {
     public interface ILocationRepository
     {
-        List<LocationOption> GetAll();
+        List<Location> GetAll();
         Location GetById(int id);
     }
 }
