@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Menu from "../pages/Menu"
 
 const ApplicationViews = () => {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -12,9 +13,9 @@ const ApplicationViews = () => {
         <Route path="/" exact>
             {isLoggedIn ? <p>Home</p> : <Redirect to="/login" />}
         </Route>
-        {/* <Route path="/explore">
-            {isLoggedIn ? <Explore /> : <Redirect to="/login" />}
-        </Route> */}
+        <Route path="/menu">
+            {isLoggedIn ? <Menu /> : <Redirect to="/login" />}
+        </Route>
         <Route path="/login">
             <Login />
         </Route>
