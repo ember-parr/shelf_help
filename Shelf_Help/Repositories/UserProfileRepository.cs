@@ -18,12 +18,12 @@ namespace Shelf_Help.Repositories
             _context = context;
         }
 
-        public UserProfile GetByFirebaseUserId(string firebaseUserId)
+        public UserProfile GetByFirebaseUserId(string FirebaseUserId)
         {
             return _context.UserProfile
                 //.Include(up => up.FoodItems)
                 //.Include(up => up.Menu)
-                .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
+                .FirstOrDefault(up => up.FirebaseUserId == FirebaseUserId);
 
         }
 
