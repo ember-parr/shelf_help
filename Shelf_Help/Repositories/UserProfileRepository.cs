@@ -18,15 +18,26 @@ namespace Shelf_Help.Repositories
             _context = context;
         }
 
-        public UserProfile GetByFirebaseUserId(string firebaseUserId)
+        public UserProfile GetByFirebaseUserId(string FirebaseUserId)
         {
             return _context.UserProfile
-                .Include(up => up.FoodItems)
+                //.Include(up => up.FoodItems)
                 //.Include(up => up.Menu)
-                .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
+                .FirstOrDefault(up => up.FirebaseUserId == FirebaseUserId);
 
         }
 
+
+        // get a user by their ID
+        // will this be used??
+        public UserProfile GetById(int id)
+        {
+            return _context.UserProfile
+                .FirstOrDefault(u => u.Id == id);
+        }
+
+
+        // add a new user from registration
         public void Add(UserProfile userProfile)
         {
             _context.Add(userProfile);

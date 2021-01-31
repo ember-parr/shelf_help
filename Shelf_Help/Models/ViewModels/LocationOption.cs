@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Shelf_Help.Models
+namespace Shelf_Help.Models.ViewModels
 {
-    public class Location
+    public class LocationOption
     {
         public int Id { get; set; }
-
-        [Required]
-        [MaxLength(255)]
         public string Name { get; set; }
+
+        [JsonIgnore]
+        public string LocationName { get; set; }
     }
 }

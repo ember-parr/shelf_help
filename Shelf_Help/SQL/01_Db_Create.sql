@@ -27,15 +27,15 @@ CREATE TABLE [UserProfile] (
 
 CREATE TABLE [Location] (
   [Id] INTEGER PRIMARY KEY IDENTITY,
-  [Name] VARCHAR (255)
+  [Name] VARCHAR (255) NOT NULL
 )
 
 
 CREATE TABLE [FoodItem] (
   [Id] INTEGER PRIMARY KEY IDENTITY,
-  [UserId] INTEGER,
-  [LocationId] INTEGER,
-  [Quantity] INTEGER,
+  [UserId] INTEGER NOT NULL,
+  [LocationId] INTEGER NOT NULL DEFAULT(6),
+  [Quantity] INTEGER NOT NULL DEFAULT(1),
   [Spoonacular_IngredientId] INTEGER,
   [Measurement] VARCHAR (255),
 
@@ -46,15 +46,15 @@ CREATE TABLE [FoodItem] (
 
 CREATE TABLE [MealType] (
   [Id] INTEGER PRIMARY KEY IDENTITY,
-  [Name] VARCHAR (255)
+  [Name] VARCHAR (255) NOT NULL
 )
 
 
 CREATE TABLE [Menu] (
   [Id] INTEGER PRIMARY KEY IDENTITY,
-  [Date] DATETIME,
-  [TypeId] INTEGER,
-  [UserId] INTEGER,
+  [Date] DATETIME NOT NULL,
+  [TypeId] INTEGER NOT NULL DEFAULT (6),
+  [UserId] INTEGER NOT NULL,
   [Custom] bit NOT NULL DEFAULT (1),
   [Spoonacular_RecipeId] INTEGER,
 

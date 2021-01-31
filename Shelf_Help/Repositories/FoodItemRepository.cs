@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shelf_Help.Repositories
 {
-    public class FoodItemRepository
+    public class FoodItemRepository : IFoodItemRepository
     {
 
         private ApplicationDbContext _context;
@@ -56,6 +56,13 @@ namespace Shelf_Help.Repositories
             }
             _context.Entry(foodItem).State = EntityState.Modified;
             _context.SaveChanges();
-        } 
+        }
+
+        public void Delete(int id)
+        {
+            var foodItem = GetById(id);
+            _context.FoodItem.Remove(foodItem);
+            _context.SaveChanges();
+        }
     }
 }

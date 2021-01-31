@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Shelf_Help.Data;
+using Shelf_Help.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,12 @@ namespace Shelf_Help
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<IFoodItemRepository, FoodItemRepository>();
+            services.AddTransient<ILocationRepository, LocationRepository>();
+            services.AddTransient<IMealTypeRepository, MealTypeRepository>();
+            services.AddTransient<IMenuRepository, MenuRepository>();
+
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

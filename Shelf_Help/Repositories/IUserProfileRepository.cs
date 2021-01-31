@@ -6,5 +6,7 @@ namespace Shelf_Help.Repositories
     {
         void Add(UserProfile userProfile);
         UserProfile GetByFirebaseUserId(string firebaseUserId);
+
+        UserProfile GetById(int id);
     }
 }
