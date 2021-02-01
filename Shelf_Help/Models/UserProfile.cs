@@ -28,7 +28,7 @@ namespace Shelf_Help.Models
 
 
         public List<FoodItem> FoodItems { get; set; }
-        public List<Menu> Menues { get; set; }
+        public List<Menu> Menus { get; set; }
         
     }
 }

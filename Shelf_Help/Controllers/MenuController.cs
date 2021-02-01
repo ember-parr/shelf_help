@@ -5,7 +5,6 @@ using System.Linq;
 using System.Security.Claims;
 using Shelf_Help.Models;
 using Shelf_Help.Repositories;
-using Shelf_Help.Models.ViewModels;
 
 namespace Shelf_Help.Controllers
 {
@@ -28,16 +27,23 @@ namespace Shelf_Help.Controllers
         }
 
         // get this users menu entries from database
-        [HttpGet("getbyuser/{id}")]
-        public IActionResult GetByUser(int userId)
+        //[HttpGet("getbyuser/{id}")]
+        //public IActionResult GetByUser(int userId)
+        //{
+        //    var currentUser = GetCurrentUserProfile();
+        //    if (currentUser.Id != userId)
+        //    {
+        //        return Unauthorized();
+        //    }
+        //    var menues = _menuRepo.GetUsersMenu(userId);
+        //    return Ok(menues);
+        //}
+
+        // get all menu entries DELETE AFTER TESTING 
+        [HttpGet]
+        public IActionResult Get()
         {
-            var currentUser = GetCurrentUserProfile();
-            if (currentUser.Id != userId)
-            {
-                return Unauthorized();
-            }
-            var menues = _menuRepo.GetUsersMenu(userId);
-            return Ok(menues);
+            return Ok(_menuRepo.GetAll());
         }
 
 
@@ -45,6 +51,10 @@ namespace Shelf_Help.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
+
+
+
+
             var currentUser = GetCurrentUserProfile();
             var menu = _menuRepo.GetById(id);
             if (menu == null)
@@ -57,14 +67,7 @@ namespace Shelf_Help.Controllers
                 return Unauthorized();
             }
 
-            var ingredients = _menuRepo.GetIngredients(id);
-            var menuDetails = new MenuDetails()
-            {
-                Menu = menu,
-                Ingredients = ingredients,
-            };
-
-            return Ok(menuDetails);
+            return Ok(menu);
         }
 
 

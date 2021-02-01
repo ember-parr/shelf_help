@@ -1,6 +1,5 @@
 ﻿using Shelf_Help.Data;
 using Shelf_Help.Models;
-using Shelf_Help.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +18,11 @@ namespace Shelf_Help.Repositories
             _context = context;
         }
 
+        public List<MealType> GetAll()
+        {
+            return _context.MealType.ToList();
+        }
+
         //get a location by id
         public MealType GetById(int id)
         {
@@ -28,15 +32,15 @@ namespace Shelf_Help.Repositories
         }
 
         // get all locations
-        public List<MealOption> GetAll()
-        {
-            return _context.MealType
-                .Select(l => new MealOption()
-                {
-                    Id = l.Id,
-                    Name = l.Name
-                })
-                .ToList();
-        }
+        //public List<MealOption> GetAll()
+        //{
+        //    return _context.MealType
+        //        .Select(l => new MealOption()
+        //        {
+        //            Id = l.Id,
+        //            Name = l.Name
+        //        })
+        //        .ToList();
+        //}
     }
 }

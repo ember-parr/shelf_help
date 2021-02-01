@@ -24,11 +24,10 @@ namespace Shelf_Help.Models
 
         [Required]
         public int UserId { get; set; }
-        public UserProfile UserProfile { get; set; }
-        public MealType MenuType { get; set; }
+        //public UserProfile UserProfile { get; set; }
+        //public MealType MenuType { get; set; }
         public List<FoodItem> Ingredients { get; set; }
 
-        public string MealName { get; set; }
 
     }
 }

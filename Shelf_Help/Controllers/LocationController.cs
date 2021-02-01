@@ -24,11 +24,18 @@ namespace Shelf_Help.Controllers
             _userRepo = userRepo;
         }
 
+
+        // TEST PASSED
         [HttpGet]
         public IActionResult Get()
         {
-            var allLocations = _locationRepo.GetAll();
-            return Ok(allLocations);            
+            return Ok(_locationRepo.GetAll());            
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Ok(_locationRepo.GetById(id));
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Shelf_Help.Data;
 using Shelf_Help.Models;
-using Shelf_Help.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
