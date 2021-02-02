@@ -27,11 +27,12 @@ namespace Shelf_Help.Controllers
             _userRepo = userRepo;
         }
 
-        // get food items by user
-        [HttpGet("getmyfood/{id}")]
-        public IActionResult GetUsersFoodItems(int id)
+        // get food items for current user
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            return Ok(_foodItemRepo.GetUsersFoodItems(id));
+            var user = GetCurrentUserProfile();
+            return Ok(_foodItemRepo.GetAll(user.Id));
         }
 
 

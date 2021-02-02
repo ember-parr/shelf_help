@@ -30,6 +30,12 @@ namespace Shelf_Help.Controllers
             var allMealTypes = _mealTypeRepo.GetAll();
             return Ok(allMealTypes);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Ok(_mealTypeRepo.GetById(id));
+        }
     }
 }
 

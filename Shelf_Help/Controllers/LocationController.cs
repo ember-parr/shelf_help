@@ -25,7 +25,6 @@ namespace Shelf_Help.Controllers
         }
 
 
-        // TEST PASSED
         [HttpGet]
         public IActionResult Get()
         {

@@ -7,7 +7,7 @@ namespace Shelf_Help.Repositories
     {
         void Add(FoodItem foodItem);
         FoodItem GetById(int id);
-        List<FoodItem> GetUsersFoodItems(int userId);
+        List<FoodItem> GetAll(int userId);
         void Update(FoodItem foodItem);
         void Delete(int id);
     }

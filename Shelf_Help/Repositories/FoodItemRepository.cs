@@ -27,12 +27,9 @@ namespace Shelf_Help.Repositories
         }
 
         //get foodItems by user with quantity > 0
-        public List<FoodItem> GetUsersFoodItems(int userId)
+        public List<FoodItem> GetAll(int userId)
         {
-            return _context.FoodItem
-                .Where(f => f.UserId == userId)
-                .Where(f => f.Quantity >= 1)
-                .ToList();
+            return _context.FoodItem.ToList();
         }
 
         //add a new food item to the database
