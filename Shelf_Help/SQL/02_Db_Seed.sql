@@ -3,7 +3,7 @@
 */
 set identity_insert [UserProfile] on
 INSERT INTO [dbo].[UserProfile] ([Id], [Email], [DisplayName], [ZipCode], [FirebaseUserId]) VALUES (1, 'ember@admin.com', 'emberparr', 37174, 'Z44y35InmHODB671einrCF1JnC22');
-INSERT INTO [UserProfile] ([Id], [Email], [DisplayName], [ZipCode], [FirebaseUserId]) VALUES (2, 'snoopcat@emberparr.com', 'snoopcat', 37174, '2UD8rDkxC4VlUEA6UrMn2udr5fX2');
+INSERT INTO [dbo].[UserProfile] ([Id], [Email], [DisplayName], [ZipCode], [FirebaseUserId]) VALUES (2, 'snoopcat@emberparr.com', 'snoopcat', 37174, '2UD8rDkxC4VlUEA6UrMn2udr5fX2');
 
 set identity_insert [UserProfile] off
 
@@ -29,11 +29,11 @@ set identity_insert [MealType] off
      ---   Menu Seed Data
 */
 set identity_insert [Menu] on
-INSERT INTO Menu ([Id], [Date], [TypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (1, '2021-01-01', 1, 1, 2, 520);
-INSERT INTO Menu ([Id], [Date], [TypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (2, '2021-01-05', 2, 1, 2, 860);
-INSERT INTO Menu ([Id], [Date], [TypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (3, '2021-01-09', 3, 1, 2, 510);
-INSERT INTO Menu ([Id], [Date], [TypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (4, '2021-01-15', 4, 2, 2, 540);
-INSERT INTO Menu ([Id], [Date], [TypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (5, '2021-01-16', 1, 2, 2, 20);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (1, '2021-01-01', 1, 1, 2, 520);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (2, '2021-01-05', 2, 1, 2, 860);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (3, '2021-01-09', 3, 1, 2, 510);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (4, '2021-01-15', 4, 2, 2, 540);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (5, '2021-01-16', 1, 2, 2, 20);
 set identity_insert [Menu] off
 
 

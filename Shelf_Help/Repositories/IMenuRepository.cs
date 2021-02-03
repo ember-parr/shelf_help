@@ -12,7 +12,7 @@ namespace Shelf_Help.Repositories
         
         void Update(Menu menu);
 
-        List<Menu> GetAll();
+        List<Menu> GetAll(int id);
 
         
     }

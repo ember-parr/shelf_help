@@ -20,10 +20,12 @@ namespace Shelf_Help.Models
         public int SpoonacularRecipeId { get; set; }
 
         [Required]
-        public int TypeId { get; set; }
+        public int MealTypeId { get; set; }
 
         [Required]
         public int UserId { get; set; }
+
+        public MealType MealType { get; set; }
         
 
     }

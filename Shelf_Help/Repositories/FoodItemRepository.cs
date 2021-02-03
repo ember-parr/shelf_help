@@ -31,6 +31,7 @@ namespace Shelf_Help.Repositories
         public FoodItem GetById(int id)
         {
             return _context.FoodItem
+                .Include(f=> f.Location)
                 .Where(f => f.Id == id)
                 .FirstOrDefault();
         }

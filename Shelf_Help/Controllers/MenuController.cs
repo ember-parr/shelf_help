@@ -31,7 +31,9 @@ namespace Shelf_Help.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_menuRepo.GetAll());
+            var currentUser = GetCurrentUserProfile();
+            var menus = _menuRepo.GetAll(currentUser.Id);
+            return Ok(menus);
         }
 
 

@@ -19,10 +19,13 @@ namespace Shelf_Help.Repositories
             _context = context;
         }
 
-        // get all menus DELETE AFTER TEST
-        public List<Menu> GetAll()
+        // get all menus for current user
+        public List<Menu> GetAll(int id)
         {
-            return _context.Menu.ToList();
+            return _context.Menu
+                .Include(m => m.MealType)
+                .Where(m => m.UserId == id)
+                .ToList();
         }
 
         //get a menu entry by Id
