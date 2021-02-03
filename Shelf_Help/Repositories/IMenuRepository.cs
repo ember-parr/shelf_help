@@ -9,9 +9,11 @@ namespace Shelf_Help.Repositories
         void Add(Menu menu);
         void Delete(int id);
         Menu GetById(int id);
-        List<MenuSummary> GetUsersMenu(int userId);
+        
         void Update(Menu menu);
 
-        List<IngredientsList> GetIngredients(int menuId);
+        List<Menu> GetAll();
+
+        
     }
 }

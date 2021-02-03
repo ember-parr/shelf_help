@@ -61,48 +61,53 @@ class OldCalendar extends React.PureComponent {
         };
         const appointment2 = {
             calendar: "Lunch",
+            background: "#7a3e61",
             description: "",
             // end: new Date(2018, 10, 24, 15, 0, 0),
             id: "id2",
             location: "",
             start: new Date(2018, 10, 24, 10, 0, 0),
-            subject: "IT Group Mtg."
+            subject: "Turkey Sandwich & fruit bowl"
         };
         const appointment3 = {
             calendar: "Dinner",
+            background: "#00373d",
             description: "",
             // end: new Date(2018, 10, 26, 13, 0, 0),
             id: "id3",
             location: "",
             start: new Date(2018, 10, 23, 11, 0, 0),
-            subject: "Course Social Media"
+            subject: "Turkey Sliders"
         };
         const appointment4 = {
-            calendar: "Lunch",
+            calendar: "Dinner",
+            background: "#00373d",
             description: "",
             // end: new Date(2018, 10, 27, 18, 0, 0),
             id: "id4",
             location: "",
             start: new Date(2018, 10, 23, 16, 0, 0),
-            subject: "New Projects Planning"
+            subject: "Eggplant Parm"
         };
         const appointment5 = {
             calendar: "Breakfast",
+            background: "#fce181",
             description: "",
             // end: new Date(2018, 10, 25, 17, 0, 0),
             id: "id5",
             location: "",
             start: new Date(2018, 10, 24, 15, 0, 0),
-            subject: "Interview with James"
+            subject: "French Toast"
         };
         const appointment6 = {
-            calendar: "Snack",
+            calendar: "Diner",
+            background: "#00373d",
             description: "",
             end: new Date(2018, 10, 30, 16, 0, 0),
             id: "id6",
             location: "",
             start: new Date(2018, 10, 24, 14, 0, 0),
-            subject: "Interview with Nancy"
+            subject: "Street Tacos"
         };
         appointments.push(appointment1);
         appointments.push(appointment2);

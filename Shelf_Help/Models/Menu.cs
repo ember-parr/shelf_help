@@ -17,18 +17,14 @@ namespace Shelf_Help.Models
         [Required]
         public bool Custom { get; set; }
 
-        public int Spoonacular_RecipeId { get; set; }
+        public int SpoonacularRecipeId { get; set; }
 
         [Required]
         public int TypeId { get; set; }
 
         [Required]
         public int UserId { get; set; }
-        public UserProfile UserProfile { get; set; }
-        public MealType MenuType { get; set; }
-        public List<FoodItem> Ingredients { get; set; }
-
-        public string MealName { get; set; }
+        
 
     }
 }

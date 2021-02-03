@@ -27,8 +27,7 @@ namespace Shelf_Help.Models
         public int ZipCode { get; set; }
 
 
-        public List<FoodItem> FoodItems { get; set; }
-        public List<Menu> Menues { get; set; }
+       
         
     }
 }

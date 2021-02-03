@@ -34,6 +34,13 @@ namespace Shelf_Help.Controllers
             return Ok(_foodItemRepo.GetUsersFoodItems(id));
         }
 
+        // get all food items
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            return Ok(_foodItemRepo.GetAll());
+        }
+
 
         // get a single food item from the database
         [HttpGet("{id}")]
@@ -67,7 +74,7 @@ namespace Shelf_Help.Controllers
                 return BadRequest();
             }
             originalFoodItem.Quantity = foodItem.Quantity;
-            originalFoodItem.Spoonacular_IngredientId = foodItem.Spoonacular_IngredientId;
+            originalFoodItem.SpoonacularIngredientId = foodItem.SpoonacularIngredientId;
             originalFoodItem.Measurement = foodItem.Measurement;
             originalFoodItem.LocationId = foodItem.LocationId;
             _foodItemRepo.Update(originalFoodItem);

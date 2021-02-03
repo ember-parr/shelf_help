@@ -19,6 +19,12 @@ namespace Shelf_Help.Repositories
             _context = context;
         }
 
+        // get all menus DELETE AFTER TEST
+        public List<Menu> GetAll()
+        {
+            return _context.Menu.ToList();
+        }
+
         //get a menu entry by Id
         public Menu GetById(int id)
         {
@@ -27,48 +33,6 @@ namespace Shelf_Help.Repositories
                 .FirstOrDefault();
         }
 
-        // get all menu entries by userId 
-        public List<MenuSummary> GetUsersMenu(int userId)
-        {
-            return _context.Menu
-                .Include(m => m.MenuType)
-                .Where(m => m.UserId == userId)
-                .OrderByDescending(m => m.Date)
-                .Select(m => new MenuSummary()
-                {
-                    Id = m.Id,
-                    Date = m.Date,
-                    Custom = m.Custom,
-                    Spoonacular_RecipeId = m.Spoonacular_RecipeId,
-                    TypeId = m.TypeId,
-                    UserId = m.UserId,
-                    UserProfile = m.UserProfile,
-                    MealType = m.MenuType,
-                    Ingredients = m.Ingredients,
-                    ImageSource = m.MealName
-                })
-                .ToList();
-        }
-
-        // get todays menu entries for current user
-
-
-
-
-        // get a menu entries food items
-        public List<IngredientsList> GetIngredients(int menuId)
-        {
-            return _context.Menu
-                .Select(m => new IngredientsList()
-                {
-                    FoodItem = m.Ingredients[0],
-                    IngredientCount = m.Ingredients.Count()
-                })
-                .ToList();
-
-        }
-
-        // add a new menu entry to the database
         public void Add(Menu menu)
         {
             _context.Add(menu);

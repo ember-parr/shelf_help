@@ -18,6 +18,12 @@ namespace Shelf_Help.Repositories
             _context = context;
         }
 
+        // get all food items 
+        public List<FoodItem> GetAll()
+        {
+            return _context.FoodItem.ToList();
+        }
+
         //get a foodItem by id
         public FoodItem GetById(int id)
         {
