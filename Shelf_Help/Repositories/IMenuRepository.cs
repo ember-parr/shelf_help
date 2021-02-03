@@ -1,5 +1,6 @@
 ﻿using Shelf_Help.Models;
 using Shelf_Help.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 
 namespace Shelf_Help.Repositories
@@ -14,6 +15,9 @@ namespace Shelf_Help.Repositories
 
         List<Menu> GetAll(int id);
 
-        
+        List<Menu> GetBySingleDate(DateTime date);
+
+
+
     }
 }

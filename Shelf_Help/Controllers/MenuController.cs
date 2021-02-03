@@ -27,13 +27,21 @@ namespace Shelf_Help.Controllers
             _userRepo = userRepo;
         }
 
-        // get all menus DELETE AFTER TEST
+        // get all menus for current user
         [HttpGet]
         public IActionResult GetAll()
         {
             var currentUser = GetCurrentUserProfile();
             var menus = _menuRepo.GetAll(currentUser.Id);
             return Ok(menus);
+        }
+
+
+        // get menus on a certain date
+        [HttpGet("day/{date}")]
+        public IActionResult GetByDate(DateTime date)
+        {
+            return Ok(_menuRepo.GetBySingleDate(date));
         }
 
 

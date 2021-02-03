@@ -36,6 +36,14 @@ namespace Shelf_Help.Repositories
                 .FirstOrDefault();
         }
 
+        // get menues on exact date range
+        public List<Menu> GetBySingleDate(DateTime date)
+        {
+            return _context.Menu
+                .Where(m => m.Date == date)
+                .ToList();
+        }
+
         public void Add(Menu menu)
         {
             _context.Add(menu);
