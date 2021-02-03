@@ -61,5 +61,5 @@ INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [Spoonac
 INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement]) VALUES (2, 1, 1, 2, 20, '6 cups'); 
 INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement]) VALUES (3, 1, 1, 2, 2, 'half gallon'); 
 INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement]) VALUES (4, 1, 1, 2, 240, 'enough for a lot of food'); 
-INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement]) VALUES (5, 1, 1, 2, 8, 'a pinch'); 
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement]) VALUES (5, 2, 1, 2, 8, 'a pinch'); 
 set identity_insert [FoodItem] off

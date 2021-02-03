@@ -23,6 +23,7 @@ namespace Shelf_Help.Models
 
         [Required]
         public int LocationId { get; set; }
+        public Location Location { get; set; }
 
         
     }

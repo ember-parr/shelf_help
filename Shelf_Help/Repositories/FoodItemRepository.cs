@@ -18,10 +18,13 @@ namespace Shelf_Help.Repositories
             _context = context;
         }
 
-        // get all food items 
-        public List<FoodItem> GetAll()
+        // get all food items (user specific)
+        public List<FoodItem> GetAll(int id)
         {
-            return _context.FoodItem.ToList();
+            return _context.FoodItem
+                .Include(f => f.Location)
+                .Where(f => f.UserId == id)
+                .ToList();
         }
 
         //get a foodItem by id
@@ -32,14 +35,7 @@ namespace Shelf_Help.Repositories
                 .FirstOrDefault();
         }
 
-        //get foodItems by user with quantity > 0
-        public List<FoodItem> GetUsersFoodItems(int userId)
-        {
-            return _context.FoodItem
-                .Where(f => f.UserId == userId)
-                .Where(f => f.Quantity >= 1)
-                .ToList();
-        }
+        
 
         //add a new food item to the database
         public void Add(FoodItem foodItem)
