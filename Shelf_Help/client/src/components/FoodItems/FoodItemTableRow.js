@@ -9,7 +9,7 @@ export const FoodItemTableRow = ({item}) => {
         return (
             <>
                 <Table.Row onClick={() => history.push(`/items/edit/${item.id}`)}>
-                    <Table.Cell collapsing>{ item.name }</Table.Cell>
+                    <Table.Cell collapsing>{ item.foodName }</Table.Cell>
                     <Table.Cell collapsing>{ item.quantity }</Table.Cell>
                     <Table.Cell collapsing>{ item.measurement }</Table.Cell>
                     <Table.Cell collapsing>{ item.location.name }</Table.Cell>
