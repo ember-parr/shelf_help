@@ -4,8 +4,9 @@ import ApplicationViews from "./components/ApplicationViews";
 import { UserProfileProvider } from "./providers/UserProfileProvider";
 import { ToastContainer } from "react-toastify";
 import AppHeader from "./components/AppHeader"
-import "./App.css";
+import "./Styles/App.css"
 import "react-toastify/dist/ReactToastify.css";
+import { Footer } from "./components/Footer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Router>
           <AppHeader /> 
           <ApplicationViews />
+          <Footer />
         </Router>
       </UserProfileProvider>
     </div>

@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Button, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
-import "./Login.css";
+import "../Styles/Login.css";
 
 const Login = () => {
     const { login } = useContext(UserProfileContext);

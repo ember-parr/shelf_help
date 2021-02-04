@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { Header, Icon } from 'semantic-ui-react';
+import {Button, ButtonGroup} from "reactstrap"
 import { FoodItemTable } from "../components/FoodItems/FoodItemTable";
 import {FoodItemProvider} from "../providers/FoodItemProvider";
 
@@ -11,10 +11,13 @@ const Pantry = () => {
     return (
         <>
             <div> 
-                <Header as='h2' icon textAlign='center'>
-                <Icon name='cube' circular />
-                <Header.Content>Pantry</Header.Content>
-                </Header>
+                
+                <h2>Pantry</h2>
+                <ButtonGroup size="sm">
+                    <Button> This Week's Ingredients </Button>
+                    <Button> Today's Ingredients </Button>
+                    <Button> All Ingredients</Button>
+                </ButtonGroup>
                 <FoodItemProvider>
                         <FoodItemTable />
                 </FoodItemProvider>
