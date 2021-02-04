@@ -1,6 +1,5 @@
 import React from "react";
 import Calendar from "../components/Calendar";
-import MealEntryCard from "../components/MealEntryCard";
 // import PostList from "../components/PostList";
 // import { UserProfileContext } from "../providers/UserProfileProvider";
 
@@ -25,6 +24,7 @@ const Menu = () => {
   //       })
   //   );
   // }, []);
+  console.log("menu file loaded")
 
   return (
     <>

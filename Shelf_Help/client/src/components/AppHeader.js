@@ -53,8 +53,8 @@ const AppHeader = () => {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/ingredients" tag={Link}>
-                    Ingredients
+                  <NavLink to="/mypantry" tag={Link}>
+                    Pantry
                   </NavLink>
                 </NavItem>
                 <NavItem>
