@@ -1,10 +1,11 @@
+import React from "react"
 import { BrowserRouter as Router } from "react-router-dom";
 import ApplicationViews from "./components/ApplicationViews";
 import { UserProfileProvider } from "./providers/UserProfileProvider";
 import { ToastContainer } from "react-toastify";
+import AppHeader from "./components/AppHeader"
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
-import AppHeader from "./components/AppHeader";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <ToastContainer position="bottom-right" hideProgressBar />
       <UserProfileProvider>
         <Router>
-          <AppHeader />
+          <AppHeader /> 
           <ApplicationViews />
         </Router>
       </UserProfileProvider>

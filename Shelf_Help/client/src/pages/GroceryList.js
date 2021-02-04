@@ -1,19 +1,14 @@
-import React from "react";
-import { FoodItemTable } from "../components/FoodItems/FoodItemTable";
+import React from "react"
 
-
-const GroceryList = () => {
-
-
-
+const GroceryList = () =>
+{
     return (
         <>
-            <h3> Grocery List </h3>
-            {/* <FoodItemTable /> */}
+            <h1>Groceries To Buy</h1>
+
 
         </>
     )
 }
-
 
 export default GroceryList;
