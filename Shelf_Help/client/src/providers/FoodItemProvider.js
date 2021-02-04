@@ -24,11 +24,7 @@ export const FoodItemProvider = (props) => {
             })
             .then((res) => res.json())
             .then(setFoodItems)
-            // .then((foods) => {
-            //     setFoodItems(foods)
-            //     console.log("FOOD ITEMS: " + foodItems)
                 // SHOULD I FETCH FOOD ITEMS FROM SPOONACULAR HERE? 
-            //})
         );
     };
 

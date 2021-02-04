@@ -8,6 +8,7 @@ import Pantry from "../pages/Pantry"
 import GroceryList from "../pages/GroceryList";
 import Dashboard from "../pages/Dashboard";
 import {FoodItemProvider} from "../providers/FoodItemProvider";
+import { IngredientDetailProvider } from "../providers/IngredientDetailProvider";
 
 const ApplicationViews = () => {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -21,9 +22,11 @@ const ApplicationViews = () => {
                 {isLoggedIn ? <Menu /> : <Redirect to="/login" />}
             </Route>
             <FoodItemProvider>
-                <Route path="/mypantry">
-                    {isLoggedIn ? <Pantry /> : <Redirect to="/login" />}
-                </Route>
+                <IngredientDetailProvider>
+                    <Route path="/mypantry">
+                        {isLoggedIn ? <Pantry /> : <Redirect to="/login" />}
+                    </Route>
+                </IngredientDetailProvider>
             </FoodItemProvider>
             <Route path="/grocerylist">
                     {isLoggedIn ? <GroceryList /> : <Redirect to="/login" />}

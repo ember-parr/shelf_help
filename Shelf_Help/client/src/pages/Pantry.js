@@ -3,6 +3,7 @@ import React from "react";
 import { Header, Icon, Image } from 'semantic-ui-react';
 import { FoodItemTable } from "../components/FoodItems/FoodItemTable";
 import {FoodItemProvider} from "../providers/FoodItemProvider";
+import { IngredientDetailProvider } from "../providers/IngredientDetailProvider";
 import GroceryList from "./GroceryList";
 
 
@@ -17,7 +18,9 @@ const Pantry = () => {
                 <Header.Content>Pantry</Header.Content>
                 </Header>
                 <FoodItemProvider>
-                    <FoodItemTable />
+                    <IngredientDetailProvider>
+                        <FoodItemTable />
+                    </IngredientDetailProvider>
                 </FoodItemProvider>
             </div>
 
