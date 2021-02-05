@@ -38,6 +38,7 @@ CREATE TABLE [FoodItem] (
   [Quantity] INTEGER NOT NULL DEFAULT(1),
   [SpoonacularIngredientId] INTEGER,
   [Measurement] VARCHAR (255),
+  [FoodName] VARCHAR (255),
 
   
 )

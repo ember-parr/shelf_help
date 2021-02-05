@@ -1,11 +1,18 @@
 import React from "react"
+import { FoodItemProvider } from "../providers/FoodItemProvider"
+import {GroceryTable} from "../components/Groceries/GroceryTable";
+import { Container } from "reactstrap";
 
 const GroceryList = () =>
 {
     return (
         <>
-            <h1>Groceries To Buy</h1>
-
+            <h2>Groceries To Buy</h2>
+            <FoodItemProvider>
+                <Container className="theamed-container" fluid="sm">
+                    <GroceryTable />
+                </Container>
+            </FoodItemProvider>
 
         </>
     )

@@ -22,6 +22,7 @@ const AppHeader = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   const logoutAndReturn = () => {
+    window.confirm("Are You Sure You Want To Log Out?")
     return logout().then(() => {
       toast.dark("You are now logged out");
       history.push("/login");
@@ -30,7 +31,7 @@ const AppHeader = () => {
 
   return (
     <div>
-      <Navbar color="primary" dark expand="md">
+      <Navbar color="dark" dark expand="md">
         <NavbarBrand tag={Link} to="/">
           <img
             id="header-logo"
@@ -62,9 +63,9 @@ const AppHeader = () => {
                     Grocery List
                   </NavLink>
                 </NavItem>
-                <NavItem>
+                {/* <NavItem>
                   <NavLink onClick={logoutAndReturn}>Logout</NavLink>
-                </NavItem>
+                </NavItem> */}
               </>
             ) : (
                 <>
@@ -82,7 +83,7 @@ const AppHeader = () => {
               )}
           </Nav>
           {user ? (
-            <NavbarText className="d-sm-none d-md-block">
+            <NavbarText className="d-sm-none d-md-block" onClick={logoutAndReturn}>
               Welcome {user.displayName}
             </NavbarText>
           ) : null}

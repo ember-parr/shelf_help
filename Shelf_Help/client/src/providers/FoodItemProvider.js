@@ -9,6 +9,7 @@ export const FoodItemContext = createContext();
 export const FoodItemProvider = (props) => {
     const [ foodItems, setFoodItems ] = useState([]);
     const [ searchTerms, setSearchTerms ] = useState([]);
+    const [ spoonResults, setSpoonResults ] = useState([])
     const getToken = () => firebase.auth().currentUser.getIdToken(); 
     const apiUrl = "/api/fooditem";
 
@@ -28,21 +29,28 @@ export const FoodItemProvider = (props) => {
         );
     };
 
-    // const getFoodItemById = (id) => {
-    //     return getToken().then((token) => {
-    //         return fetch(`$${apiUrl}/${id}`, {
-    //             method: "GET",
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`,
-    //             },
-    //         })
-    //         .then((res) => res.json())
-    //         .then((foods) => {
-    //             setFoodItems(foods);
-    //             // SHOULD I FETCH FOOD ITEMS FROM SPOONACULAR HERE? 
-    //         });
-    //     });
-    // }
+    // this function gets all of the users food items from the database that has a quantity of 0
+    const getGroceryList = () => {
+        return getToken().then((token) => {
+            fetch(`${apiUrl}/groceries`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((res) => res.json())
+            .then(setFoodItems)
+        })
+    }
+
+    const searchSpoonacularIngredients = (searchedWords) => {
+        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=5&addChildren=true&apiKey=d77d78f9357b477094b10096abd85b71`)
+        .then((res) => res.json())
+        .then(output => {
+            setSpoonResults(output.results)
+        })
+        
+    }
 
 
     return (
@@ -51,8 +59,10 @@ export const FoodItemProvider = (props) => {
             foodItems,
             getFoodItems,
             setSearchTerms,
-            searchTerms
-            
+            searchTerms,
+            getGroceryList,
+            searchSpoonacularIngredients,
+            spoonResults
         }}>
             {props.children}
         </FoodItemContext.Provider>

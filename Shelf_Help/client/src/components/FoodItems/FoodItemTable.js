@@ -4,7 +4,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { FoodItemContext } from "../../providers/FoodItemProvider";
 import { FoodItemTableRow } from "./FoodItemTableRow";
 import { useHistory } from "react-router-dom";
-import { Table, Button, Input } from "semantic-ui-react";
+
+import {Button, ButtonGroup, Table, Input, Form, FormGroup, Label, FormText} from "reactstrap"
 
 
 export const FoodItemTable = () => {
@@ -42,47 +43,59 @@ export const FoodItemTable = () => {
 
     return (
         <>
-            <section className="sectionAboveHeader">
-            <Button className="addNew-btn" onClick={() => domHistory.push("/")}>New Item</Button>
+            <section className="m-2">
+            <Button className="addNew-btn mb-3" onClick={() => domHistory.push("/")}>New Item</Button>
 
-            <Input
+            <Form>
+                <FormGroup>
+                    <Input type="text" name="searchTerms" id="searchTerms" placeholder="Search Pantry" onKeyUp={(keyEvent) => setSearchTerms(keyEvent.target.value.toLowerCase())}/>
+                </FormGroup>
+            </Form>
+            {/* <Input
             type="text"
             icon='search'
             onKeyUp={(keyEvent) => setSearchTerms(keyEvent.target.value.toLowerCase())}
             placeholder="Search Items... "
             className="searchTable"
-            />
+            /> */}
 
 
 
-            <Button.Group floated='right'>
+                <ButtonGroup size="sm" className="mb-3">
+                    <Button> This Week's Ingredients </Button>
+                    <Button> Today's Ingredients </Button>
+                    <Button> All Ingredients</Button>
+                </ButtonGroup>
+                <br />
+
+            {/* <ButtonGroup floated='right'>
                 <Button toggle className="filter-btn" onClick={todayIngredients}>Ingredients Needed Today</Button>
                     <Button.Or />
                 <Button toggle className="filter-btn" onClick={weekIngredients}>Ingredients Needed This Week</Button>
                     <Button.Or />
                 <Button toggle className="filter-btn" onClick={allIngredients}>View All Food Items</Button>
-            </Button.Group>
-            </section>
+        </ButtonGroup> */}
+            </section> 
 
             
-            <Table unstackable celled selectable collapsing compact size="small" className="pageComponent">
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell width={1}>Ingredient</Table.HeaderCell>
-                        <Table.HeaderCell width={1}>Quantity</Table.HeaderCell>
-                        <Table.HeaderCell width={1}>Measurement</Table.HeaderCell>
-                        <Table.HeaderCell width={1}>Storage</Table.HeaderCell>
-                        <Table.HeaderCell width={1}>Used In...</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
+            <Table hover responsive size="sm" >
+                <thead>
+                    <tr>
+                        <th>Ingredient</th>
+                        <th>Quantity</th>
+                        <th  className="d-none d-sm-block">Measurement</th>
+                        <th >Storage</th>
+                        <th className="d-none d-md-block">Used In...</th>
+                    </tr>
+                </thead>
 
             
-                <Table.Body>
+                <tbody>
                 {foodItems.map(item => {
                         return <FoodItemTableRow key={item.id} item={item} />
                     })}
 
-                </Table.Body>
+                </tbody>
             </Table>
 
 

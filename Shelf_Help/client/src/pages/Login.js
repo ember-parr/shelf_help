@@ -19,8 +19,8 @@ const Login = () => {
         login(email, password)
         .then((user) => {
             setLoading(false);
-            toast.info(`Welcome back ${user.displayName}`);
             history.push("/");
+            toast.info(`Welcome back ${user.displayName}`);
         })
         .catch((err) => {
             setLoading(false);

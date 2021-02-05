@@ -25,6 +25,7 @@ namespace Shelf_Help.Models
         public int LocationId { get; set; }
         public Location Location { get; set; }
 
+        public string FoodName { get; set; }
         
     }
 }

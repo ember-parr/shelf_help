@@ -11,5 +11,7 @@ namespace Shelf_Help.Repositories
         void Delete(int id);
 
         List<FoodItem> GetAll(int id);
+
+        List<FoodItem> GetGroceryList(int id);
     }
 }

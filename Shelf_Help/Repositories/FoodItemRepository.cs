@@ -24,6 +24,7 @@ namespace Shelf_Help.Repositories
             return _context.FoodItem
                 .Include(f => f.Location)
                 .Where(f => f.UserId == id)
+                .Where(f => f.Quantity > 0)
                 .ToList();
         }
 
@@ -34,6 +35,16 @@ namespace Shelf_Help.Repositories
                 .Include(f=> f.Location)
                 .Where(f => f.Id == id)
                 .FirstOrDefault();
+        }
+
+        // get user food items with a quantity of zero for grocery list
+        public List<FoodItem> GetGroceryList(int id)
+        {
+            return _context.FoodItem
+                .Include(f => f.Location)
+                .Where(f => f.UserId == id)
+                .Where(f => f.Quantity < 1)
+                .ToList();
         }
 
         

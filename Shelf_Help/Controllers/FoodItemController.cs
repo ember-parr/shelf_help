@@ -60,6 +60,14 @@ namespace Shelf_Help.Controllers
             return Ok();
         }
 
+        [HttpGet("groceries")]
+        public IActionResult GetGroceryList()
+        {
+            var currentUser = GetCurrentUserProfile();
+            var foods = _foodItemRepo.GetGroceryList(currentUser.Id);
+            return Ok(foods);
+        }
+
         
         // update a food item in the database
         [HttpPut("{id}")]
