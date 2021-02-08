@@ -29,6 +29,19 @@ export const FoodItemProvider = (props) => {
         );
     };
 
+    // this function gets individual food item by it's id
+    const getFoodById = (id) => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((res) => res.json())
+            )
+    }
+
     // this function gets all of the users food items from the database that has a quantity of 0
     const getGroceryList = () => {
         return getToken().then((token) => {
@@ -44,11 +57,27 @@ export const FoodItemProvider = (props) => {
     }
 
     const searchSpoonacularIngredients = (searchedWords) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=5&addChildren=true&apiKey=d77d78f9357b477094b10096abd85b71`)
+        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=d77d78f9357b477094b10096abd85b71&metaInformation=true`)
         .then((res) => res.json())
         .then(output => {
-            setSpoonResults(output.results)
+            setSpoonResults(output)
+            console.log(output)
         })
+        
+    }
+
+    const addFoodItem = Item => {
+        return getToken().then((token) => {
+            fetch(`${apiUrl}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(Item)
+            })
+        })
+        
         
     }
 
@@ -62,7 +91,10 @@ export const FoodItemProvider = (props) => {
             searchTerms,
             getGroceryList,
             searchSpoonacularIngredients,
-            spoonResults
+            spoonResults,
+            getFoodById,
+            addFoodItem,
+            setSpoonResults
         }}>
             {props.children}
         </FoodItemContext.Provider>

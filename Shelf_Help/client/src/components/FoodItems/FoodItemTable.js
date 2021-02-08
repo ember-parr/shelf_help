@@ -9,7 +9,7 @@ import {Button, ButtonGroup, Table, Input, Form, FormGroup, Label, FormText} fro
 
 
 export const FoodItemTable = () => {
-    const { getFoodItems, foodItems } = useContext(FoodItemContext);
+    const { getFoodItems, foodItems, setSpoonResults } = useContext(FoodItemContext);
     const user = parseInt(localStorage.user)
     const domHistory = useHistory();
     const [ allFoods, setAllFoods ] = useState({});
@@ -41,23 +41,18 @@ export const FoodItemTable = () => {
         setFiltered(allFoods)
     }
 
+    
+
     return (
         <>
             <section className="m-2">
-            <Button className="addNew-btn mb-3" onClick={() => domHistory.push("/")}>New Item</Button>
+            <Button className="addNew-btn mb-3" onClick={() => domHistory.push("/pantry/add")}>Manually Add Item</Button>
 
             <Form>
                 <FormGroup>
                     <Input type="text" name="searchTerms" id="searchTerms" placeholder="Search Pantry" onKeyUp={(keyEvent) => setSearchTerms(keyEvent.target.value.toLowerCase())}/>
                 </FormGroup>
             </Form>
-            {/* <Input
-            type="text"
-            icon='search'
-            onKeyUp={(keyEvent) => setSearchTerms(keyEvent.target.value.toLowerCase())}
-            placeholder="Search Items... "
-            className="searchTable"
-            /> */}
 
 
 
@@ -67,14 +62,6 @@ export const FoodItemTable = () => {
                     <Button> All Ingredients</Button>
                 </ButtonGroup>
                 <br />
-
-            {/* <ButtonGroup floated='right'>
-                <Button toggle className="filter-btn" onClick={todayIngredients}>Ingredients Needed Today</Button>
-                    <Button.Or />
-                <Button toggle className="filter-btn" onClick={weekIngredients}>Ingredients Needed This Week</Button>
-                    <Button.Or />
-                <Button toggle className="filter-btn" onClick={allIngredients}>View All Food Items</Button>
-        </ButtonGroup> */}
             </section> 
 
             
