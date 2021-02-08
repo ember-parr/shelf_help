@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 
 import React, { useContext, useState, useEffect } from 'react';
@@ -7,7 +8,7 @@ import { FoodItemContext } from "../../providers/FoodItemProvider"
 
 const GroceryForm = () => {
     const { searchSpoonacularIngredients, spoonResults } = useContext(FoodItemContext)
-    const [searchTerms, setSearchTerms] = useState("")
+    const [searchWords, setSearchTerms] = useState("")
     const [ searchOutput, setResults ] = useState([])
 
     // useEffect(() => {
@@ -17,7 +18,9 @@ const GroceryForm = () => {
     //     }
     // })
 
-    const searchForFood = (wordsToSearch) => {
+    const searchForFood = (event) => {
+        const wordsToSearch = {...searchWords}
+        wordsToSearch[event] = event.value
         searchSpoonacularIngredients(wordsToSearch)
         console.log("words to search: " + wordsToSearch);
         console.log("spoon results: " + spoonResults)
@@ -29,9 +32,9 @@ const GroceryForm = () => {
             <h2>Add a new item to your grocery list</h2>
             <Form onSubmit={event=> {
                     event.preventDefault() 
-                    searchForFood("milk")}}>
+                    searchForFood()}}>
                 <FormGroup>
-                    <Input type="text" name="searchTerms" id="searchTerms" placeholder="Search Groceries to Add" />
+                    <Input type="text" name="name" id="searchTerms" placeholder="Search Groceries to Add" />
                 </FormGroup>
                 <Button type="submit" > SEARCH </Button>
             </Form>

@@ -19,8 +19,9 @@ const Login = () => {
         login(email, password)
         .then((user) => {
             setLoading(false);
-            history.push("/");
             toast.info(`Welcome back ${user.displayName}`);
+            history.push("/");
+            console.log("should have loaded to home page.... ")
         })
         .catch((err) => {
             setLoading(false);
