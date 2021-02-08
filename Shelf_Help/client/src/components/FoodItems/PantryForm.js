@@ -11,7 +11,7 @@ import { PantryFormListItem } from './PantryFormListItem';
 
 
 const PantryForm = () => {
-    const { searchSpoonacularIngredients, spoonResults, foodItems, getFoodById } = useContext(FoodItemContext)
+    const { searchSpoonacularIngredients, spoonResults, foodItems, getFoodById, setSpoonResults } = useContext(FoodItemContext)
     const { locations, getLocations } = useContext(LocationContext)
     const [food, setFood] = useState({})
     const [isLoading, setIsLoading] = useState(true);
@@ -19,19 +19,25 @@ const PantryForm = () => {
     const [snoopy, setSnoopy] = useState('')
 
 
+    // useEffect(() => {
+    //     getLocations().then(() => {
+    //         if(foodId){
+    //             getFoodById(foodId)
+    //             .then(singleFood => {
+    //                 setFood(singleFood)
+    //                 setIsLoading(false)
+    //             })
+    //         } else {
+    //             setIsLoading(false)
+    //         }
+    //     })
+    // }, [])
+
     useEffect(() => {
-        getLocations().then(() => {
-            if(foodId){
-                getFoodById(foodId)
-                .then(singleFood => {
-                    setFood(singleFood)
-                    setIsLoading(false)
-                })
-            } else {
-                setIsLoading(false)
-            }
-        })
+        setSpoonResults([])
     }, [])
+
+
 
 
     

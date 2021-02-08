@@ -32,6 +32,8 @@ export const PantryFormListItem = ({food}) => {
     const user = getCurrentUser();
     const toggleModal = (id, name) => {
         setModal(!modal);
+        setStorageChoice({})
+        setMeasurementChoice("")
         setClicks(1);
     }
     const toggleChildModal = (id, name) => {
@@ -79,8 +81,6 @@ export const PantryFormListItem = ({food}) => {
             toast.error("Please select a storage option")
         } else {
             setIsLoading(true)
-            console.log("clicks: " + clicks + " spoonacular id: " + food.id + " userId " + user.id + " food name: " + food.name)
-            console.log("")
             const foodToAdd = {
                 quantity: clicks,
                 spoonacularIngredientId: food.id,
@@ -89,24 +89,11 @@ export const PantryFormListItem = ({food}) => {
                 locationId: storageChoice.id,
                 foodName: food.name
             }
-            console.log("food to add all together as an object: " + foodToAdd)
             addFoodItem(foodToAdd)
-
+            .then(() => toast.info(`${foodToAdd.quantity} ${foodToAdd.foodName} successfully added!`))
             .then(() => history.push("/mypantry"))
         }
     }
-
-
-    console.log("Locations: " + locations)
-
-
-
-
-
-
-
-
-
 
 
 
@@ -185,23 +172,6 @@ export const PantryFormListItem = ({food}) => {
                                                 </Col>
                                                 <Col lg="3"></Col>
                                             </Row>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                         </ModalBody>
                                         <ModalFooter>
                                             <Button color="primary" onClick={addIngredient}>Add To Pantry</Button>{' '}
@@ -214,49 +184,57 @@ export const PantryFormListItem = ({food}) => {
                                                     <Modal isOpen={childModal} toggle={toggleChildModal} >
                                                         <ModalHeader toggle={toggleChildModal}>{child.name} quantity...</ModalHeader>
                                                         <ModalBody>
-                                                        <Row className="mb-4" style={centerItUp}>
-                                                            <Col lg="2"></Col>
-                                                            <Col lg="3">
-                                                                <Dropdown isOpen={dropdownOpen} toggle={dropdownToggle}>
-                                                                    <DropdownToggle caret>
-                                                                        Measurement
-                                                                    </DropdownToggle>
-                                                                    <DropdownMenu>
-                                                                        <DropdownItem header>select one option</DropdownItem>
-                                                                        <DropdownItem divider />
-                                                                        {food.possibleUnits.map(option => {
-                                                                            return <DropdownItem onClick={() => setMeasurementChoice(option)}>{option}</DropdownItem>
-                                                                        })}
-                                                                    </DropdownMenu>
-                                                                </Dropdown>
-                                                            </Col>
-                                                            <Col lg="1"></Col>
+                                                            <Row className="mb-4" style={centerItUp}>
+                                                                <Col lg="2"></Col>
+                                                                <Col lg="3">
+                                                                    <Dropdown isOpen={dropdownOpen} toggle={dropdownToggle}>
+                                                                        <DropdownToggle caret>
+                                                                            Measurement
+                                                                        </DropdownToggle>
+                                                                        <DropdownMenu>
+                                                                            <DropdownItem header>select one option</DropdownItem>
+                                                                            <DropdownItem divider />
+                                                                            {food.possibleUnits.map(option => {
+                                                                                return <DropdownItem onClick={() => setMeasurementChoice(option)}>{option}</DropdownItem>
+                                                                            })}
+                                                                        </DropdownMenu>
+                                                                    </Dropdown>
+                                                                </Col>
+                                                                <Col lg="1"></Col>
 
 
-                                                            <Col lg="3">
-                                                                <Dropdown isOpen={dropdownStorageOpen} toggle={dropdownStorageToggle}>
-                                                                    
-                                                                        { storageChoice.name ? <DropdownToggle caret>{storageChoice.name}</DropdownToggle> : <DropdownToggle caret>Storage</DropdownToggle> }
-                                                                    
-                                                                    <DropdownMenu>
-                                                                        <DropdownItem header>select one option</DropdownItem>
-                                                                        <DropdownItem divider />
-                                                                        {locations.map(option => {
-                                                                            return <DropdownItem onClick={() => setStorageChoice(option)}>{option.name}</DropdownItem>
-                                                                        })}
-                                                                    </DropdownMenu>
-                                                                </Dropdown>
-                                                            </Col>
-                                                            <Col lg="3"></Col>
-                                                        </Row>
-                                                        <span style={iconStyling}>
-                                                            <i class="fas fa-minus-square" onClick={() => DecreaseItem()}></i>
-
-
-                                                            
-                                                            {"   "}{clicks}{"   "}
-                                                            <i class="fas fa-plus-square" onClick={() => IncrementItem()}></i>
-                                                        </span>
+                                                                <Col lg="3">
+                                                                    <Dropdown isOpen={dropdownStorageOpen} toggle={dropdownStorageToggle}>
+                                                                        
+                                                                            { storageChoice.name ? <DropdownToggle caret>{storageChoice.name}</DropdownToggle> : <DropdownToggle caret>Storage</DropdownToggle> }
+                                                                        
+                                                                        <DropdownMenu>
+                                                                            <DropdownItem header>select one option</DropdownItem>
+                                                                            <DropdownItem divider />
+                                                                            {locations.map(option => {
+                                                                                return <DropdownItem onClick={() => setStorageChoice(option)}>{option.name}</DropdownItem>
+                                                                            })}
+                                                                        </DropdownMenu>
+                                                                    </Dropdown>
+                                                                </Col>
+                                                                <Col lg="3"></Col>
+                                                            </Row>
+                                                            <Row style={iconStyling}>
+                                                                <Col lg="3"></Col>
+                                                                <Col lg="1">
+                                                                    <i class="fas fa-minus-square" onClick={() => DecreaseItem()}></i>
+                                                                </Col>
+                                                                <Col lg="2" style={centerItUp}>
+                                                                    {clicks}
+                                                                </Col>
+                                                                <Col lg="1">
+                                                                    <i class="fas fa-plus-square" onClick={() => IncrementItem()}></i>
+                                                                </Col>
+                                                                <Col lg="2">
+                                                                    {measurementChoice ? <p>{measurementChoice}(s)</p> : <p> </p>}
+                                                                </Col>
+                                                                <Col lg="3"></Col>
+                                                            </Row>
                                                         </ModalBody>
                                                         <ModalFooter>
                                                             <Button color="primary" onClick={addIngredient}>Done</Button>
@@ -321,11 +299,22 @@ export const PantryFormListItem = ({food}) => {
                             </Col>
                             <Col lg="3"></Col>
                         </Row>
-                        <span style={iconStyling}>
-                            <i class="fas fa-minus-square" onClick={() => DecreaseItem()}></i>
-                            {"   "}{clicks}{"   "}
-                            <i class="fas fa-plus-square" onClick={() => IncrementItem()}></i>
-                        </span>
+                        <Row style={iconStyling}>
+                            <Col lg="3"></Col>
+                            <Col lg="1">
+                                <i class="fas fa-minus-square" onClick={() => DecreaseItem()}></i>
+                            </Col>
+                            <Col lg="2" style={centerItUp}>
+                                {clicks}
+                            </Col>
+                            <Col lg="1">
+                                <i class="fas fa-plus-square" onClick={() => IncrementItem()}></i>
+                            </Col>
+                            <Col lg="2">
+                                {measurementChoice ? <p>{measurementChoice}(s)</p> : <p> </p>}
+                            </Col>
+                            <Col lg="3"></Col>
+                        </Row>
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={addIngredient}>Add To Pantry</Button>{' '}

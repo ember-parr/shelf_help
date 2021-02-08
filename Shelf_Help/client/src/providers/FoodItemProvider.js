@@ -93,7 +93,8 @@ export const FoodItemProvider = (props) => {
             searchSpoonacularIngredients,
             spoonResults,
             getFoodById,
-            addFoodItem
+            addFoodItem,
+            setSpoonResults
         }}>
             {props.children}
         </FoodItemContext.Provider>

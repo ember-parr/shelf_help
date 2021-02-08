@@ -9,7 +9,7 @@ import {Button, ButtonGroup, Table, Input, Form, FormGroup, Label, FormText} fro
 
 
 export const FoodItemTable = () => {
-    const { getFoodItems, foodItems } = useContext(FoodItemContext);
+    const { getFoodItems, foodItems, setSpoonResults } = useContext(FoodItemContext);
     const user = parseInt(localStorage.user)
     const domHistory = useHistory();
     const [ allFoods, setAllFoods ] = useState({});
@@ -40,6 +40,8 @@ export const FoodItemTable = () => {
     let allIngredients = () => {
         setFiltered(allFoods)
     }
+
+    
 
     return (
         <>
