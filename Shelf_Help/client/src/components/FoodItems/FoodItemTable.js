@@ -44,7 +44,7 @@ export const FoodItemTable = () => {
     return (
         <>
             <section className="m-2">
-            <Button className="addNew-btn mb-3" onClick={() => domHistory.push("/")}>New Item</Button>
+            <Button className="addNew-btn mb-3" onClick={() => domHistory.push("/pantry/add")}>Manually Add Item</Button>
 
             <Form>
                 <FormGroup>
