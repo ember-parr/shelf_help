@@ -4,9 +4,10 @@
 
 import React, { useContext, useState, useEffect, createRef } from 'react';
 import { useParams } from "react-router-dom";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup, Container } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup, Container, Row } from 'reactstrap';
 import { FoodItemContext } from "../../providers/FoodItemProvider";
 import { LocationContext } from "../../providers/LocationProvider";
+import { PantryFormListItem } from './PantryFormListItem';
 
 
 const PantryForm = () => {
@@ -35,7 +36,11 @@ const PantryForm = () => {
 
     
     const handleFoodSearch = (wordsToSearch) => {
-        console.log("sent with click: " + wordsToSearch)
+        console.log("words sent with click: " + wordsToSearch)
+        setIsLoading(true)
+        searchSpoonacularIngredients(wordsToSearch)
+        console.log("spoon results: " + spoonResults.results)
+        setIsLoading(false)
     }
 
     
@@ -57,6 +62,16 @@ const PantryForm = () => {
                     }
                     > SEARCH </Button>
             </Form>
+            <hr />
+
+            <div className="mt-3">
+                <Row>
+                    {spoonResults.results?.map(ingredientOption => {
+                        return <PantryFormListItem key={ingredientOption.id} food={ingredientOption} />
+                        // return <p key={ingredientChoice.id}>{ingredientChoice.name}</p>
+                    })}
+                    </Row>
+            </div>
             </Container>
         </div>
     );

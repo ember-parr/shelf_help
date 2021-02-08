@@ -57,10 +57,11 @@ export const FoodItemProvider = (props) => {
     }
 
     const searchSpoonacularIngredients = (searchedWords) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=5&addChildren=true&apiKey=d77d78f9357b477094b10096abd85b71`)
+        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=d77d78f9357b477094b10096abd85b71`)
         .then((res) => res.json())
         .then(output => {
-            setSpoonResults(output.results)
+            setSpoonResults(output)
+            console.log(output)
         })
         
     }

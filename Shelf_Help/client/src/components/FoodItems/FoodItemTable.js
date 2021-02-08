@@ -51,13 +51,6 @@ export const FoodItemTable = () => {
                     <Input type="text" name="searchTerms" id="searchTerms" placeholder="Search Pantry" onKeyUp={(keyEvent) => setSearchTerms(keyEvent.target.value.toLowerCase())}/>
                 </FormGroup>
             </Form>
-            {/* <Input
-            type="text"
-            icon='search'
-            onKeyUp={(keyEvent) => setSearchTerms(keyEvent.target.value.toLowerCase())}
-            placeholder="Search Items... "
-            className="searchTable"
-            /> */}
 
 
 
@@ -67,14 +60,6 @@ export const FoodItemTable = () => {
                     <Button> All Ingredients</Button>
                 </ButtonGroup>
                 <br />
-
-            {/* <ButtonGroup floated='right'>
-                <Button toggle className="filter-btn" onClick={todayIngredients}>Ingredients Needed Today</Button>
-                    <Button.Or />
-                <Button toggle className="filter-btn" onClick={weekIngredients}>Ingredients Needed This Week</Button>
-                    <Button.Or />
-                <Button toggle className="filter-btn" onClick={allIngredients}>View All Food Items</Button>
-        </ButtonGroup> */}
             </section> 
 
             
