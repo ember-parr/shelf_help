@@ -8,6 +8,7 @@ import Pantry from "../pages/Pantry"
 import GroceryList from "../pages/GroceryList";
 import Dashboard from "../pages/Dashboard";
 import {FoodItemProvider} from "../providers/FoodItemProvider";
+import {LocationProvider} from "../providers/LocationProvider";
 import GroceryForm from "./Groceries/GroceryForm";
 import PantryForm from "./FoodItems/PantryForm";
 
@@ -32,9 +33,11 @@ const ApplicationViews = () => {
             </FoodItemProvider>
 
             <FoodItemProvider>
+                <LocationProvider>
                     <Route path="/pantry/add">
                         {isLoggedIn ? <PantryForm /> : <Redirect to="/login" />}
                     </Route>
+                </LocationProvider>
             </FoodItemProvider>
 
 
@@ -43,9 +46,11 @@ const ApplicationViews = () => {
             </Route>
 
             <FoodItemProvider>
-                <Route path="/grocery/add" exact>
-                    {isLoggedIn ? <GroceryForm /> : <Redirect to="/login" />}
-                </Route>
+                <LocationProvider>
+                    <Route path="/grocery/add" exact>
+                        {isLoggedIn ? <GroceryForm /> : <Redirect to="/login" />}
+                    </Route>
+                </LocationProvider>
             </FoodItemProvider>
 
             <Route path="/login">

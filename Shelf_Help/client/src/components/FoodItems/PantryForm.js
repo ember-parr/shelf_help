@@ -1,40 +1,44 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, createRef } from 'react';
+import { useParams } from "react-router-dom";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup, Container } from 'reactstrap';
-import { FoodItemContext } from "../../providers/FoodItemProvider"
+import { FoodItemContext } from "../../providers/FoodItemProvider";
+import { LocationContext } from "../../providers/LocationProvider";
 
 
 const PantryForm = () => {
-    const { searchSpoonacularIngredients, spoonResults } = useContext(FoodItemContext)
-    const [spoonSearchWords, setSpoonSearchTerms] = useState("")
-    const [ searchOutput, setResults ] = useState({})
+    const { searchSpoonacularIngredients, spoonResults, foodItems, getFoodById } = useContext(FoodItemContext)
+    const { locations, getLocations } = useContext(LocationContext)
+    const [food, setFood] = useState({})
+    const [isLoading, setIsLoading] = useState(true);
+    const {foodId} = useParams();
+    const [snoopy, setSnoopy] = useState('')
 
-    // useEffect(() => {
-    //     if (searchTerms !== "") {
-    //         searchSpoonacularIngredients(searchTerms)
-    //         .then(console.log("search output: " + searchOutput))
-    //     }
-    // })
+
+    useEffect(() => {
+        getLocations().then(() => {
+            if(foodId){
+                getFoodById(foodId)
+                .then(singleFood => {
+                    setFood(singleFood)
+                    setIsLoading(false)
+                })
+            } else {
+                setIsLoading(false)
+            }
+        })
+    }, [])
+
 
     
-    const handleFoodSearch = (e) => {
-        const newFoodSearch = { ...searchOutput }
-        newFoodSearch[e.target.name] = e.target.value
-        setResults(newFoodSearch)
-
-
-
-        // e.preventDefault()
-        // setSpoonSearchTerms(e.target.value)
-        console.log("handle food search output: " + searchOutput)
+    const handleFoodSearch = (wordsToSearch) => {
+        console.log("sent with click: " + wordsToSearch)
     }
 
-    console.log("solo food search state: " + spoonSearchWords)
-
-        // console.log("ouside of function spoonSearchWords: " + spoonSearchWords );
-
+    
 
     return (
         <div className="m-2">
@@ -42,13 +46,13 @@ const PantryForm = () => {
             <h2>Add a new item to your pantry's ingredient inventory</h2>
             <Form    >
                 <FormGroup>
-                    <Input type="text" name="name" id="searchTerms" placeholder="Search Ingredient to Add" />
+                    <Input type="text"  placeholder="Search Ingredient to Add" onChange={event => setSnoopy(event.target.value)}/>
                 </FormGroup>
                 <Button 
                     type="submit" 
                     onClick={(e) => {
                         e.preventDefault()
-                        handleFoodSearch()
+                        handleFoodSearch(snoopy)
                     }
                     }
                     > SEARCH </Button>

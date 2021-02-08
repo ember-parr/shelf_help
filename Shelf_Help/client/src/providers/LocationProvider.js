@@ -7,7 +7,7 @@ import "firebase/auth";
 export const LocationContext = createContext();
 
 export const LocationProvider = (props) => {
-    const [locations, setLocations] = useState([]);
+    const [ locations, setLocations ] = useState([]);
     const getToken = () => firebase.auth().currentUser.getIdToken();
     const apiUrl = "/api/location";
 
@@ -31,6 +31,10 @@ export const LocationProvider = (props) => {
 
 
     return (
-        <LocationContext.Provider value= {{locations, getLocations}}> {props.children} </LocationContext.Provider>
+        <LocationContext.Provider 
+            value= {{locations, getLocations}}
+        > 
+        {props.children} 
+        </LocationContext.Provider>
     )
 }
