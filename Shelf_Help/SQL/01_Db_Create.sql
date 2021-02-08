@@ -36,11 +36,11 @@ CREATE TABLE [FoodItem] (
   [UserId] INTEGER NOT NULL,
   [LocationId] INTEGER NOT NULL DEFAULT(6),
   [Quantity] INTEGER NOT NULL DEFAULT(1),
-  [Spoonacular_IngredientId] INTEGER,
+  [SpoonacularIngredientId] INTEGER,
   [Measurement] VARCHAR (255),
+  [FoodName] VARCHAR (255),
 
-  CONSTRAINT [FK_FoodItem_User] FOREIGN KEY ([UserId]) REFERENCES [UserProfile] ([Id]),
-  CONSTRAINT [FK_FoodItem_Location] FOREIGN KEY ([LocationId]) REFERENCES [Location] ([Id])
+  
 )
 
 
@@ -53,13 +53,11 @@ CREATE TABLE [MealType] (
 CREATE TABLE [Menu] (
   [Id] INTEGER PRIMARY KEY IDENTITY,
   [Date] DATETIME NOT NULL,
-  [TypeId] INTEGER NOT NULL DEFAULT (6),
+  [MealTypeId] INTEGER NOT NULL DEFAULT (6),
   [UserId] INTEGER NOT NULL,
   [Custom] bit NOT NULL DEFAULT (1),
-  [Spoonacular_RecipeId] INTEGER,
+  [SpoonacularRecipeId] INTEGER,
 
-  CONSTRAINT [FK_Menu_Type] FOREIGN KEY ([TypeId]) REFERENCES [MealType] ([Id]),
-  CONSTRAINT [FK_Menu_User] FOREIGN KEY ([UserId]) REFERENCES [UserProfile] ([Id])
 )
 GO
 

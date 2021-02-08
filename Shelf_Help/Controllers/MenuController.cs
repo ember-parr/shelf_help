@@ -27,45 +27,63 @@ namespace Shelf_Help.Controllers
             _userRepo = userRepo;
         }
 
-        // get this users menu entries from database
-        [HttpGet("getbyuser/{id}")]
-        public IActionResult GetByUser(int userId)
+        // get all menus for current user
+        [HttpGet]
+        public IActionResult GetAll()
         {
             var currentUser = GetCurrentUserProfile();
-            if (currentUser.Id != userId)
-            {
-                return Unauthorized();
-            }
-            var menues = _menuRepo.GetUsersMenu(userId);
-            return Ok(menues);
+            var menus = _menuRepo.GetAll(currentUser.Id);
+            return Ok(menus);
         }
+
+
+        // get menus on a certain date
+        [HttpGet("day/{date}")]
+        public IActionResult GetByDate(DateTime date)
+        {
+            return Ok(_menuRepo.GetBySingleDate(date));
+        }
+
+
+        // get this users menu entries from database
+        //[HttpGet("getbyuser/{id}")]
+        //public IActionResult GetByUser(int userId)
+        //{
+        //    var currentUser = GetCurrentUserProfile();
+        //    if (currentUser.Id != userId)
+        //    {
+        //        return Unauthorized();
+        //    }
+        //    var menues = _menuRepo.GetUsersMenu(userId);
+        //    return Ok(menues);
+        //}
 
 
         // get a menu entry by it's id
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var currentUser = GetCurrentUserProfile();
-            var menu = _menuRepo.GetById(id);
-            if (menu == null)
-            {
-                return NotFound();
-            }
+        //[HttpGet("{id}")]
+        //public IActionResult GetById(int id)
+        //{
+        //    var currentUser = GetCurrentUserProfile();
+        //    var menu = _menuRepo.GetById(id);
+        //    if (menu == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            if (currentUser.Id != menu.UserId)
-            {
-                return Unauthorized();
-            }
+        //    if (currentUser.Id != menu.UserId)
+        //    {
+        //        return Unauthorized();
+        //    }
 
-            var ingredients = _menuRepo.GetIngredients(id);
-            var menuDetails = new MenuDetails()
-            {
-                Menu = menu,
-                Ingredients = ingredients,
-            };
+        //    var ingredients = _menuRepo.GetIngredients(id);
+        //    var menuDetails = new MenuDetails()
+        //    {
+        //        Menu = menu,
+        //        Ingredients = ingredients,
+        //    };
 
-            return Ok(menuDetails);
-        }
+        //    return Ok(menuDetails);
+        //}
 
 
         // add a new menu entry

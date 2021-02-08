@@ -13,7 +13,7 @@ namespace Shelf_Help.Models
         [Required]
         public int Quantity { get; set; }
 
-        public int Spoonacular_IngredientId { get; set; }
+        public int SpoonacularIngredientId { get; set; }
 
         [MaxLength(255)]
         public string Measurement { get; set; }
@@ -23,8 +23,9 @@ namespace Shelf_Help.Models
 
         [Required]
         public int LocationId { get; set; }
-
-        public UserProfile UserProfile { get; set; }
         public Location Location { get; set; }
+
+        public string FoodName { get; set; }
+        
     }
 }

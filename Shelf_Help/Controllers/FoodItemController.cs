@@ -27,15 +27,19 @@ namespace Shelf_Help.Controllers
             _userRepo = userRepo;
         }
 
-        // get food items by user
-        [HttpGet("getmyfood/{id}")]
-        public IActionResult GetUsersFoodItems(int id)
+        
+
+        // get all food items (user specific by user id)
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            return Ok(_foodItemRepo.GetUsersFoodItems(id));
+            var currentUser = GetCurrentUserProfile();
+            var foods = _foodItemRepo.GetAll(currentUser.Id);
+            return Ok(foods);
         }
 
 
-        // get a single food item from the database
+        // get a single food item from the database from foodItem id
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -56,6 +60,14 @@ namespace Shelf_Help.Controllers
             return Ok();
         }
 
+        [HttpGet("groceries")]
+        public IActionResult GetGroceryList()
+        {
+            var currentUser = GetCurrentUserProfile();
+            var foods = _foodItemRepo.GetGroceryList(currentUser.Id);
+            return Ok(foods);
+        }
+
         
         // update a food item in the database
         [HttpPut("{id}")]
@@ -67,7 +79,7 @@ namespace Shelf_Help.Controllers
                 return BadRequest();
             }
             originalFoodItem.Quantity = foodItem.Quantity;
-            originalFoodItem.Spoonacular_IngredientId = foodItem.Spoonacular_IngredientId;
+            originalFoodItem.SpoonacularIngredientId = foodItem.SpoonacularIngredientId;
             originalFoodItem.Measurement = foodItem.Measurement;
             originalFoodItem.LocationId = foodItem.LocationId;
             _foodItemRepo.Update(originalFoodItem);
