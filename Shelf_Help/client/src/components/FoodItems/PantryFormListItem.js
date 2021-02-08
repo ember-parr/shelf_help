@@ -1,14 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-whitespace-before-property */
 /* eslint-disable no-unused-vars */
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
-import { Card, Button, CardTitle, CardBody, Collapse, Col, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Card, Button, CardTitle, CardBody, Collapse, Col, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Row  } from "reactstrap";
 import {FoodItemContext} from "../../providers/FoodItemProvider"
 import { UserProfileContext } from "../../providers/UserProfileProvider";
+import { toast } from "react-toastify";
+import { LocationContext } from "../../providers/LocationProvider";
 
 
 export const PantryFormListItem = ({food}) => {
     const { getCurrentUser } = useContext(UserProfileContext)
+    const { locations, getLocations } = useContext(LocationContext)
     const [isLoading, setIsLoading] = useState(true)
     const history = useHistory();
     const [collapse, setCollapse] = useState(false);
@@ -21,6 +25,10 @@ export const PantryFormListItem = ({food}) => {
     const toggle = () => setCollapse(!collapse);
     const [modal, setModal] = useState(false);
     const [childModal, setChildModal] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [dropdownStorageOpen, setDropdownStorageOpen] = useState(false);
+    const [measurementChoice, setMeasurementChoice] = useState("")
+    const [storageChoice, setStorageChoice] = useState({})
     const user = getCurrentUser();
     const toggleModal = (id, name) => {
         setModal(!modal);
@@ -29,6 +37,14 @@ export const PantryFormListItem = ({food}) => {
     const toggleChildModal = (id, name) => {
         setChildModal(!childModal);
         setClicks(1);
+    }
+
+    const dropdownToggle = () => {
+        setDropdownOpen(!dropdownOpen);
+    }
+
+    const dropdownStorageToggle = () => {
+        setDropdownStorageOpen(!dropdownStorageOpen);
     }
 
     // FUNCTIONS FOR INCREMENTAL COUNTER ON FORM MODAL
@@ -42,32 +58,46 @@ export const PantryFormListItem = ({food}) => {
         }
     }
     const iconStyling = {
-        textAlign: "center",
         fontSize: 30
     }
+    const centerItUp = {
+        textAlign: "center"
+    }
+
+    useEffect(() => {
+        getLocations()
+    }, [])
 
 
 
 
     // SAVING THE INGREDIENT TO THE USERS PANTRY
     const addIngredient = () => {
-        setIsLoading(true)
-        console.log("clicks: " + clicks + " spoonacular id: " + food.id + " userId " + user.id + " food name: " + food.name)
-        console.log("")
-        const foodToAdd = {
-            quantity: clicks,
-            spoonacularIngredientId: food.id,
-            measurement: "tablespoons",
-            userId: user.id,
-            locationId: 1,
-            foodName: food.name
-        }
-        console.log("food to add all together as an object: " + foodToAdd)
-        addFoodItem(foodToAdd)
+        if (!measurementChoice) {
+            toast.error("Please Select A Unit of Measurement");
+        } else if (!storageChoice.name) {
+            toast.error("Please select a storage option")
+        } else {
+            setIsLoading(true)
+            console.log("clicks: " + clicks + " spoonacular id: " + food.id + " userId " + user.id + " food name: " + food.name)
+            console.log("")
+            const foodToAdd = {
+                quantity: clicks,
+                spoonacularIngredientId: food.id,
+                measurement: measurementChoice,
+                userId: user.id,
+                locationId: storageChoice.id,
+                foodName: food.name
+            }
+            console.log("food to add all together as an object: " + foodToAdd)
+            addFoodItem(foodToAdd)
 
-        .then(() => history.push("/mypantry"))
+            .then(() => history.push("/mypantry"))
+        }
     }
 
+
+    console.log("Locations: " + locations)
 
 
 
@@ -103,11 +133,75 @@ export const PantryFormListItem = ({food}) => {
                                     <Modal isOpen={modal} toggle={toggle} >
                                         <ModalHeader toggle={toggleModal}>{food.name} quantity... </ModalHeader>
                                         <ModalBody>
-                                            <span style={iconStyling}>
-                                                <i class="fas fa-minus-square" onClick={() => DecreaseItem()}></i>
-                                                {"   "}{clicks}{"   "}
-                                                <i class="fas fa-plus-square" onClick={() => IncrementItem()}></i>
-                                            </span>
+                                            <Row className="mb-4" style={centerItUp}>
+                                                <Col lg="2"></Col>
+                                                <Col lg="3">
+                                                    <Dropdown isOpen={dropdownOpen} toggle={dropdownToggle}>
+                                                        <DropdownToggle caret>
+                                                            Measurement
+                                                        </DropdownToggle>
+                                                        <DropdownMenu>
+                                                            <DropdownItem header>select one option</DropdownItem>
+                                                            <DropdownItem divider />
+                                                            {food.possibleUnits.map(option => {
+                                                                return <DropdownItem onClick={() => setMeasurementChoice(option)}>{option}</DropdownItem>
+                                                            })}
+                                                        </DropdownMenu>
+                                                    </Dropdown>
+                                                </Col>
+                                                <Col lg="1"></Col>
+
+
+                                                <Col lg="3">
+                                                    <Dropdown isOpen={dropdownStorageOpen} toggle={dropdownStorageToggle}>
+                                                        
+                                                            { storageChoice.name ? <DropdownToggle caret>{storageChoice.name}</DropdownToggle> : <DropdownToggle caret>Storage</DropdownToggle> }
+                                                        
+                                                        <DropdownMenu>
+                                                            <DropdownItem header>select one option</DropdownItem>
+                                                            <DropdownItem divider />
+                                                            {locations.map(option => {
+                                                                return <DropdownItem onClick={() => setStorageChoice(option)}>{option.name}</DropdownItem>
+                                                            })}
+                                                        </DropdownMenu>
+                                                    </Dropdown>
+                                                </Col>
+                                                <Col lg="3"></Col>
+                                            </Row>
+
+                                            <Row style={iconStyling}>
+                                                <Col lg="3"></Col>
+                                                <Col lg="1">
+                                                    <i class="fas fa-minus-square" onClick={() => DecreaseItem()}></i>
+                                                </Col>
+                                                <Col lg="2" style={centerItUp}>
+                                                    {clicks}
+                                                </Col>
+                                                <Col lg="1">
+                                                    <i class="fas fa-plus-square" onClick={() => IncrementItem()}></i>
+                                                </Col>
+                                                <Col lg="2">
+                                                    {measurementChoice ? <p>{measurementChoice}(s)</p> : <p> </p>}
+                                                </Col>
+                                                <Col lg="3"></Col>
+                                            </Row>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                         </ModalBody>
                                         <ModalFooter>
                                             <Button color="primary" onClick={addIngredient}>Add To Pantry</Button>{' '}
