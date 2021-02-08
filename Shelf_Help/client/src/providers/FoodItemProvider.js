@@ -57,12 +57,27 @@ export const FoodItemProvider = (props) => {
     }
 
     const searchSpoonacularIngredients = (searchedWords) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=d77d78f9357b477094b10096abd85b71`)
+        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=d77d78f9357b477094b10096abd85b71&metaInformation=true`)
         .then((res) => res.json())
         .then(output => {
             setSpoonResults(output)
             console.log(output)
         })
+        
+    }
+
+    const addFoodItem = Item => {
+        return getToken().then((token) => {
+            fetch(`${apiUrl}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(Item)
+            })
+        })
+        
         
     }
 
@@ -77,7 +92,8 @@ export const FoodItemProvider = (props) => {
             getGroceryList,
             searchSpoonacularIngredients,
             spoonResults,
-            getFoodById
+            getFoodById,
+            addFoodItem
         }}>
             {props.children}
         </FoodItemContext.Provider>

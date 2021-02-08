@@ -1,11 +1,18 @@
+/* eslint-disable no-whitespace-before-property */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from 'react-router-dom';
 import { Card, Button, CardTitle, CardBody, Collapse, Col, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import {FoodItemContext} from "../../providers/FoodItemProvider"
+import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 
 export const PantryFormListItem = ({food}) => {
+    const { getCurrentUser } = useContext(UserProfileContext)
+    const [isLoading, setIsLoading] = useState(true)
+    const history = useHistory();
     const [collapse, setCollapse] = useState(false);
+    const {addFoodItem} = useContext(FoodItemContext);
     const [status, setStatus] = useState('Closed');
     const onEntering = () => setStatus('Opening...');
     const onEntered = () => setStatus('Opened');
@@ -14,11 +21,11 @@ export const PantryFormListItem = ({food}) => {
     const toggle = () => setCollapse(!collapse);
     const [modal, setModal] = useState(false);
     const [childModal, setChildModal] = useState(false);
+    const user = getCurrentUser();
     const toggleModal = (id, name) => {
         setModal(!modal);
         setClicks(1);
     }
-
     const toggleChildModal = (id, name) => {
         setChildModal(!childModal);
         setClicks(1);
@@ -38,6 +45,38 @@ export const PantryFormListItem = ({food}) => {
         textAlign: "center",
         fontSize: 30
     }
+
+
+
+
+    // SAVING THE INGREDIENT TO THE USERS PANTRY
+    const addIngredient = () => {
+        setIsLoading(true)
+        console.log("clicks: " + clicks + " spoonacular id: " + food.id + " userId " + user.id + " food name: " + food.name)
+        console.log("")
+        const foodToAdd = {
+            quantity: clicks,
+            spoonacularIngredientId: food.id,
+            measurement: "tablespoons",
+            userId: user.id,
+            locationId: 1,
+            foodName: food.name
+        }
+        console.log("food to add all together as an object: " + foodToAdd)
+        addFoodItem(foodToAdd)
+
+        .then(() => history.push("/mypantry"))
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -71,7 +110,7 @@ export const PantryFormListItem = ({food}) => {
                                             </span>
                                         </ModalBody>
                                         <ModalFooter>
-                                            <Button color="primary" onClick={toggleModal}>Add To Pantry</Button>{' '}
+                                            <Button color="primary" onClick={addIngredient}>Add To Pantry</Button>{' '}
                                         </ModalFooter>
                                     </Modal>
             {/* MAPS THROUGH CHILDREN OF THE INGREDIENT (VARIETIES) & HAS SAME BEHAVIOR AS REGULAR INGREDIENTS.  */}
@@ -92,7 +131,7 @@ export const PantryFormListItem = ({food}) => {
                                                         </span>
                                                         </ModalBody>
                                                         <ModalFooter>
-                                                            <Button color="primary" onClick={toggleChildModal}>Done</Button>
+                                                            <Button color="primary" onClick={addIngredient}>Done</Button>
 
                                                         </ModalFooter>
                                                     </Modal>
@@ -126,7 +165,7 @@ export const PantryFormListItem = ({food}) => {
                         </span>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={toggleModal}>Add To Pantry</Button>{' '}
+                        <Button color="primary" onClick={addIngredient}>Add To Pantry</Button>{' '}
                     </ModalFooter>
                 </Modal>
             </>
