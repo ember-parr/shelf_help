@@ -46,6 +46,7 @@ export const PantryFormListItem = ({food}) => {
     {
         return (
             <>
+            {/* AFTER USER SEARCHES FOR A FOOD ITEM TO ADD TO PANTRY, RETURNED ITEMS WITH CHILDREN SHOW WITH OPTION TO VIEW VARIETIES  */}
                 <Col sm="4" className="mb-4">
                     <Card body>
                         <CardTitle tag="h5">{food.name}</CardTitle>
@@ -60,8 +61,6 @@ export const PantryFormListItem = ({food}) => {
                             <Card>
                             <CardBody>
                                 <p key={food.id}>{food.name}{"  "} <Button color="secondary" size="sm" onClick={()=> toggleModal(food.id, food.name)}>Add To My Pantry</Button> </p>
-
-
                                     <Modal isOpen={modal} toggle={toggle} >
                                         <ModalHeader toggle={toggleModal}>{food.name} quantity... </ModalHeader>
                                         <ModalBody>
@@ -75,17 +74,10 @@ export const PantryFormListItem = ({food}) => {
                                             <Button color="primary" onClick={toggleModal}>Add To Pantry</Button>{' '}
                                         </ModalFooter>
                                     </Modal>
-
-
-
-
-
-
+            {/* MAPS THROUGH CHILDREN OF THE INGREDIENT (VARIETIES) & HAS SAME BEHAVIOR AS REGULAR INGREDIENTS.  */}
                                 {food.children.map(child => {
                                     return (<>
                                         <p key={child.id}>{child.name}{"  "} <Button color="secondary" size="sm" onClick={()=> toggleChildModal(child.id, child.name)}>Add To My Pantry</Button> </p>
-                
-                
                                                     <Modal isOpen={childModal} toggle={toggleChildModal} >
                                                         <ModalHeader toggle={toggleChildModal}>{child.name} quantity...</ModalHeader>
                                                         <ModalBody>
@@ -112,38 +104,23 @@ export const PantryFormListItem = ({food}) => {
                         </Collapse>
                     </Card>
                 </Col>
-                
-                
-
-
-
-
-
-
-
             </>
         )
     } else {
         return (
             <>
+            {/* INGREDIENTS WITHOUT CHILDREN JUST HAVE A BUTTON TO ADD TO PANTRY  */}
                 <Col sm="4" className="mb-4">
                 <Card body>
                     <CardTitle tag="h5">{food.name}</CardTitle>
                     <Button onClick={() => toggleModal(food.id, food.name)}> Add To My Pantry </Button>
                 </Card>
                 </Col>
-
-
-
-
                 <Modal isOpen={modal} toggle={toggle} >
                     <ModalHeader toggle={toggleModal}>{food.name} quantity... </ModalHeader>
                     <ModalBody>
                         <span style={iconStyling}>
                             <i class="fas fa-minus-square" onClick={() => DecreaseItem()}></i>
-
-
-                            
                             {"   "}{clicks}{"   "}
                             <i class="fas fa-plus-square" onClick={() => IncrementItem()}></i>
                         </span>
@@ -152,8 +129,6 @@ export const PantryFormListItem = ({food}) => {
                         <Button color="primary" onClick={toggleModal}>Add To Pantry</Button>{' '}
                     </ModalFooter>
                 </Modal>
-        
-        
             </>
             )
     }
