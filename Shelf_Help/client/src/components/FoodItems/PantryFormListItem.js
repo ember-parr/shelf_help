@@ -20,7 +20,7 @@ export const PantryFormListItem = ({food}) => {
     }
 
     const toggleChildModal = (id, name) => {
-        setChildModal(!modal);
+        setChildModal(!childModal);
         setClicks(1);
     }
 
