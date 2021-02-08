@@ -36,10 +36,8 @@ const PantryForm = () => {
 
     
     const handleFoodSearch = (wordsToSearch) => {
-        console.log("words sent with click: " + wordsToSearch)
         setIsLoading(true)
         searchSpoonacularIngredients(wordsToSearch)
-        console.log("spoon results: " + spoonResults.results)
         setIsLoading(false)
     }
 

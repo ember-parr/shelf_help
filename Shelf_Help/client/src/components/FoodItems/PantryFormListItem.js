@@ -214,7 +214,41 @@ export const PantryFormListItem = ({food}) => {
                                                     <Modal isOpen={childModal} toggle={toggleChildModal} >
                                                         <ModalHeader toggle={toggleChildModal}>{child.name} quantity...</ModalHeader>
                                                         <ModalBody>
+                                                        <Row className="mb-4" style={centerItUp}>
+                                                            <Col lg="2"></Col>
+                                                            <Col lg="3">
+                                                                <Dropdown isOpen={dropdownOpen} toggle={dropdownToggle}>
+                                                                    <DropdownToggle caret>
+                                                                        Measurement
+                                                                    </DropdownToggle>
+                                                                    <DropdownMenu>
+                                                                        <DropdownItem header>select one option</DropdownItem>
+                                                                        <DropdownItem divider />
+                                                                        {food.possibleUnits.map(option => {
+                                                                            return <DropdownItem onClick={() => setMeasurementChoice(option)}>{option}</DropdownItem>
+                                                                        })}
+                                                                    </DropdownMenu>
+                                                                </Dropdown>
+                                                            </Col>
+                                                            <Col lg="1"></Col>
 
+
+                                                            <Col lg="3">
+                                                                <Dropdown isOpen={dropdownStorageOpen} toggle={dropdownStorageToggle}>
+                                                                    
+                                                                        { storageChoice.name ? <DropdownToggle caret>{storageChoice.name}</DropdownToggle> : <DropdownToggle caret>Storage</DropdownToggle> }
+                                                                    
+                                                                    <DropdownMenu>
+                                                                        <DropdownItem header>select one option</DropdownItem>
+                                                                        <DropdownItem divider />
+                                                                        {locations.map(option => {
+                                                                            return <DropdownItem onClick={() => setStorageChoice(option)}>{option.name}</DropdownItem>
+                                                                        })}
+                                                                    </DropdownMenu>
+                                                                </Dropdown>
+                                                            </Col>
+                                                            <Col lg="3"></Col>
+                                                        </Row>
                                                         <span style={iconStyling}>
                                                             <i class="fas fa-minus-square" onClick={() => DecreaseItem()}></i>
 
@@ -252,6 +286,41 @@ export const PantryFormListItem = ({food}) => {
                 <Modal isOpen={modal} toggle={toggle} >
                     <ModalHeader toggle={toggleModal}>{food.name} quantity... </ModalHeader>
                     <ModalBody>
+                        <Row className="mb-4" style={centerItUp}>
+                            <Col lg="2"></Col>
+                            <Col lg="3">
+                                <Dropdown isOpen={dropdownOpen} toggle={dropdownToggle}>
+                                    <DropdownToggle caret>
+                                        Measurement
+                                    </DropdownToggle>
+                                    <DropdownMenu>S
+                                        <DropdownItem header>select one option</DropdownItem>
+                                        <DropdownItem divider />
+                                        {food.possibleUnits.map(option => {
+                                            return <DropdownItem onClick={() => setMeasurementChoice(option)}>{option}</DropdownItem>
+                                        })}
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </Col>
+                            <Col lg="1"></Col>
+
+
+                            <Col lg="3">
+                                <Dropdown isOpen={dropdownStorageOpen} toggle={dropdownStorageToggle}>
+                                    
+                                        { storageChoice.name ? <DropdownToggle caret>{storageChoice.name}</DropdownToggle> : <DropdownToggle caret>Storage</DropdownToggle> }
+                                    
+                                    <DropdownMenu>
+                                        <DropdownItem header>select one option</DropdownItem>
+                                        <DropdownItem divider />
+                                        {locations.map(option => {
+                                            return <DropdownItem onClick={() => setStorageChoice(option)}>{option.name}</DropdownItem>
+                                        })}
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </Col>
+                            <Col lg="3"></Col>
+                        </Row>
                         <span style={iconStyling}>
                             <i class="fas fa-minus-square" onClick={() => DecreaseItem()}></i>
                             {"   "}{clicks}{"   "}
