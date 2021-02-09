@@ -22,7 +22,7 @@ const ApplicationViews = () => {
                 {isLoggedIn ? <Dashboard /> : <Redirect to="/login" />}
             </Route>
 
-            <Route path="/menu">
+            <Route path="/menu" exact>
                 {isLoggedIn ? <Menu /> : <Redirect to="/login" />}
             </Route>
 

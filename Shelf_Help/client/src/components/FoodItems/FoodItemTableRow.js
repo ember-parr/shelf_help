@@ -22,7 +22,6 @@ export const FoodItemTableRow = ({item}) => {
     const [modal, setModal] = useState(false);
     const [collapse, setCollapse] = useState(false);
     const toggle = () => setCollapse(!collapse);
-    const [details, setDetails] = useState(0)
 
     
     // FOR UPDATING & DISPLAYING QUANTITY OF FOOD ITEM

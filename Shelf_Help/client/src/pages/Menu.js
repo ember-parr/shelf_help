@@ -1,41 +1,67 @@
-import React from "react";
-import Calendar from "../components/Calendar";
-// import PostList from "../components/PostList";
-// import { UserProfileContext } from "../providers/UserProfileProvider";
-
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
+import { MealTable } from "../components/MealMenu/MealTable";
+// import { MenuProvider } from "../providers/MealProvider";
+import { Button, ButtonGroup, Row, Col, Input, Form, FormGroup, Container } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 // very similar to CommentList.js file in Tabloid as far as getting the menu items individually. 
 const Menu = () => {
-  // const [menues, setMenues] = useState([]);
-  // const { getToken } = useContext(UserProfileContext);
+    const domHistory = useHistory();
+    const [viewToDisplay, setViewToDisplay] = useState("Today")
+    const today = Date.now();
+    const [startDate, setStartDate] = useState(today)
+    const [dayCount, setDayCount] = useState(1)
 
-  //get all menu entries
-  // useEffect(() => {
-  //   getToken().then((token) =>
-  //     fetch("/api/post", {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     })
-  //       .then((res) => res.json())
-  //       .then((menues) => {
-  //         setMenues(menues);
-  //       })
-  //   );
-  // }, []);
-  console.log("menu file loaded")
+
+    const todayView = () => {
+      setViewToDisplay("Today")
+      setStartDate(today)
+      setDayCount(1)
+    }
+
+    const weekView = () => {
+      setViewToDisplay("Week")
+      setStartDate(today)
+      setDayCount(7)
+    }
+
+    const monthView = () => {
+      setViewToDisplay("Month")
+      setStartDate(today)
+      setDayCount(35)
+    }
+
+
 
   return (
     <>
-    <h3>Your Menu</h3>
-    <div className="row justify-content-center">
-      <div className="col-lg-1 col-md-4 col-xs-12"></div>
-      <div className="col-lg-10 col-xs-12">
-        <Calendar />
-      </div>
-      <div className="col-lg-1 col-xs-12"></div>
-      
+    <div>
+
+      {/* <MenuProvider> */}
+        <Container className="theamed-container" fluid="sm">
+        <section className="m-2">
+          <Row>
+            <Col>
+            <Button color="info" size="sm" onClick={() => domHistory.push("/menu/add")}>Add Meal to Menu</Button>
+            </Col>
+            <Col>
+            <ButtonGroup size="sm" className="mb-3">
+                <Button onClick={() => todayView()}> Today </Button>
+                <Button onClick={() => weekView()}> Week </Button>
+                <Button onClick={() => monthView()}> Month </Button>
+            </ButtonGroup>
+            </Col>
+            </Row>
+            <br />
+        </section>
+          <MealTable view={viewToDisplay} startDate={startDate} dayCount={dayCount} />
+        </Container>
+      {/* </MenuProvider> */}
+
+
+
+
     </div>
     </>
   );

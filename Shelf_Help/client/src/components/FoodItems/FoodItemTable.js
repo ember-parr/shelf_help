@@ -5,17 +5,15 @@ import { FoodItemContext } from "../../providers/FoodItemProvider";
 import { FoodItemTableRow } from "./FoodItemTableRow";
 import { useHistory } from "react-router-dom";
 
-import {Button, ButtonGroup, Table, Input, Form, FormGroup, Label, FormText} from "reactstrap"
+import {Button, ButtonGroup, Table, Input, Form, FormGroup } from "reactstrap"
 
 
 export const FoodItemTable = () => {
-    const { getFoodItems, foodItems, setSpoonResults } = useContext(FoodItemContext);
-    const user = parseInt(localStorage.user)
+    const { getFoodItems, foodItems } = useContext(FoodItemContext);
     const domHistory = useHistory();
     const [ allFoods, setAllFoods ] = useState({});
     const [searchTerms, setSearchTerms] = useState("")
     const [filteredFoods, setFiltered ] = useState([]);
-    const [theThing, setTheThing] = useState({})
     const todayFoodItems = []
     const weekFoodItems = []
     
@@ -57,9 +55,9 @@ export const FoodItemTable = () => {
 
 
                 <ButtonGroup size="sm" className="mb-3">
-                    <Button> This Week's Ingredients </Button>
-                    <Button> Today's Ingredients </Button>
-                    <Button> All Ingredients</Button>
+                    <Button> Today </Button>
+                    <Button> Week </Button>
+                    <Button> View All </Button>
                 </ButtonGroup>
                 <br />
             </section> 
