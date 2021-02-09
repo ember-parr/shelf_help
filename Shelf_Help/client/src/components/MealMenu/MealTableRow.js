@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React, {useState} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import {useHistory} from "react-router-dom";
+import { MealContext } from "../../providers/MealProvider";
 
 
 
@@ -8,19 +9,72 @@ import {useHistory} from "react-router-dom";
 
 export const MealTableRow = ({date, dayCount}) => {
     const domHistory = useHistory();
+    const { getMealById } = useContext(MealContext)
+    const [singleMeal, setSingleMeal] = useState()
+    const [ mealsInMenu, setMealsInMenu ] = useState(0)
+    
+    const getOneMeal = (mealId) => {
+        console.log("getOneMeal is running & the mealId is: " + mealId)
+        getMealById(mealId)
+        .then((output) => {
+            console.log("getOneMeal mealType: " + output.mealType.name)
+            console.log("getOneMeal's spoonacularRecipeId: " + output.spoonacularRecipeId)
+            getMealDetails(output.spoonacularRecipeId)
+        })
+    }
+
+    const getMealDetails = (spoonRecipeId) => {
+        setMealsInMenu(2)
+        console.log("getMealDetails is running... ")
+        fetch(`https://api.spoonacular.com/recipes/${spoonRecipeId}/information?apiKey=5c60c91675ec4b6299f1bc901dc8def9`)
+        .then((res) => res.json())
+        .then(spoonOutput => {
+            console.log("getMealDetails spoonOutput: " + spoonOutput.title)
+            setSingleMeal(spoonOutput)
+        })
+    }
 
     let recipeId = 2
 
+    useEffect(() => {
+        console.log("useEffect is running with empty dependancy ")
+        getOneMeal(2)
+    }, [])
 
+    useEffect(()=>{
+        if (mealsInMenu > 0) {
+            console.log("use effect is running INSIDE IF STATEMENT... mealsInMenu is: " + mealsInMenu)
+        } else {
+            console.log("use effect is running... mealsInMenu is: " + mealsInMenu)
+        }
+    }, [mealsInMenu])
 
 
     if (dayCount === 1) {
         return (
             <>
                 <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
+                    <td><h5>Breakfast</h5></td>
+                    <td>Toasted bagle with preserves <br /> -- cook time: 15 minutes --</td>
+                    <td>Fruit cup</td>
                     <td></td>
-                    <td>Burgers</td>
+                </tr>
+                <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
+                    <td><h5>Lunch</h5></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
+                    <td><h5>Dinner</h5></td>
+                    <td>{singleMeal?.title} <br /> -- cook time: {singleMeal?.readyInMinutes} minutes --</td>
                     <td>Fries</td>
+                    <td></td>
+                </tr>
+                <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
+                    <td><h5>Snack</h5></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                 </tr>
             </>

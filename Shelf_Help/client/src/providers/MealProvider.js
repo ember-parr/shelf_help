@@ -4,19 +4,42 @@ import React, {useState, createContext} from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-export const MenuContext = createContext();
+export const MealContext = createContext();
 
-export const MenuProvider = (props) => {
-    const [ singleMenu, setSingleMenu ] = useState([])
+export const MealProvider = (props) => {
+    const getToken = () => firebase.auth().currentUser.getIdToken(); 
+    const apiUrl = "/api/menu";
+    const [ allMeals, setAllMeals ] = useState([])
 
 
     // get this users menu entries
-    
-
+    const getMeals = () => {
+        return getToken().then((token) => 
+            fetch(`${apiUrl}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((res) => res.json())
+            .then(setAllMeals)
+        );
+    }
 
 
 
     // get single menu by id
+    const getMealById = (id) => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((res) => res.json())
+            )
+    }
 
 
 
@@ -47,4 +70,20 @@ export const MenuProvider = (props) => {
 
 
     // update an existing recipe in SQL database
+
+
+
+
+    // send the data out
+    return (
+        <MealContext.Provider
+        value = {{
+            getMeals,
+            allMeals,
+            getMealById,
+
+        }}>
+            {props.children}
+        </MealContext.Provider>
+    )
 }

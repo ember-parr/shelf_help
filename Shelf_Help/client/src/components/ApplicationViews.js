@@ -9,6 +9,7 @@ import GroceryList from "../pages/GroceryList";
 import Dashboard from "../pages/Dashboard";
 import {FoodItemProvider} from "../providers/FoodItemProvider";
 import {LocationProvider} from "../providers/LocationProvider";
+import {MealProvider} from "../providers/MealProvider";
 import GroceryForm from "./Groceries/GroceryForm";
 import PantryForm from "./FoodItems/PantryForm";
 
@@ -22,9 +23,11 @@ const ApplicationViews = () => {
                 {isLoggedIn ? <Dashboard /> : <Redirect to="/login" />}
             </Route>
 
-            <Route path="/menu" exact>
-                {isLoggedIn ? <Menu /> : <Redirect to="/login" />}
-            </Route>
+            <MealProvider>
+                <Route path="/menu" exact>
+                    {isLoggedIn ? <Menu /> : <Redirect to="/login" />}
+                </Route>
+            </MealProvider>
 
             <FoodItemProvider>
                 <LocationProvider>
