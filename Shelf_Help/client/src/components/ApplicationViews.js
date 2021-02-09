@@ -27,9 +27,11 @@ const ApplicationViews = () => {
             </Route>
 
             <FoodItemProvider>
+                <LocationProvider>
                     <Route path="/mypantry" exact>
                         {isLoggedIn ? <Pantry /> : <Redirect to="/login" />}
                     </Route>
+                </LocationProvider>
             </FoodItemProvider>
 
             <FoodItemProvider>
