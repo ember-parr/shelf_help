@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, {useState, useContext, useEffect} from "react";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { MealContext } from "../../providers/MealProvider";
-
+import { format } from "date-fns"
 
 
 
@@ -12,24 +13,23 @@ export const MealTableRow = ({date, dayCount}) => {
     const { getMealById } = useContext(MealContext)
     const [singleMeal, setSingleMeal] = useState()
     const [ mealsInMenu, setMealsInMenu ] = useState(0)
+    let todaysDate = format(new Date(), 'yyyy-MM-dd')
+
+    console.log("today's date: " + todaysDate + "T00:00:00")
     
     const getOneMeal = (mealId) => {
-        console.log("getOneMeal is running & the mealId is: " + mealId)
         getMealById(mealId)
         .then((output) => {
-            console.log("getOneMeal mealType: " + output.mealType.name)
-            console.log("getOneMeal's spoonacularRecipeId: " + output.spoonacularRecipeId)
-            getMealDetails(output.spoonacularRecipeId)
+            // COMMENTED OUT SO I DON'T RUN OUT OF API CALLS AGAIN
+            // getMealDetails(output.spoonacularRecipeId)
         })
     }
 
     const getMealDetails = (spoonRecipeId) => {
         setMealsInMenu(2)
-        console.log("getMealDetails is running... ")
         fetch(`https://api.spoonacular.com/recipes/${spoonRecipeId}/information?apiKey=5c60c91675ec4b6299f1bc901dc8def9`)
         .then((res) => res.json())
         .then(spoonOutput => {
-            console.log("getMealDetails spoonOutput: " + spoonOutput.title)
             setSingleMeal(spoonOutput)
         })
     }
@@ -37,7 +37,6 @@ export const MealTableRow = ({date, dayCount}) => {
     let recipeId = 2
 
     useEffect(() => {
-        console.log("useEffect is running with empty dependancy ")
         getOneMeal(2)
     }, [])
 

@@ -144,5 +144,6 @@ export const FoodItemProvider = (props) => {
 
 
 // spoonyone@emberparr.com & temporary password API KEY: d77d78f9357b477094b10096abd85b71
+// spoonytwo@emberparr.com & initials w. bday APIKEY: 5c60c91675ec4b6299f1bc901dc8def9
 // devops gmail email API KEY: 66e7421be84e4b16a934c4ad2b86bfd4
 // ember21892 gmail API KEY: 350c741bf82e41378e9b1359a60deadd

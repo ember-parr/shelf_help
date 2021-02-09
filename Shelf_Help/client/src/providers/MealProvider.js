@@ -44,7 +44,18 @@ export const MealProvider = (props) => {
 
 
 
-    // get today's menu 
+    // get meals for single day
+    const getMealBySingleDate = (date) => {
+        return getToken().then((token) =>
+        fetch(`${apiUrl}/day/${date}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then((res) => res.json())
+        )
+    }
 
 
 
@@ -81,7 +92,7 @@ export const MealProvider = (props) => {
             getMeals,
             allMeals,
             getMealById,
-
+            getMealBySingleDate
         }}>
             {props.children}
         </MealContext.Provider>
