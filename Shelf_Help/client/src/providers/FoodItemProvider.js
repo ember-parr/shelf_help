@@ -10,6 +10,7 @@ export const FoodItemProvider = (props) => {
     const [ foodItems, setFoodItems ] = useState([]);
     const [ searchTerms, setSearchTerms ] = useState([]);
     const [ spoonResults, setSpoonResults ] = useState([])
+    const [ spoonDetails, setSpoonDetails ] = useState({})
     const getToken = () => firebase.auth().currentUser.getIdToken(); 
     const apiUrl = "/api/fooditem";
 
@@ -56,16 +57,27 @@ export const FoodItemProvider = (props) => {
         })
     }
 
+
+    // this function searches spoonacular for an ingredient by query string (words searched in PantryForm.js)
     const searchSpoonacularIngredients = (searchedWords) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=d77d78f9357b477094b10096abd85b71&metaInformation=true`)
+        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=350c741bf82e41378e9b1359a60deadd&metaInformation=true`)
         .then((res) => res.json())
         .then(output => {
             setSpoonResults(output)
-            console.log(output)
         })
-        
     }
 
+    // get ingredient details from spoonacular using ingredient id
+    const getSpoonacularIngredById = (id) => {
+        fetch(`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=350c741bf82e41378e9b1359a60deadd`)
+        .then((res) => res.json())
+        .then(output => {
+            setSpoonDetails(output)
+        })
+    }
+
+
+    // add a new item to the FoodItems SQL database. 
     const addFoodItem = Item => {
         return getToken().then((token) => {
             fetch(`${apiUrl}`, {
@@ -77,8 +89,19 @@ export const FoodItemProvider = (props) => {
                 body: JSON.stringify(Item)
             })
         })
-        
-        
+    }
+
+    const updateFoodItem = Item => {
+        return getToken().then((token) => {
+            fetch(`${apiUrl}/${Item.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(Item)
+            })
+        })
     }
 
 
@@ -94,7 +117,10 @@ export const FoodItemProvider = (props) => {
             spoonResults,
             getFoodById,
             addFoodItem,
-            setSpoonResults
+            setSpoonResults,
+            getSpoonacularIngredById,
+            spoonDetails,
+            updateFoodItem
         }}>
             {props.children}
         </FoodItemContext.Provider>
@@ -102,3 +128,8 @@ export const FoodItemProvider = (props) => {
 
 
 }
+
+
+// spoonyone@emberparr.com & temporary password API KEY: d77d78f9357b477094b10096abd85b71
+// devops gmail email API KEY: 66e7421be84e4b16a934c4ad2b86bfd4
+// ember21892 gmail API KEY: 350c741bf82e41378e9b1359a60deadd

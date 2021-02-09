@@ -57,10 +57,13 @@ set identity_insert [Location] off
      ---   FoodItem Seed Data
 */
 set identity_insert [FoodItem] on
-INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (1, 1, 1, 2, 9040, 'sinlges', 'bananas'); 
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (1, 1, 1, 2, 9040, 'singles', 'bananas'); 
 INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (2, 1, 2, 0, 14412, 'bottles', 'water'); 
-INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (3, 1, 1, 2, 11960, 'bag', 'baby carrots'); 
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (3, 1, 2, 2, 11960, 'bag', 'baby cut carrots'); 
 INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (4, 1, 1, 2, 6194, 'can', 'chicken broth'); 
-INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (5, 2, 1, 2, 13923, 'singles', 'beef strip loin'); 
-INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (6, 2, 1, 2, 1062047, 'a pinch', 'garlic salt'); 
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (5, 2, 3, 2, 13923, 'singles', 'beef strip loin'); 
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (6, 2, 5, 2, 1062047, 'a pinch', 'garlic salt'); 
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (7, 1, 1, 2, 6970, 'tablespoons', 'low-salt chicken broth'); 
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (8, 1, 5, 4, 19034, 'bag', 'popcorn');
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (9, 1, 3, 4, 11052, 'cup', 'greenbeans'); 
 set identity_insert [FoodItem] off
