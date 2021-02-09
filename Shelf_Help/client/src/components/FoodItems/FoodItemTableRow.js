@@ -12,7 +12,7 @@ export const FoodItemTableRow = ({item}) => {
     // PROVIDERS FOR DATA NEEDED WITHIN COMPONENT
     const { getCurrentUser } = useContext(UserProfileContext)
     const { locations, getLocations } = useContext(LocationContext)
-    const { getSpoonacularIngredById, updateFoodItem } = useContext(FoodItemContext);
+    const { deleteFoodItem, updateFoodItem } = useContext(FoodItemContext);
     const user = getCurrentUser();
 
     // SET STATE NEEDED WITHIN COMPONENT FOR GENERAL FUNCTIONS
@@ -118,6 +118,20 @@ export const FoodItemTableRow = ({item}) => {
         })
     }
 
+    // DELETING AN INGREDIENT IN THE DATABASE
+    const deleteIngredient = () => {
+        setIsLoading(true)
+        deleteFoodItem(item)
+        .then(() => {
+            setIsLoading(false)
+            toast.info(`${item.foodName} deleted`)
+            closeEditModal()
+        })
+        .then(()=> {
+            window.location.href="/mypantry"
+        })
+    }
+
     
     // DISPLAYING INFO ON DOM 
         return (
@@ -211,7 +225,7 @@ export const FoodItemTableRow = ({item}) => {
                         {/* MODAL FOOTER WITH SAVE UPDATE BUTTON */}
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={() => updateIngredient()}>Update</Button>{' '}
+                        <Button color="primary" onClick={() => updateIngredient()}>Update</Button>{' '}<Button color="danger" onClick={() => deleteIngredient()}>Delete</Button>
                     </ModalFooter>
                 </Modal>
             {/* END OF MODAL FOR UPDATING FOOD ITEM */}

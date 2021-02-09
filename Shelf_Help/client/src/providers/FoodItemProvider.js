@@ -91,6 +91,7 @@ export const FoodItemProvider = (props) => {
         })
     }
 
+    // update existing FoodItem in SQL database
     const updateFoodItem = Item => {
         return getToken().then((token) => {
             fetch(`${apiUrl}/${Item.id}`, {
@@ -100,6 +101,17 @@ export const FoodItemProvider = (props) => {
                     Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify(Item)
+            })
+        })
+    }
+
+    const deleteFoodItem = Item => {
+        return getToken().then((token) => {
+            fetch(`${apiUrl}/${Item.id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
         })
     }
@@ -120,7 +132,8 @@ export const FoodItemProvider = (props) => {
             setSpoonResults,
             getSpoonacularIngredById,
             spoonDetails,
-            updateFoodItem
+            updateFoodItem,
+            deleteFoodItem
         }}>
             {props.children}
         </FoodItemContext.Provider>
