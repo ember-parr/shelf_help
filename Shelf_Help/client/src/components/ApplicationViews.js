@@ -12,7 +12,9 @@ import {LocationProvider} from "../providers/LocationProvider";
 import {MealProvider} from "../providers/MealProvider";
 import GroceryForm from "./Groceries/GroceryForm";
 import PantryForm from "./FoodItems/PantryForm";
+import { MealForm } from "./MealMenu/MealForm";
 import { MealTypeProvider } from "../providers/MealTypeProvider";
+import { MealDetails } from "./MealMenu/MealDetails";
 
 const ApplicationViews = () => {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -30,6 +32,24 @@ const ApplicationViews = () => {
                         {isLoggedIn ? <Menu /> : <Redirect to="/login" />}
                     </Route>
                 </MealTypeProvider>
+            </MealProvider>
+
+            <MealProvider>
+                <MealTypeProvider>
+                    <Route path="/menu/add/" >
+                        {isLoggedIn ? <MealForm /> : <Redirect to="/login" />}
+                    </Route>
+                </MealTypeProvider>
+            </MealProvider>
+
+            <MealProvider>
+                <FoodItemProvider>
+                    <MealTypeProvider>
+                        <Route path="/menu/details/:recipeId" >
+                            {isLoggedIn ? <MealDetails /> : <Redirect to="/login" />}
+                        </Route>
+                    </MealTypeProvider>
+                </FoodItemProvider>
             </MealProvider>
 
             <FoodItemProvider>

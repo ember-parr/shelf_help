@@ -7,12 +7,10 @@ export const GroceryTableRow = ({item}) => {
     
         return (
             <>
-                <tr onClick={() => history.push(`/items/edit/${item.id}`)}>
+                <tr >
                     <td>{ item.foodName }</td>
-                    <td >{ item.quantity }</td>
-                    <td  className="d-none d-sm-block">{ item.measurement }</td>
                     <td>{ item.location.name }</td>
-                    <td className="d-none d-md-block"> Using in some recipess.... EDIT THIS</td>
+                    <td className="d-none d-md-block"> 1 recipe on your menu</td>
                 </tr>
 
             </>

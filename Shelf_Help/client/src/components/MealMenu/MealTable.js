@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
 import { MealContext } from "../../providers/MealProvider";
@@ -26,7 +27,7 @@ export const MealTable = () => {
             
             <tbody>
                 {allMeals.map(menu => {
-                    return <MealTableRow key={menu.id} menu={menu} />
+                    return <MealTableRow key={menu.id} menu={menu} spoonId={menu.spoonacularRecipeId}/>
                 })}
             </tbody>
         </Table>

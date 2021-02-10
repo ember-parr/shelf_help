@@ -25,6 +25,7 @@ namespace Shelf_Help.Repositories
             return _context.Menu
                 .Include(m => m.MealType)
                 .Where(m => m.UserId == id)
+                .Where(m => m.Date > DateTime.Now)
                 .OrderBy(m => m.Date)
                 .ToList();
         }

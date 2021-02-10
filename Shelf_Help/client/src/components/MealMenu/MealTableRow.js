@@ -11,7 +11,7 @@ import { MealTypeContext } from "../../providers/MealTypeProvider";
 
 
 
-export const MealTableRow = ({menu}) => {
+export const MealTableRow = ({menu, spoonId}) => {
     const { updateMenu } = useContext(MealContext);
     const { getMealTypes, mealTypes } = useContext(MealTypeContext)
     const history = useHistory();
@@ -30,6 +30,7 @@ export const MealTableRow = ({menu}) => {
     // HELP DATE APPEAR LESS AWFUL & RE-RENDER WHEN MENUS ARE UPDATED OR RELOADED. (strange behavior with date-fns, betterDate function solved but is not pretty)
     useEffect(() => {
         betterDate()
+        console.log("in use effect spoon id is: " + spoonId)
     }, [menu])
 
     let betterDate =() => {
@@ -41,11 +42,12 @@ export const MealTableRow = ({menu}) => {
     const centerItUp = {
         textAlign: "center",
         flex: 1,
-    justifyContent: "center"
+        justifyContent: "center"
     }
 
     // OPEN AND CLOSE THE EDIT MENU MODAL
     const openEditModal = () => {
+        console.log("on open edit spoon id is: " + menu.spoonacularIngredientId)
         setIsLoading(true)
         getMealTypes()
         setModal(true)
@@ -98,17 +100,27 @@ export const MealTableRow = ({menu}) => {
         })
     }
 
+    const goToDetails = () => {
+        let spoonyId = menu.spoonacularIngredientId
+        console.log("spoon id is: " + menu.spoonacularIngredientId)
+        if (menu.spoonacularIngredientId) {
+            history.push(`/menu/details/${menu.spoonacularIngredientId}`)
+        } else {
+            console.log("error on GoToDetails function")
+        }
+    }
+
     return (
     <>
         <tr onClick={() => openEditModal()}>
             <td> <b>{betterDate()}</b> <br /> {menu?.mealType.name}</td>
-            <td> <h4> {menu?.name} </h4></td>
+            <td> <big> {menu?.name} </big></td>
         </tr>
 
 
-        <Modal isOpen={modal} toggle={toggle} >
-            <ModalHeader toggle={() => closeEditModal()}>update {menu.name} </ModalHeader>
-                <i className="m-2">in your meal plan for {mealTypeChoice.name} on {betterDate()}</i>
+        <Modal isOpen={modal} toggle={toggle} spoony={menu.spoonacularIngredientId}>
+            <ModalHeader style={centerItUp} toggle={() => closeEditModal()}>update {menu.name} </ModalHeader>
+                <i style={centerItUp} className="m-2"> currently in your meal plan for {menu.mealType.name} on {betterDate()}</i>
             <ModalBody>
 
             {/* START OF UNIT OF DATE ROW WITHIN MODAL */}
@@ -147,12 +159,12 @@ export const MealTableRow = ({menu}) => {
             {/* END OF MEAL TYPE ROW WITHIN MODAL */}
 
                 <Row style={centerItUp} className="mt-2">
-                    <Button color="info" size="md" onClick={ () => history.push(`/menu/edit/${menu.id}`)}>Choose Another Recipe</Button>
+                    <Button color="info" size="md" onClick={ () => history.push(`/menu/details/${spoonId}`)}>View Details</Button>
                 </Row>
 
             </ModalBody>
-            <ModalFooter>
-                <Button color="primary" onClick={() => updateTheMenu()}>Update</Button>{' '}<Button color="danger" onClick={() => deleteMenu()}>Delete</Button>
+            <ModalFooter className="justify-content-between">
+                <Button color="secondary" onClick={() => deleteMenu()}>Delete</Button> <Button color="info" onClick={() => updateTheMenu()}>Update</Button>
             </ModalFooter>
         </Modal>
     </>

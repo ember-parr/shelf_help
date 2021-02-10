@@ -12,35 +12,13 @@ import { PantryFormListItem } from './PantryFormListItem';
 
 const PantryForm = () => {
     const { searchSpoonacularIngredients, spoonResults, foodItems, getFoodById, setSpoonResults } = useContext(FoodItemContext)
-    const { locations, getLocations } = useContext(LocationContext)
-    const [food, setFood] = useState({})
     const [isLoading, setIsLoading] = useState(true);
-    const {foodId} = useParams();
     const [snoopy, setSnoopy] = useState('')
-
-
-    // useEffect(() => {
-    //     getLocations().then(() => {
-    //         if(foodId){
-    //             getFoodById(foodId)
-    //             .then(singleFood => {
-    //                 setFood(singleFood)
-    //                 setIsLoading(false)
-    //             })
-    //         } else {
-    //             setIsLoading(false)
-    //         }
-    //     })
-    // }, [])
 
     useEffect(() => {
         setSpoonResults([])
     }, [])
 
-
-
-
-    
     const handleFoodSearch = (wordsToSearch) => {
         setIsLoading(true)
         searchSpoonacularIngredients(wordsToSearch)
@@ -74,7 +52,7 @@ const PantryForm = () => {
                         return <PantryFormListItem key={ingredientOption.id} food={ingredientOption} />
                         // return <p key={ingredientChoice.id}>{ingredientChoice.name}</p>
                     })}
-                    </Row>
+                </Row>
             </div>
             </Container>
         </div>

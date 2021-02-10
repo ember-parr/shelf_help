@@ -8,6 +8,7 @@ export const FoodItemContext = createContext();
 
 export const FoodItemProvider = (props) => {
     const [ foodItems, setFoodItems ] = useState([]);
+    const [ groceryItems, setGroceryItems ] = useState([]);
     const [ searchTerms, setSearchTerms ] = useState([]);
     const [ spoonResults, setSpoonResults ] = useState([])
     const [ spoonDetails, setSpoonDetails ] = useState({})
@@ -53,14 +54,14 @@ export const FoodItemProvider = (props) => {
                 },
             })
             .then((res) => res.json())
-            .then(setFoodItems)
+            .then(setGroceryItems)
         })
     }
 
 
     // this function searches spoonacular for an ingredient by query string (words searched in PantryForm.js)
     const searchSpoonacularIngredients = (searchedWords) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=350c741bf82e41378e9b1359a60deadd&metaInformation=true`)
+        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=66e7421be84e4b16a934c4ad2b86bfd4&metaInformation=true`)
         .then((res) => res.json())
         .then(output => {
             setSpoonResults(output)
@@ -69,7 +70,7 @@ export const FoodItemProvider = (props) => {
 
     // get ingredient details from spoonacular using ingredient id
     const getSpoonacularIngredById = (id) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=350c741bf82e41378e9b1359a60deadd`)
+        fetch(`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=66e7421be84e4b16a934c4ad2b86bfd4`)
         .then((res) => res.json())
         .then(output => {
             setSpoonDetails(output)
@@ -125,6 +126,7 @@ export const FoodItemProvider = (props) => {
             setSearchTerms,
             searchTerms,
             getGroceryList,
+            groceryItems,
             searchSpoonacularIngredients,
             spoonResults,
             getFoodById,

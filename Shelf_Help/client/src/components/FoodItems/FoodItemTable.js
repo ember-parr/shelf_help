@@ -46,19 +46,19 @@ export const FoodItemTable = () => {
             <section className="m-2">
             <Button className="addNew-btn mb-3" onClick={() => domHistory.push("/pantry/add")}>Manually Add Item</Button>
 
-            <Form>
+            {/* <Form>
                 <FormGroup>
                     <Input type="text" name="searchTerms" id="searchTerms" placeholder="Search Pantry" onKeyUp={(keyEvent) => setSearchTerms(keyEvent.target.value.toLowerCase())}/>
                 </FormGroup>
-            </Form>
+            </Form> */}
 
 
 
-                <ButtonGroup size="sm" className="mb-3">
+                {/* <ButtonGroup size="sm" className="mb-3">
                     <Button> Today </Button>
                     <Button> Week </Button>
                     <Button> View All </Button>
-                </ButtonGroup>
+                </ButtonGroup> */}
                 <br />
             </section> 
 

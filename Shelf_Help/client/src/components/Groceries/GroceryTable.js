@@ -10,7 +10,7 @@ import {Button, ButtonGroup, Table, Modal, ModalHeader, ModalBody, ModalFooter, 
 
 
 export const GroceryTable = () => {
-    const { getGroceryList, foodItems } = useContext(FoodItemContext);
+    const { getGroceryList, groceryItems } = useContext(FoodItemContext);
     const [ allFoods, setAllFoods ] = useState({});
     const [filteredFoods, setFiltered ] = useState([]);
     const todayFoodItems = []
@@ -49,15 +49,15 @@ export const GroceryTable = () => {
     return (
         <>
             <section className="m-2">
-                    <Button size="sm" className="addNew-btn m-2" onClick={() => openMyModal()}>Add An Item</Button>
+                    {/* <Button size="sm" className="addNew-btn m-2" onClick={() => openMyModal()}>Add An Item</Button> */}
                 
-            <hr />
-                <ButtonGroup size="sm" className="mb-3">
+            {/* <hr /> */}
+                {/* <ButtonGroup size="sm" className="mb-3">
                     <Button> This Week's Shopping List </Button>
                     <Button> Ingredients Needed Today </Button>
                     <Button> Entire Grocery List</Button>
                 </ButtonGroup>
-                <br />
+                <br /> */}
 
             </section> 
 
@@ -65,8 +65,6 @@ export const GroceryTable = () => {
                 <thead>
                     <tr>
                         <th>Ingredient</th>
-                        <th>Quantity</th>
-                        <th  className="d-none d-sm-block">Measurement</th>
                         <th >Storage</th>
                         <th className="d-none d-md-block">Used In...</th>
                     </tr>
@@ -74,7 +72,7 @@ export const GroceryTable = () => {
 
             
                 <tbody>
-                {foodItems.map(item => {
+                {groceryItems.map(item => {
                         return <GroceryTableRow key={item.id} item={item} />
                     })}
 

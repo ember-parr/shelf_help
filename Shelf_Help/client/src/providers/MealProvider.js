@@ -11,6 +11,8 @@ export const MealProvider = (props) => {
     const apiUrl = "/api/menu";
     const [ singleMeal, setSingleMeal ] = useState([])
     const [ allMeals, setAllMeals ] = useState([])
+    const [ spoonResults, setSpoonResults ] = useState([])
+    const [ singleRecipe, setSingleRecipe ] = useState([])
 
 
     // get this users menu entries
@@ -42,7 +44,7 @@ export const MealProvider = (props) => {
             )
     }
 
-
+    // get all meals for a specific day
     const getDaysMeals = (date) => {
         return getToken().then((token) =>
         fetch(`${apiUrl}/range/${date}/${date}`, {
@@ -56,19 +58,15 @@ export const MealProvider = (props) => {
     }
 
 
-    // get specific meal by date and meal type
-    // const getCertainMeal = (date, type) => {
-    //     return getToken().then((token) =>
-    //     fetch(`${apiUrl}/day/${date}/${type}`, {
-    //         method: "GET",
-    //         headers: {
-    //             Authorization: `Bearer ${token}`,
-    //         },
-    //     })
-    //     .then((res) => res.json())
-    //     .then(output => setSingleMeal(JSON.stringify(output)))
-    //     )
-    // }
+    // search spoonacular for a recipe by query string
+    const searchSpoonacularRecipes = (searchedWords) => {
+        fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchedWords}&number=8&addChildren=true&apiKey=66e7421be84e4b16a934c4ad2b86bfd4&metaInformation=true&addRecipeInformation=true`)
+        .then((res) => res.json())
+        .then(output => {
+            setSpoonResults(output)
+        })
+    }
+    
 
 
 
@@ -87,18 +85,14 @@ export const MealProvider = (props) => {
 
 
 
-    // search spoonacular for recipe by name (words searched in MenuForm.js)
-
-
-
-
-
-    // get recipe details by recipe id
-
-
-    
-
-    // add a new Recipe to SQL database
+    // get a single recipe from spoonacular
+    const getSingleSpoonacularRecipe = (recipeId) => {
+        fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=66e7421be84e4b16a934c4ad2b86bfd4`)
+        .then((res) => res.json())
+        .then(output  => {
+            setSingleRecipe(output)
+        })
+    }
 
 
 
@@ -109,6 +103,21 @@ export const MealProvider = (props) => {
         return getToken().then((token) => {
             fetch(`${apiUrl}/${menu.id}`, {
                 method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(menu)
+            })
+        })
+    }
+
+
+    // add a new menu entry to the database
+    const addMenu = menu => {
+        return getToken().then((token) => {
+            fetch(`${apiUrl}`, {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
@@ -131,7 +140,13 @@ export const MealProvider = (props) => {
             getMealsByDateRange,
             getDaysMeals,
             singleMeal,
-            updateMenu
+            updateMenu,
+            setSpoonResults,
+            searchSpoonacularRecipes,
+            spoonResults,
+            getSingleSpoonacularRecipe,
+            singleRecipe,
+            addMenu
         }}>
             {props.children}
         </MealContext.Provider>

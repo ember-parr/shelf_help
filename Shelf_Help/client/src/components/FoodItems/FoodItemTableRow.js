@@ -15,6 +15,8 @@ export const FoodItemTableRow = ({item}) => {
     const { deleteFoodItem, updateFoodItem } = useContext(FoodItemContext);
     const user = getCurrentUser();
 
+    
+
     // SET STATE NEEDED WITHIN COMPONENT FOR GENERAL FUNCTIONS
     const [isLoading, setIsLoading] = useState(true)
 
@@ -169,7 +171,7 @@ export const FoodItemTableRow = ({item}) => {
                                     <DropdownMenu>
                                         <DropdownItem header>select one option</DropdownItem>
                                         <DropdownItem divider />
-                                        {spoonDetails?.possibleUnits.map(option => {
+                                        {spoonDetails?.possibleUnits.forEach(option => {
                                             return <DropdownItem onClick={() => setMeasurementChoice(option)}>{option}</DropdownItem>
                                         })}
                                     </DropdownMenu>

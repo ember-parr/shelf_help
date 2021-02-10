@@ -15,13 +15,11 @@ const Menu = () => {
     <>
     <div>
 
-      {/* <MenuProvider> */}
         <Container className="theamed-container" fluid="sm">
-        <section className="m-2">
+        <section className="m-2" >
+            <Button className="center mt-2" color="info" size="md" onClick={() => domHistory.push("/menu/add/")}>Add Meal to Menu</Button>
           <Row>
-            <Col>
-            <Button color="info" size="sm" onClick={() => domHistory.push("/menu/add")}>Add Meal to Menu</Button>
-            </Col>
+            
             <Col>
             
             </Col>
@@ -31,7 +29,6 @@ const Menu = () => {
           
           <MealTable />
         </Container>
-      {/* </MenuProvider> */}
 
 
 

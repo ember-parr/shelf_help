@@ -16,7 +16,7 @@ function App() {
         <Router>
           <AppHeader /> 
           <ApplicationViews />
-          <Footer />
+          {/* <Footer /> */}
         </Router>
       </UserProfileProvider>
     </div>
