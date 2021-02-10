@@ -3,9 +3,8 @@
 import React, {useState, useContext, useEffect} from "react";
 import { useHistory } from "react-router-dom";
 import { MealContext } from "../../providers/MealProvider";
-import { format, add, parse, parseISO, setDate } from "date-fns"
-import { useTable, Modal, ModalHeader, ModalBody, Row, Col, Dropdown, Input, Form, FormGroup, DropdownMenu, DropdownItem, Label, DropdownToggle, Button, ModalFooter } from "reactstrap";
-import { UserProfileContext } from "../../providers/UserProfileProvider";
+import { format, parseISO } from "date-fns"
+import { Modal, ModalHeader, ModalBody, Row, Dropdown, Input, FormGroup, DropdownMenu, DropdownItem, DropdownToggle, Button, ModalFooter } from "reactstrap";
 import { toast } from "react-toastify";
 import { MealTypeContext } from "../../providers/MealTypeProvider";
 
@@ -13,10 +12,12 @@ import { MealTypeContext } from "../../providers/MealTypeProvider";
 
 
 export const MealTableRow = ({menu}) => {
-    const { getCertainMeal, allMeals, getDaysMeals, getMeals, updateMenu } = useContext(MealContext);
+    const { updateMenu } = useContext(MealContext);
     const { getMealTypes, mealTypes } = useContext(MealTypeContext)
-    const { getCurrentUser } = useContext(UserProfileContext)
-    const User = getCurrentUser();
+    const history = useHistory();
+    // DATE AND MEALTYPE ARE INITIALIZED WITH THE MENUS DATA SO NO CHANGE ON UPDATEMENU FUNCTION
+    const [dateSelection, setDateSelection] = useState(menu.date)
+    const [mealTypeChoice, setMealTypeChoice] = useState(menu.mealType)
 
     // SET STATE NEEDED WITHIN COMPONENT FOR GENERAL FUNCTIONS
     const [isLoading, setIsLoading] = useState(true)
@@ -26,46 +27,41 @@ export const MealTableRow = ({menu}) => {
     const [collapse, setCollapse] = useState(false);
     const toggle = () => setCollapse(!collapse);
 
+    // HELP DATE APPEAR LESS AWFUL & RE-RENDER WHEN MENUS ARE UPDATED OR RELOADED. (strange behavior with date-fns, betterDate function solved but is not pretty)
     useEffect(() => {
         betterDate()
     }, [menu])
 
     let betterDate =() => {
         let stepOne = parseISO(menu.date)
-        // bestDate = format(stepOne, 'yyyy-MM-dd')
-        console.log(stepOne)
         return format(stepOne, 'MM-dd')
     }
 
+    // SIMPLE STYLING FOR MODAL CONSISTANCY
     const centerItUp = {
         textAlign: "center",
         flex: 1,
     justifyContent: "center"
     }
 
+    // OPEN AND CLOSE THE EDIT MENU MODAL
     const openEditModal = () => {
         setIsLoading(true)
         getMealTypes()
         setModal(true)
-        setIsLoading(false)}
-
+        setIsLoading(false)
+    }
     const closeEditModal = () => {
         setModal(false)
-        console.log("modal closed!")
     }
 
-
+    // HANDLE BEHAVIOR AND FUNTIONALITY OF MEALTYPE DROPDOWN MENU AND HANDLING STATE CHANGE / UPDATED MENU SAVE
     const [dropdownMealTypeOpen, setDropdownMealTypeOpen] = useState(false);
     const dropdownMealTypeToggle = () => {
-        setDropdownMealTypeOpen(!dropdownMealTypeOpen);}
-    const [mealTypeChoice, setMealTypeChoice] = useState(menu.mealType)
+        setDropdownMealTypeOpen(!dropdownMealTypeOpen)
+    }
 
-    const [dateSelection, setDateSelection] = useState(menu.date)
-        console.log("initial date: " + menu.date)
-        console.log("dateSelection state right now: " + dateSelection)
-
-
-    // UPDATING THE INGREDIENT IN THE DATABASE
+    // UPDATING THE MENU IN THE DATABASE (note to self... don't name a function the same as an import. so many headaches)
     const updateTheMenu = () => {
         setIsLoading(true)
         const mealToUpdate = {
@@ -88,10 +84,7 @@ export const MealTableRow = ({menu}) => {
         })
     }
 
-
-    
-
-    // DELETING AN INGREDIENT IN THE DATABASE
+    // DELETING A MENU ENTRY IN THE DATABASE
     const deleteMenu = () => {
         setIsLoading(true)
         deleteMenu(menu)
@@ -106,66 +99,62 @@ export const MealTableRow = ({menu}) => {
     }
 
     return (
-        <>
-            <tr onClick={() => openEditModal()}>
-                <td> <b>{betterDate()}</b> <br /> {menu?.mealType.name}</td>
-                <td> <h4> {menu?.name} </h4></td>
-            </tr>
+    <>
+        <tr onClick={() => openEditModal()}>
+            <td> <b>{betterDate()}</b> <br /> {menu?.mealType.name}</td>
+            <td> <h4> {menu?.name} </h4></td>
+        </tr>
 
 
         <Modal isOpen={modal} toggle={toggle} >
-                    <ModalHeader toggle={() => closeEditModal()}>update {menu.name} </ModalHeader>
-                        <i className="m-2">in your meal plan for {mealTypeChoice.name} on {betterDate()}</i>
-                        
-                    <ModalBody>
+            <ModalHeader toggle={() => closeEditModal()}>update {menu.name} </ModalHeader>
+                <i className="m-2">in your meal plan for {mealTypeChoice.name} on {betterDate()}</i>
+            <ModalBody>
 
-                    {/* START OF UNIT OF MEASUREMENT ROW WITHIN MODAL */}
-                        <Row style={centerItUp} className="mb-2">
-                            <big>Date: &ensp;</big>{" "}
-                            <FormGroup>
-                                <Input
-                                type="date"
-                                name="date"
-                                id="mealDate"
-                                placeholder="date for this meal"
-                                defaultValue={menu.date}
-                                onChange={(event) => setDateSelection(event.target.value)}
-                                />
-                            </FormGroup>
-                        </Row>
-                    {/* END OF UNIT OF MEASUREMENT ROW WITHIN MODAL */}
-
+            {/* START OF UNIT OF DATE ROW WITHIN MODAL */}
+                <Row style={centerItUp} className="mb-2">
+                    <big>Date: &ensp;</big>{" "}
+                    <FormGroup>
+                        <Input
+                        type="date"
+                        name="date"
+                        id="mealDate"
+                        placeholder="date for this meal"
+                        defaultValue={menu.date}
+                        onChange={(event) => setDateSelection(event.target.value)}
+                        />
+                    </FormGroup>
+                </Row>
+            {/* END OF UNIT OF DATE ROW WITHIN MODAL */}
 
 
-                    {/* START OF MEAL TYPE ROW WITHIN MODAL */}
-                        <Row style={centerItUp} className="mb-4">
-                            <big>Meal Type: &ensp;</big>
-                                <Dropdown size="sm" isOpen={dropdownMealTypeOpen} toggle={dropdownMealTypeToggle}> 
-                                    { mealTypeChoice.name ? <DropdownToggle caret>{mealTypeChoice.name}</DropdownToggle> : <DropdownToggle caret>Options</DropdownToggle> } 
-                                    <DropdownMenu>
-                                        <DropdownItem header>select one option</DropdownItem>
-                                        <DropdownItem divider />
-                                        {mealTypes.map(option => {
-                                            return <DropdownItem key={option.id} onClick={() => setMealTypeChoice(option)}>{option.name}</DropdownItem>
-                                        })}
-                                    </DropdownMenu>
-                                </Dropdown>
-                            
-                        </Row>
-                    {/* START OF STORAGE LOCATION ROW WITHIN MODAL */}
 
-                    <Row style={centerItUp} className="mt-2">
-                        <Button color="info" size="md">Choose Another Recipe</Button>
-                    </Row>
+            {/* START OF MEAL TYPE ROW WITHIN MODAL */}
+                <Row style={centerItUp} className="mb-4">
+                    <big>Meal Type: &ensp;</big>
+                        <Dropdown size="sm" isOpen={dropdownMealTypeOpen} toggle={dropdownMealTypeToggle}> 
+                            { mealTypeChoice.name ? <DropdownToggle caret>{mealTypeChoice.name}</DropdownToggle> : <DropdownToggle caret>Options</DropdownToggle> } 
+                            <DropdownMenu>
+                                <DropdownItem header>select one option</DropdownItem>
+                                <DropdownItem divider />
+                                {mealTypes.map(option => {
+                                    return <DropdownItem key={option.id} onClick={() => setMealTypeChoice(option)}>{option.name}</DropdownItem>
+                                })}
+                            </DropdownMenu>
+                        </Dropdown>
+                    
+                </Row>
+            {/* END OF MEAL TYPE ROW WITHIN MODAL */}
 
+                <Row style={centerItUp} className="mt-2">
+                    <Button color="info" size="md" onClick={ () => history.push(`/menu/edit/${menu.id}`)}>Choose Another Recipe</Button>
+                </Row>
 
-                        {/* MODAL FOOTER WITH SAVE UPDATE BUTTON */}
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={() => updateTheMenu()}>Update</Button>{' '}<Button color="danger" onClick={() => deleteMenu()}>Delete</Button>
-                    </ModalFooter>
-                </Modal>
-            {/* END OF MODAL FOR UPDATING FOOD ITEM */}
-        </>
+            </ModalBody>
+            <ModalFooter>
+                <Button color="primary" onClick={() => updateTheMenu()}>Update</Button>{' '}<Button color="danger" onClick={() => deleteMenu()}>Delete</Button>
+            </ModalFooter>
+        </Modal>
+    </>
     )
 }
