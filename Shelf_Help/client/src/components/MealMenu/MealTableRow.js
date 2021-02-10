@@ -33,7 +33,8 @@ export const MealTableRow = ({menu}) => {
     let betterDate =() => {
         let stepOne = parseISO(menu.date)
         // bestDate = format(stepOne, 'yyyy-MM-dd')
-        return format(stepOne, 'iiii - LLL. Io')
+        console.log(stepOne)
+        return format(stepOne, 'MM-dd')
     }
 
     const centerItUp = {
