@@ -12,6 +12,7 @@ import {LocationProvider} from "../providers/LocationProvider";
 import {MealProvider} from "../providers/MealProvider";
 import GroceryForm from "./Groceries/GroceryForm";
 import PantryForm from "./FoodItems/PantryForm";
+import { MealTypeProvider } from "../providers/MealTypeProvider";
 
 const ApplicationViews = () => {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -24,9 +25,11 @@ const ApplicationViews = () => {
             </Route>
 
             <MealProvider>
-                <Route path="/menu" exact>
-                    {isLoggedIn ? <Menu /> : <Redirect to="/login" />}
-                </Route>
+                <MealTypeProvider>
+                    <Route path="/menu" exact>
+                        {isLoggedIn ? <Menu /> : <Redirect to="/login" />}
+                    </Route>
+                </MealTypeProvider>
             </MealProvider>
 
             <FoodItemProvider>

@@ -57,6 +57,7 @@ CREATE TABLE [Menu] (
   [UserId] INTEGER NOT NULL,
   [Custom] bit NOT NULL DEFAULT (1),
   [SpoonacularRecipeId] INTEGER,
+  [Name] VARCHAR (255)
 
 )
 GO

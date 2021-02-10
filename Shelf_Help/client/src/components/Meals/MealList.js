@@ -6,7 +6,7 @@ import {useHistory} from "react-router-dom";
 
 
 
-export const MealTableRow = ({date, dayCount}) => {
+const MealTableRow = ({date, dayCount}) => {
     const domHistory = useHistory();
 
     let recipeId = 2

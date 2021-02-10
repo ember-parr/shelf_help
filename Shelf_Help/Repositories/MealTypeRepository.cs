@@ -28,15 +28,9 @@ namespace Shelf_Help.Repositories
         }
 
         // get all locations
-        public List<MealOption> GetAll()
+        public List<MealType> GetAll()
         {
-            return _context.MealType
-                .Select(l => new MealOption()
-                {
-                    Id = l.Id,
-                    Name = l.Name
-                })
-                .ToList();
+            return _context.MealType.ToList();
         }
     }
 }

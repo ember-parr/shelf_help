@@ -1,82 +1,80 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
-// import { MenuContext } from "../../providers/MealProvider";
+import { MealContext, MenuContext } from "../../providers/MealProvider";
 import { MealTableRow } from "./MealTableRow";
 import { MealWeekView } from "./MealWeekView";
 import { useHistory } from "react-router-dom";
 import { Button, ButtonGroup, Table, Input, Form, FormGroup } from "reactstrap";
-import {format, endOfDay } from "date-fns";
+import {format, add, sub } from "date-fns";
+import { DailyMenu } from "./DailyMenu";
 
-export const MealTable = ({view, dayCount, startDate}) => {
-    // const { getMenues } = useContext(MenuContext);
-    const domHistory = useHistory();
-    let todaysDate = format(new Date(), 'M-d-yyy')
-    console.log("today's date: " + todaysDate)
-    const thisWeek = new Date(2021, 0, 3, 10, 10, 10)
+export const MealTable = () => {
+    const [ viewDay, setViewDay ] = useState(new Date())
+    const { getMeals, allMeals } = useContext(MealContext)
+    const [ isLoading, setIsLoading ] = useState(false)
+
+    useEffect(() => {
+        getMeals()
+        .then(setIsLoading(false))
+        
+    }, [])
+
+    // console.log("viewDay: " + viewDay)
+    // const today = new Date();
+    // const displayDate = () => {
+    //     if (viewDay === today) {
+    //         return "today's menu"
+    //     } else {
+    //         return format(viewDay, 'iiii - LLL. Io')
+    //     }
+    // }
+
+    // const setToToday = () => {
+    //     setViewDay(new Date())
+    // }
+
+    // const backOneDay = () => {
+    //     const result = sub(viewDay, {
+    //         days: 1
+    //     })
+    //     setViewDay(result)
+    // }
+
+    // const forwardOneDay = () => {
+    //     const result = add(viewDay, {
+    //         days: 1
+    //     })
+    //     setViewDay(result)
+    // }
 
 
-    if (view === "Today") {
-        return (
-            <>
-            <h3>Today's Menu</h3>
-            <Table hover responsive size="sm">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>main dish</th>
-                        <th>sides</th>
-                        <th>dessert</th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    <MealTableRow date={startDate} dayCount={dayCount} />
-                </tbody>
-            </Table>
-            </>
-        )
-    } else if (view === "Week") {
-        return (
-            <>
-            <h3>Weekly Menu</h3>
-            <Table hover responsive size="sm">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Breakfast</th>
-                        <th>Lunch</th>
-                        <th>Dinner</th>
-                        <th>Snacks / Other</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <MealWeekView startDate={thisWeek} />
-                </tbody>
-            </Table>
-            </>
-        )
-    } else {
-        return (
-            <>
-            <h3>Monthly Menu</h3>
-            <Table dark hover responsive size="sm">
-                <thead>
-                    <tr>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                        <th>Saturday</th>
-                        <th>Sunday</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <MealTableRow date={startDate} dayCount={dayCount} />
-                </tbody>
-            </Table>
-            </>
-        )
-    }
+
+    return (
+        <>
+
+        {/* <ButtonGroup size="sm" className="mb-3">
+                <Button onClick={() => backOneDay()}> back </Button>
+                <Button onClick={() => setToToday()}> today </Button>
+                <Button onClick={() => forwardOneDay()}> foward </Button>
+            </ButtonGroup> */}
+
+
+        <Table hover responsive size="sm">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Meal</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {allMeals.map(menu => {
+                    return <MealTableRow key={menu.id} menu={menu} />
+                })}
+            </tbody>
+        </Table>
+        </>
+    )
 
 }

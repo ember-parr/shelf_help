@@ -29,13 +29,13 @@ set identity_insert [MealType] off
      ---   Menu Seed Data
 */
 set identity_insert [Menu] on
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (1, '2021-01-01', 1, 1, 1, 520);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (2, '2021-01-05', 2, 1, 1, 860);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (3, '2021-01-09', 3, 1, 1, 510);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (4, '2021-01-15', 4, 2, 1, 540);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (5, '2021-01-16', 1, 2, 1, 20);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (6, '2021-01-05', 1, 1, 1, 920);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (7, '2021-01-05', 4, 1, 1, 442);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (1, '2021-02-01', 1, 1, 1, 520, 'Spring Rolls');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (2, '2021-02-05', 2, 1, 1, 860, 'Meatballs');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (3, '2021-02-09', 3, 1, 1, 510, 'Ramen');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (4, '2021-02-15', 4, 2, 1, 540, 'cereal');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (5, '2021-02-16', 1, 2, 1, 20, 'mooshoo pork');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (6, '2021-02-05', 1, 1, 1, 920, 'orange chicken');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (7, '2021-02-05', 4, 1, 1, 442, 'tacos');
 set identity_insert [Menu] off
 
 

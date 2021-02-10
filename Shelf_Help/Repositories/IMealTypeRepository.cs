@@ -6,7 +6,7 @@ namespace Shelf_Help.Repositories
 {
     public interface IMealTypeRepository
     {
-        List<MealOption> GetAll();
+        List<MealType> GetAll();
         MealType GetById(int id);
     }
 }

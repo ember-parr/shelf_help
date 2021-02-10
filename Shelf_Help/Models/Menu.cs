@@ -25,6 +25,8 @@ namespace Shelf_Help.Models
         [Required]
         public int UserId { get; set; }
 
+        public string Name { get; set; }
+
         public MealType MealType { get; set; }
         
 

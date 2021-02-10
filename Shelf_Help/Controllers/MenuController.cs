@@ -38,12 +38,12 @@ namespace Shelf_Help.Controllers
 
 
         // get menus on a certain date
-        [HttpGet("day/{date}")]
-        public IActionResult GetByDate(DateTime date)
+        [HttpGet("day/{date}/{typeId}")]
+        public IActionResult GetByDate(DateTime date, int typeId)
         {
             var currentUser = GetCurrentUserProfile();
-            var menus = _menuRepo.GetBySingleDate(date, currentUser.Id);
-            return Ok(menus);
+            var menu = _menuRepo.GetBySingleDate(date, typeId, currentUser.Id);
+            return Ok(menu);
         }
 
 

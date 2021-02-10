@@ -39,14 +39,14 @@ namespace Shelf_Help.Repositories
         }
 
         // get menues on exact date range
-        public List<Menu> GetBySingleDate(DateTime date, int userId)
+        public Menu GetBySingleDate(DateTime date,int typeId, int userId)
         {
             return _context.Menu
                 .Include(m => m.MealType)
                 .Where(m => m.Date == date)
+                .Where(m => m.MealTypeId == typeId)
                 .Where(m => m.UserId == userId)
-                .OrderBy(m => m.MealTypeId)
-                .ToList();
+                .FirstOrDefault();
         }
 
 

@@ -15,7 +15,7 @@ namespace Shelf_Help.Repositories
 
         List<Menu> GetAll(int id);
 
-        List<Menu> GetBySingleDate(DateTime date, int id);
+        Menu GetBySingleDate(DateTime date, int typeId, int userId);
 
         List<Menu> GetByDateRange(DateTime startDate, DateTime endDate, int userId);
 

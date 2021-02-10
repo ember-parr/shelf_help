@@ -9,6 +9,7 @@ export const MealContext = createContext();
 export const MealProvider = (props) => {
     const getToken = () => firebase.auth().currentUser.getIdToken(); 
     const apiUrl = "/api/menu";
+    const [ singleMeal, setSingleMeal ] = useState([])
     const [ allMeals, setAllMeals ] = useState([])
 
 
@@ -42,12 +43,9 @@ export const MealProvider = (props) => {
     }
 
 
-
-
-    // get meals for single day
-    const getMealBySingleDate = (date) => {
+    const getDaysMeals = (date) => {
         return getToken().then((token) =>
-        fetch(`${apiUrl}/day/${date}`, {
+        fetch(`${apiUrl}/range/${date}/${date}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -56,6 +54,21 @@ export const MealProvider = (props) => {
         .then((res) => res.json())
         )
     }
+
+
+    // get specific meal by date and meal type
+    // const getCertainMeal = (date, type) => {
+    //     return getToken().then((token) =>
+    //     fetch(`${apiUrl}/day/${date}/${type}`, {
+    //         method: "GET",
+    //         headers: {
+    //             Authorization: `Bearer ${token}`,
+    //         },
+    //     })
+    //     .then((res) => res.json())
+    //     .then(output => setSingleMeal(JSON.stringify(output)))
+    //     )
+    // }
 
 
 
@@ -92,6 +105,18 @@ export const MealProvider = (props) => {
 
 
     // update an existing recipe in SQL database
+    const updateMenu = (menu) => {
+        return getToken().then((token) => {
+            fetch(`${apiUrl}/${menu.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(menu)
+            })
+        })
+    }
 
 
 
@@ -103,7 +128,10 @@ export const MealProvider = (props) => {
             getMeals,
             allMeals,
             getMealById,
-            getMealsByDateRange
+            getMealsByDateRange,
+            getDaysMeals,
+            singleMeal,
+            updateMenu
         }}>
             {props.children}
         </MealContext.Provider>
