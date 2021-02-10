@@ -3,56 +3,115 @@
 import React, {useState, useContext, useEffect} from "react";
 import { useHistory } from "react-router-dom";
 import { MealContext } from "../../providers/MealProvider";
-import { format } from "date-fns"
+import { format, add, parse } from "date-fns"
 
 
 
 
 export const MealTableRow = ({date, dayCount}) => {
     const domHistory = useHistory();
-    const { getMealById } = useContext(MealContext)
-    const [singleMeal, setSingleMeal] = useState()
-    const [ mealsInMenu, setMealsInMenu ] = useState(0)
+    const { getMealById, getMealsByDateRange } = useContext(MealContext)
     let todaysDate = format(new Date(), 'yyyy-MM-dd')
+    const [ todayFullMenu, setTodayMenu ] = useState([])
+    const [ todayMenuEntries, setTodayEntries ] = useState([])
+    const [ todayMenuDetails, setTodayDetails ] = useState([])
 
-    console.log("today's date: " + todaysDate + "T00:00:00")
     
-    const getOneMeal = (mealId) => {
-        getMealById(mealId)
+
+    // get date range to search -- use dayOne as start date & dayTwo as end date for range
+    const dayOne = format(date, 'yyyy-MM-dd')
+    const addDays = add(date, {
+        days: dayCount - 1
+    })
+    const dayTwo = format(addDays, 'yyyy-MM-dd')
+
+
+
+
+    // get meal info from SQL database 
+    const getMealRangeEntries = () => {
+        console.log("getting meal range entries in 3... 2... 1... ")
+        getMealEntriesWithinDateRange(dayThree, dayFour)
+    }
+
+    const getMealEntriesWithinDateRange = (startDate, endDate) => {
+        console.log("getMealEntriesWithinDateRange function is running (start/end dates): " + startDate + " / " + endDate)
+        getMealsByDateRange(startDate, endDate)
         .then((output) => {
-            // COMMENTED OUT SO I DON'T RUN OUT OF API CALLS AGAIN
-            // getMealDetails(output.spoonacularRecipeId)
+            output.forEach(meal => {
+                todayMenuEntries.push({
+                    id: meal.id,
+                    spoonacularRecipeId: meal.spoonacularRecipeId,
+                    mealTypeId: meal.mealTypeId,
+                    userId: meal.userId,
+                })
+                putDetailsIn();
+                console.log("menu entries length: " + todayMenuEntries.length)
+            })
         })
+        // .then(putDetailsIn())
     }
 
-    const getMealDetails = (spoonRecipeId) => {
-        setMealsInMenu(2)
-        fetch(`https://api.spoonacular.com/recipes/${spoonRecipeId}/information?apiKey=5c60c91675ec4b6299f1bc901dc8def9`)
-        .then((res) => res.json())
-        .then(spoonOutput => {
-            setSingleMeal(spoonOutput)
-        })
+    
+    
+    // get details of each recipe from spoonacular
+    const putDetailsIn = () => {
+        console.log("put details in function is running & todayMenuEntries length is: " + todayMenuEntries.length)
+        todayMenuEntries.forEach(meal => getRecipeDetailsFromSpoon(meal.spoonacularRecipeId))
+        // testingFunctionality()
     }
 
+    
+
+    const getRecipeDetailsFromSpoon = (spoonId) => {
+        fetch(`https://api.spoonacular.com/recipes/${spoonId}/information?apiKey=5c60c91675ec4b6299f1bc901dc8def9`)
+            .then((res) => res.json())
+                .then(spoonOutput => {
+                    todayMenuDetails.push(spoonOutput)
+                    console.log(" menu detail length: " + todayMenuDetails.length)
+                })
+    }
+
+
+    const testingFunctionality = () => {
+        console.log("index 0")
+        console.log("entry: " + todayMenuEntries[0].spoonacularRecipeId)
+        console.log("database: " + todayMenuDetails.lastIndexOf)
+        console.log(" ")
+        // console.log("index 1")
+        // console.log("entry: " + todayMenuEntries[1].spoonacularRecipeId)
+        // console.log("database: " + todayMenuDetails[1].id)
+        // console.log(" ")
+        // console.log("index 2")
+        // console.log("entry: " + todayMenuEntries[2].spoonacularRecipeId)
+        // console.log("database: " + todayMenuDetails[2].id)
+        // console.log(" ")
+        // console.log("index 3")
+        // console.log("entry: " + todayMenuEntries[3].spoonacularRecipeId)
+        // console.log("database: " + todayMenuDetails[3].id)
+        // console.log(" ")
+    }
+
+
+    // dummy data to delete
+    const dayThree = '2021-01-05'
+    const dayFour = '2021-01-05'
     let recipeId = 2
 
+
+    // on page load, sets today entries array to empty
     useEffect(() => {
-        getOneMeal(2)
+        setTodayEntries([])
+        setTodayDetails([])
+        console.log("use effect is happening! current todayMenuEntries length: " + todayMenuEntries.length)
     }, [])
 
-    useEffect(()=>{
-        if (mealsInMenu > 0) {
-            console.log("use effect is running INSIDE IF STATEMENT... mealsInMenu is: " + mealsInMenu)
-        } else {
-            console.log("use effect is running... mealsInMenu is: " + mealsInMenu)
-        }
-    }, [mealsInMenu])
 
-
+    
     if (dayCount === 1) {
         return (
             <>
-                <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
+                <tr onClick={() => getMealRangeEntries()}>
                     <td><h5>Breakfast</h5></td>
                     <td>Toasted bagle with preserves <br /> -- cook time: 15 minutes --</td>
                     <td>Fruit cup</td>
@@ -66,7 +125,7 @@ export const MealTableRow = ({date, dayCount}) => {
                 </tr>
                 <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
                     <td><h5>Dinner</h5></td>
-                    <td>{singleMeal?.title} <br /> -- cook time: {singleMeal?.readyInMinutes} minutes --</td>
+                    {/* <td>{singleMeal?.title} <br /> -- cook time: {singleMeal?.readyInMinutes} minutes --</td> */}
                     <td>Fries</td>
                     <td></td>
                 </tr>
@@ -74,60 +133,6 @@ export const MealTableRow = ({date, dayCount}) => {
                     <td><h5>Snack</h5></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                </tr>
-            </>
-        )
-    } else if (dayCount === 7) {
-        return (
-            <>
-                <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
-                    <td><h5>Monday</h5></td>
-                    <td>Burgers</td>
-                    <td>Fries</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
-                    <td><h5>Tuesday</h5></td>
-                    <td>Burgers</td>
-                    <td>Fries</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
-                    <td><h5>Wednesday</h5></td>
-                    <td>Burgers</td>
-                    <td>Fries</td>
-                    <td></td>
-                    <td>smoothies</td>
-                </tr>
-                <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
-                    <td><h5>Thursday</h5></td>
-                    <td>Burgers</td>
-                    <td>Fries</td>
-                    <td>Salmon</td>
-                    <td></td>
-                </tr>
-                <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
-                    <td><h5>Friday</h5></td>
-                    <td>Burgers</td>
-                    <td>Fries</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
-                    <td><h5>Saturday</h5></td>
-                    <td>Burgers</td>
-                    <td>Fries</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr onClick={() => domHistory.push(`/menu/details/${recipeId}`)}>
-                    <td><h5>Sunday</h5></td>
-                    <td>Burgers</td>
-                    <td>Fries</td>
-                    <td>Steak</td>
                     <td></td>
                 </tr>
             </>

@@ -59,7 +59,18 @@ export const MealProvider = (props) => {
 
 
 
-    // get this week's menu
+    // get meals within date range
+    const getMealsByDateRange = (startDate, endDate) => {
+        return getToken().then((token) =>
+        fetch(`${apiUrl}/range/${startDate}/${endDate}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then((res) => res.json())
+        )
+    }
 
 
 
@@ -92,7 +103,7 @@ export const MealProvider = (props) => {
             getMeals,
             allMeals,
             getMealById,
-            getMealBySingleDate
+            getMealsByDateRange
         }}>
             {props.children}
         </MealContext.Provider>

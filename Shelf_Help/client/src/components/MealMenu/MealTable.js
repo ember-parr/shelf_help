@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 // import { MenuContext } from "../../providers/MealProvider";
 import { MealTableRow } from "./MealTableRow";
+import { MealWeekView } from "./MealWeekView";
 import { useHistory } from "react-router-dom";
 import { Button, ButtonGroup, Table, Input, Form, FormGroup } from "reactstrap";
 import {format, endOfDay } from "date-fns";
@@ -11,6 +12,7 @@ export const MealTable = ({view, dayCount, startDate}) => {
     const domHistory = useHistory();
     let todaysDate = format(new Date(), 'M-d-yyy')
     console.log("today's date: " + todaysDate)
+    const thisWeek = new Date(2021, 0, 3, 10, 10, 10)
 
 
     if (view === "Today") {
@@ -48,7 +50,7 @@ export const MealTable = ({view, dayCount, startDate}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <MealTableRow date={startDate} dayCount={dayCount} />
+                    <MealWeekView startDate={thisWeek} />
                 </tbody>
             </Table>
             </>

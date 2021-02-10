@@ -29,11 +29,13 @@ set identity_insert [MealType] off
      ---   Menu Seed Data
 */
 set identity_insert [Menu] on
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (1, '2021-01-01', 1, 1, 2, 520);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (2, '2021-01-05', 2, 1, 2, 860);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (3, '2021-01-09', 3, 1, 2, 510);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (4, '2021-01-15', 4, 2, 2, 540);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (5, '2021-01-16', 1, 2, 2, 20);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (1, '2021-01-01', 1, 1, 1, 520);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (2, '2021-01-05', 2, 1, 1, 860);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (3, '2021-01-09', 3, 1, 1, 510);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (4, '2021-01-15', 4, 2, 1, 540);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (5, '2021-01-16', 1, 2, 1, 20);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (6, '2021-01-05', 1, 1, 1, 920);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (7, '2021-01-05', 4, 1, 1, 442);
 set identity_insert [Menu] off
 
 
