@@ -24,11 +24,11 @@ export const Recipe = () => {
                 {singleRecipe ? <RecipeHeader recipe={singleRecipe} /> : <Spinner color="secondary" />} 
 
                 <Row>
-                    <Col lg="5">
+                    <Col lg="4">
                         {singleRecipe.image ? <img alt={singleRecipe.name} src={singleRecipe.image} /> : <Spinner color="secondary" /> }
                     </Col>
                     <Col lg="2"></Col>
-                    <Col lg="5">
+                    <Col lg="6">
                         {singleIngredients ? <RecipeIngredients ingredients={singleIngredients} /> : <Spinner color="secondary" />}
                     </Col>    
                 </Row>

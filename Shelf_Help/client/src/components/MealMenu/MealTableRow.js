@@ -73,7 +73,7 @@ export const MealTableRow = ({menu, spoonId}) => {
             date: dateSelection,
             userId: menu.userId,
             custom: false,
-            spoonacularIngredientId: menu.spoonacularIngredientId
+            spoonacularIngredientId: menu.spoonacularIngredientId,
         }
         updateMenu(mealToUpdate)
         .then(() => {
