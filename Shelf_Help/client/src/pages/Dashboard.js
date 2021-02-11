@@ -52,7 +52,7 @@ export const Dashboard = () => {
                     </Col>
                     <Col lg="1"></Col>
                     <Col lg="3">
-                        <p className="lead">You have Questions... We Have Answers...  </p>
+                        {/* <p className="lead">You have Questions... We Have Answers...  </p>
                         <FormGroup>
                             <Input
                             type="search"
@@ -64,7 +64,7 @@ export const Dashboard = () => {
                         <Card body outline color="info">
                             <CardTitle tag="h5"> </CardTitle>
                             <CardText></CardText>
-                        </Card>
+                        </Card> */}
                     </Col>
                 </Row>
             </Container>

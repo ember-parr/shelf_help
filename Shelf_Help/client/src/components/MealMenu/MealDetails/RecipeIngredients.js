@@ -45,6 +45,7 @@ export const RecipeIngredients = ({ingredients}) => {
         }
         addFoodItem(foodToAdd)
         .then(() => closeEditModal())
+        .then(() => getGroceryList())
         .then(() => toast.info(`${foodToAdd.foodName} successfully added to your grocery list!`))
     }
 
