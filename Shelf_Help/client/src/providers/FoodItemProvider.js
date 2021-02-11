@@ -14,6 +14,7 @@ export const FoodItemProvider = (props) => {
     const [ spoonDetails, setSpoonDetails ] = useState({})
     const getToken = () => firebase.auth().currentUser.getIdToken(); 
     const apiUrl = "/api/fooditem";
+    const spoonKey = process.env.REACT_APP_SPOON_KEY
 
 
     // this function looks like a get all, but filters out other users food items on server side. 
@@ -61,7 +62,7 @@ export const FoodItemProvider = (props) => {
 
     // this function searches spoonacular for an ingredient by query string (words searched in PantryForm.js)
     const searchSpoonacularIngredients = (searchedWords) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=684def93f3f54381b774a2f9763b05d7&metaInformation=true`)
+        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=${spoonKey}&metaInformation=true`)
         .then((res) => res.json())
         .then(output => {
             setSpoonResults(output)

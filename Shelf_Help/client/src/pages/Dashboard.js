@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState,  } from "react";
 import { Card, CardImg, CardColumns, CardBody, CardTitle, CardSubtitle, CardText, FormGroup, Input } from "reactstrap"
 import { Container, Spinner, Row, Col, Jumbotron, Button } from 'reactstrap';
@@ -8,14 +10,15 @@ import { MealIdeas } from "../components/DashboardMealIdeas";
 export const Dashboard = () => {
     const { getFunFact, funFact, dashboardMealIdeas, mealIdeas  } = useContext(MealContext)
     
-    useEffect(() => {
-        getFunFact()
-        setTimeout(function() {
+    // useEffect(() => {
+    //     getFunFact()
+    //     setTimeout(function() {
 
-            console.log(funFact)
-        }, 750 )
-    }, [])
+    //         console.log(funFact)
+    //     }, 750 )
+    // }, [])
 
+    
 
     useEffect(() => {
         dashboardMealIdeas()
