@@ -142,7 +142,7 @@ export const FoodItemTableRow = ({item}) => {
                 <tr onClick={() => openEditModal()}>
                     <td>{ item.foodName }</td>
                     <td >{ item.quantity }</td>
-                    <td  className="d-none d-sm-block">{ item.measurement }</td>
+                    {/* <td  className="d-none d-sm-block">{ item.measurement }</td> */}
                     <td>{ item.location.name }</td>
                     {/* <td className="d-none d-md-block"> Using in some recipess.... EDIT THIS</td> */}
                 </tr>

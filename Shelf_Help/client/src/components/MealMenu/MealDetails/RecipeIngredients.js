@@ -23,8 +23,6 @@ export const RecipeIngredients = ({ingredients}) => {
     const toggle = () => setCollapse(!collapse);
     const [modalFood, setModalFood] = useState()
     
-
-    //functions
     const openEditModal = (food) => {
         setModal(true)
         setModalFood(food)
@@ -34,32 +32,23 @@ export const RecipeIngredients = ({ingredients}) => {
         setModal(false)
     }
 
-    /*
-****************************************************************************
-THIS IS WHERE I'M STUCK
-****************************************************************************
-*/
 
-    // const addIngredient = (food) => {
-    //     setIsLoading(true)
-    //     const foodToAdd = {
-    //         quantity: 0,
-    //         spoonacularIngredientId: food?.id,
-    //         measurement: "",
-    //         userId: user.id,
-    //         locationId: 6,
-    //         foodName: food?.name
-    //     }
-    //     addFoodItem(foodToAdd)
-    //     .then(closeEditModal())
-    //     .then(() => toast.info(`${foodToAdd.quantity} ${foodToAdd.foodName} successfully added to your grocery list!`))
-    // }
+    const addIngredient = (food) => {
+        setIsLoading(true)
+        const foodToAdd = {
+            quantity: 0,
+            spoonacularIngredientId: food?.id,
+            measurement: "",
+            userId: user.id,
+            locationId: 6,
+            foodName: food.name
+        }
+        addFoodItem(foodToAdd)
+        .then(() => closeEditModal())
+        .then(() => getGroceryList())
+        .then(() => toast.info(`${foodToAdd.foodName} successfully added to your grocery list!`))
+    }
 
-/*
-****************************************************************************
-THIS IS WHERE I'M STUCK
-****************************************************************************
-*/
 
 
 
@@ -77,7 +66,7 @@ THIS IS WHERE I'M STUCK
                                 return <Card key={food.id}><CardBody>{food.original} &emsp; <Badge pill color="info">in pantry</Badge></CardBody></Card>
                             } else if (groceryItems.some(f => f.spoonacularIngredientId === food.id)) {
                                 return <Card key={food.id}><CardBody>{food.original} &emsp; <Badge pill color="secondary">on grocery list</Badge></CardBody></Card>
-                            } else { return <Card onClick={() => openEditModal()}><CardBody>{food.original}</CardBody> </Card> }
+                            } else { return <Card onClick={() => openEditModal(food)}><CardBody>{food.original}</CardBody> </Card> }
                         })}
                 
 
@@ -93,7 +82,7 @@ THIS IS WHERE I'M STUCK
                         Would you like to add {modalFood?.name} to your grocery list?
                     </ModalBody>
                     <ModalFooter>
-                        {/* <Button color="primary" onClick={addIngredient(modalFood)}>Yes</Button>{' '} */}
+                        <Button color="primary" onClick={() => addIngredient(modalFood)}>Yes</Button>{' '}
                     </ModalFooter>
                 </Modal>
                 </CardColumns>

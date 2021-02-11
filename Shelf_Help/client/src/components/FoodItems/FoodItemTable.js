@@ -56,7 +56,7 @@ export const FoodItemTable = () => {
                     <tr>
                         <th>Ingredient</th>
                         <th>Quantity</th>
-                        <th  className="d-none d-sm-block">Measurement</th>
+                        {/* <th  className="d-none d-sm-block">Measurement</th> */}
                         <th >Storage</th>
                         {/* <th className="d-none d-md-block">Used In...</th> */}
                     </tr>

@@ -17,9 +17,10 @@ export const MealProvider = (props) => {
     const [ singleInstructions, setSingleInstructions] = useState()
     const [funFact, setFunFact] = useState()
     const [ mealIdeas, setMealIdeas ] = useState()
+    const spoonKey = process.env.REACT_APP_SPOON_KEY
 
     const getFunFact = () => {
-        fetch ("https://api.spoonacular.com/food/jokes/random?apiKey=5c60c91675ec4b6299f1bc901dc8def9")
+        fetch (`https://api.spoonacular.com/food/jokes/random?apiKey=${spoonKey}`)
         .then((res) => JSON.parse(res))
         .then(output => setFunFact(output.keys))
         
@@ -71,7 +72,7 @@ export const MealProvider = (props) => {
 
     // search spoonacular for a recipe by query string
     const searchSpoonacularRecipes = (searchedWords) => {
-        fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchedWords}&number=9&addChildren=true&apiKey=684def93f3f54381b774a2f9763b05d7&metaInformation=true&addRecipeInformation=true`)
+        fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchedWords}&number=9&addChildren=true&apiKey=${spoonKey}&metaInformation=true&addRecipeInformation=true`)
         .then((res) => res.json())
         .then(output => {
             setSpoonResults(output)
@@ -98,7 +99,7 @@ export const MealProvider = (props) => {
 
     // get a single recipe from spoonacular
     const getSingleSpoonacularRecipe = (recipeId) => {
-        fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=684def93f3f54381b774a2f9763b05d7`)
+        fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${spoonKey}`)
         .then((res) => res.json())
         .then(output => {
             setSingleRecipe(output)
@@ -141,7 +142,7 @@ export const MealProvider = (props) => {
     }
 
     const dashboardMealIdeas = () => {
-        fetch(`https://api.spoonacular.com/mealplanner/generate?timeFrame=week&apiKey=684def93f3f54381b774a2f9763b05d7`)
+        fetch(`https://api.spoonacular.com/mealplanner/generate?timeFrame=week&apiKey=${spoonKey}`)
         .then((res) => res.json())
         .then(output => {
             setMealIdeas(output)
@@ -149,7 +150,7 @@ export const MealProvider = (props) => {
     }
 
     const dashboardQuickSearch = (searchWords) => {
-        fetch(`https://api.spoonacular.com/recipes/quickAnswer${searchWords}&apiKey=5c60c91675ec4b6299f1bc901dc8def9`)
+        fetch(`https://api.spoonacular.com/recipes/quickAnswer${searchWords}&apiKey=${spoonKey}`)
         .then((res) => res.json())
     }
 
@@ -186,9 +187,3 @@ export const MealProvider = (props) => {
     )
 }
 
-
-
-// spoonyone@emberparr.com & temporary password API KEY: d77d78f9357b477094b10096abd85b71 [out]
-// spoonytwo@emberparr.com & initials w. bday APIKEY: 5c60c91675ec4b6299f1bc901dc8def9 [out]
-// devops gmail email API KEY: 66e7421be84e4b16a934c4ad2b86bfd4 [out 1]
-// ember21892 gmail API KEY: 350c741bf82e41378e9b1359a60deadd [out 4]

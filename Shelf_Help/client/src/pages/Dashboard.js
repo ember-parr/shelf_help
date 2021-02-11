@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState,  } from "react";
 import { Card, CardImg, CardColumns, CardBody, CardTitle, CardSubtitle, CardText, FormGroup, Input } from "reactstrap"
 import { Container, Spinner, Row, Col, Jumbotron, Button } from 'reactstrap';
@@ -16,6 +18,7 @@ export const Dashboard = () => {
     //     }, 750 )
     // }, [])
 
+    
 
     useEffect(() => {
         dashboardMealIdeas()
@@ -43,13 +46,13 @@ export const Dashboard = () => {
 
                 <Row>
 
-                    {/* <Col lg="8">
+                    <Col lg="8">
                         
                             {mealIdeas ? <MealIdeas mealIdeas={mealIdeas} /> : <Spinner color="secondary" />}
                     </Col>
                     <Col lg="1"></Col>
                     <Col lg="3">
-                        <p className="lead">You have Questions... We Have Answers...  </p>
+                        {/* <p className="lead">You have Questions... We Have Answers...  </p>
                         <FormGroup>
                             <Input
                             type="search"
@@ -61,8 +64,8 @@ export const Dashboard = () => {
                         <Card body outline color="info">
                             <CardTitle tag="h5"> </CardTitle>
                             <CardText></CardText>
-                        </Card>
-                    </Col> */}
+                        </Card> */}
+                    </Col>
                 </Row>
             </Container>
 
