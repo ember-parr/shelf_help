@@ -71,7 +71,7 @@ export const FoodItemProvider = (props) => {
 
     // get ingredient details from spoonacular using ingredient id
     const getSpoonacularIngredById = (id) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=684def93f3f54381b774a2f9763b05d7`)
+        fetch(`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=${spoonKey}`)
         .then((res) => res.json())
         .then(output => {
             setSpoonDetails(output)
@@ -144,9 +144,3 @@ export const FoodItemProvider = (props) => {
 
 
 }
-
-
-// spoonyone@emberparr.com & temporary password API KEY: d77d78f9357b477094b10096abd85b71
-// spoonytwo@emberparr.com & initials w. bday APIKEY: 5c60c91675ec4b6299f1bc901dc8def9
-// devops gmail email API KEY: 66e7421be84e4b16a934c4ad2b86bfd4
-// ember21892 gmail API KEY: 350c741bf82e41378e9b1359a60deadd
