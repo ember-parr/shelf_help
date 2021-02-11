@@ -47,7 +47,7 @@ export const MealTableRow = ({menu, spoonId}) => {
 
     // OPEN AND CLOSE THE EDIT MENU MODAL
     const openEditModal = () => {
-        console.log("on open edit spoon id is: " + menu.spoonacularIngredientId)
+        console.log("on open edit spoon id is: " + menu.spoonacularRecipeId)
         setIsLoading(true)
         getMealTypes()
         setModal(true)
@@ -73,7 +73,7 @@ export const MealTableRow = ({menu, spoonId}) => {
             date: dateSelection,
             userId: menu.userId,
             custom: false,
-            spoonacularIngredientId: menu.spoonacularIngredientId,
+            spoonacularIngredientId: menu.spoonacularRecipeId,
         }
         updateMenu(mealToUpdate)
         .then(() => {

@@ -71,7 +71,7 @@ export const MealProvider = (props) => {
 
     // search spoonacular for a recipe by query string
     const searchSpoonacularRecipes = (searchedWords) => {
-        fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchedWords}&number=9&addChildren=true&apiKey=5c60c91675ec4b6299f1bc901dc8def9&metaInformation=true&addRecipeInformation=true`)
+        fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchedWords}&number=9&addChildren=true&apiKey=684def93f3f54381b774a2f9763b05d7&metaInformation=true&addRecipeInformation=true`)
         .then((res) => res.json())
         .then(output => {
             setSpoonResults(output)
@@ -98,7 +98,7 @@ export const MealProvider = (props) => {
 
     // get a single recipe from spoonacular
     const getSingleSpoonacularRecipe = (recipeId) => {
-        fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=5c60c91675ec4b6299f1bc901dc8def9`)
+        fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=684def93f3f54381b774a2f9763b05d7`)
         .then((res) => res.json())
         .then(output => {
             setSingleRecipe(output)

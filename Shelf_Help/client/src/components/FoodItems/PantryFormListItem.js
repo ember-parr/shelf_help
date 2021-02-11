@@ -75,16 +75,17 @@ export const PantryFormListItem = ({food}) => {
 
     // SAVING THE INGREDIENT TO THE USERS PANTRY
     const addIngredient = () => {
-        if (!measurementChoice) {
-            toast.error("Please Select A Unit of Measurement");
-        } else if (!storageChoice.name) {
+        // if (!measurementChoice) {
+        //     toast.error("Please Select A Unit of Measurement");
+        // } else
+         if (!storageChoice.name) {
             toast.error("Please select a storage option")
         } else {
             setIsLoading(true)
             const foodToAdd = {
                 quantity: clicks,
                 spoonacularIngredientId: food.id,
-                measurement: measurementChoice,
+                measurement: " ",
                 userId: user.id,
                 locationId: storageChoice.id,
                 foodName: food.name
@@ -123,7 +124,7 @@ export const PantryFormListItem = ({food}) => {
                                             <Row className="mb-4" style={centerItUp}>
                                                 <Col lg="2"></Col>
                                                 <Col lg="3">
-                                                    <Dropdown isOpen={dropdownOpen} toggle={dropdownToggle}>
+                                                    {/* <Dropdown isOpen={dropdownOpen} toggle={dropdownToggle}>
                                                         <DropdownToggle caret>
                                                             Measurement
                                                         </DropdownToggle>
@@ -134,7 +135,7 @@ export const PantryFormListItem = ({food}) => {
                                                                 return <DropdownItem onClick={() => setMeasurementChoice(option)}>{option}</DropdownItem>
                                                             })}
                                                         </DropdownMenu>
-                                                    </Dropdown>
+                                                    </Dropdown> */}
                                                 </Col>
                                                 <Col lg="1"></Col>
 
@@ -187,7 +188,7 @@ export const PantryFormListItem = ({food}) => {
                                                             <Row className="mb-4" style={centerItUp}>
                                                                 <Col lg="2"></Col>
                                                                 <Col lg="3">
-                                                                    <Dropdown isOpen={dropdownOpen} toggle={dropdownToggle}>
+                                                                    {/* <Dropdown isOpen={dropdownOpen} toggle={dropdownToggle}>
                                                                         <DropdownToggle caret>
                                                                             Measurement
                                                                         </DropdownToggle>
@@ -198,13 +199,13 @@ export const PantryFormListItem = ({food}) => {
                                                                                 return <DropdownItem onClick={() => setMeasurementChoice(option)}>{option}</DropdownItem>
                                                                             })}
                                                                         </DropdownMenu>
-                                                                    </Dropdown>
+                                                                    </Dropdown> */}
                                                                 </Col>
                                                                 <Col lg="1"></Col>
 
 
                                                                 <Col lg="3">
-                                                                    <Dropdown isOpen={dropdownStorageOpen} toggle={dropdownStorageToggle}>
+                                                                    {/* <Dropdown isOpen={dropdownStorageOpen} toggle={dropdownStorageToggle}>
                                                                         
                                                                             { storageChoice.name ? <DropdownToggle caret>{storageChoice.name}</DropdownToggle> : <DropdownToggle caret>Storage</DropdownToggle> }
                                                                         
@@ -215,7 +216,7 @@ export const PantryFormListItem = ({food}) => {
                                                                                 return <DropdownItem onClick={() => setStorageChoice(option)}>{option.name}</DropdownItem>
                                                                             })}
                                                                         </DropdownMenu>
-                                                                    </Dropdown>
+                                                                    </Dropdown> */}
                                                                 </Col>
                                                                 <Col lg="3"></Col>
                                                             </Row>
@@ -267,7 +268,7 @@ export const PantryFormListItem = ({food}) => {
                         <Row className="mb-4" style={centerItUp}>
                             <Col lg="2"></Col>
                             <Col lg="3">
-                                <Dropdown isOpen={dropdownOpen} toggle={dropdownToggle}>
+                                {/* <Dropdown isOpen={dropdownOpen} toggle={dropdownToggle}>
                                     <DropdownToggle caret>
                                         Measurement
                                     </DropdownToggle>
@@ -278,7 +279,7 @@ export const PantryFormListItem = ({food}) => {
                                             return <DropdownItem onClick={() => setMeasurementChoice(option)}>{option}</DropdownItem>
                                         })}
                                     </DropdownMenu>
-                                </Dropdown>
+                                </Dropdown> */}
                             </Col>
                             <Col lg="1"></Col>
 
