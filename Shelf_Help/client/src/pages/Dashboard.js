@@ -8,13 +8,13 @@ import { MealIdeas } from "../components/DashboardMealIdeas";
 export const Dashboard = () => {
     const { getFunFact, funFact, dashboardMealIdeas, mealIdeas  } = useContext(MealContext)
     
-    // useEffect(() => {
-    //     getFunFact()
-    //     setTimeout(function() {
+    useEffect(() => {
+        getFunFact()
+        setTimeout(function() {
 
-    //         console.log(funFact)
-    //     }, 750 )
-    // }, [])
+            console.log(funFact)
+        }, 750 )
+    }, [])
 
 
     useEffect(() => {
@@ -43,7 +43,7 @@ export const Dashboard = () => {
 
                 <Row>
 
-                    {/* <Col lg="8">
+                    <Col lg="8">
                         
                             {mealIdeas ? <MealIdeas mealIdeas={mealIdeas} /> : <Spinner color="secondary" />}
                     </Col>
@@ -62,7 +62,7 @@ export const Dashboard = () => {
                             <CardTitle tag="h5"> </CardTitle>
                             <CardText></CardText>
                         </Card>
-                    </Col> */}
+                    </Col>
                 </Row>
             </Container>
 
