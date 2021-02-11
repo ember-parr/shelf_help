@@ -25,22 +25,41 @@ namespace Shelf_Help.Repositories
             return _context.Menu
                 .Include(m => m.MealType)
                 .Where(m => m.UserId == id)
+                .Where(m => m.Date > DateTime.Now)
+                .OrderBy(m => m.Date)
                 .ToList();
         }
 
         //get a menu entry by Id
-        public Menu GetById(int id)
+        public Menu GetById(int id, int userId)
         {
             return _context.Menu
+                .Include(m => m.MealType)
                 .Where(m => m.Id == id)
+                .Where(m => m.UserId == userId)
                 .FirstOrDefault();
         }
 
         // get menues on exact date range
-        public List<Menu> GetBySingleDate(DateTime date)
+        public Menu GetBySingleDate(DateTime date,int typeId, int userId)
         {
             return _context.Menu
+                .Include(m => m.MealType)
                 .Where(m => m.Date == date)
+                .Where(m => m.MealTypeId == typeId)
+                .Where(m => m.UserId == userId)
+                .FirstOrDefault();
+        }
+
+
+        // get menus within date range
+        public List<Menu> GetByDateRange(DateTime startDate, DateTime endDate, int userId)
+        {
+            return _context.Menu
+                .Include(m => m.MealType)
+                .Where(m => m.Date >= startDate && m.Date <= endDate)
+                .Where(m => m.UserId == userId)
+                .OrderBy(m => m.Date).ThenBy(m => m.MealTypeId)
                 .ToList();
         }
 

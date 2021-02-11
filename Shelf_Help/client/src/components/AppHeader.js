@@ -33,14 +33,14 @@ const AppHeader = () => {
     <div>
       <Navbar color="dark" dark expand="md">
         <NavbarBrand tag={Link} to="/">
-          <img
+          {/* <img
             id="header-logo"
-            src="./images/favicon.png"
+            src="./../../public/images/favicon-duo.png"
             width="30"
             height="30"
             className="mr-1"
             alt="Shelfy"
-          />
+          /> */}
           Shelf Help
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />

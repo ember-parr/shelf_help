@@ -9,15 +9,15 @@ namespace Shelf_Help.Repositories
     {
         void Add(Menu menu);
         void Delete(int id);
-        Menu GetById(int id);
+        Menu GetById(int id, int userId);
         
         void Update(Menu menu);
 
         List<Menu> GetAll(int id);
 
-        List<Menu> GetBySingleDate(DateTime date);
+        Menu GetBySingleDate(DateTime date, int typeId, int userId);
 
-
+        List<Menu> GetByDateRange(DateTime startDate, DateTime endDate, int userId);
 
     }
 }

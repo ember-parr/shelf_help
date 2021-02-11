@@ -8,6 +8,7 @@ export const FoodItemContext = createContext();
 
 export const FoodItemProvider = (props) => {
     const [ foodItems, setFoodItems ] = useState([]);
+    const [ groceryItems, setGroceryItems ] = useState([]);
     const [ searchTerms, setSearchTerms ] = useState([]);
     const [ spoonResults, setSpoonResults ] = useState([])
     const [ spoonDetails, setSpoonDetails ] = useState({})
@@ -53,14 +54,14 @@ export const FoodItemProvider = (props) => {
                 },
             })
             .then((res) => res.json())
-            .then(setFoodItems)
+            .then(setGroceryItems)
         })
     }
 
 
     // this function searches spoonacular for an ingredient by query string (words searched in PantryForm.js)
     const searchSpoonacularIngredients = (searchedWords) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=350c741bf82e41378e9b1359a60deadd&metaInformation=true`)
+        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=684def93f3f54381b774a2f9763b05d7&metaInformation=true`)
         .then((res) => res.json())
         .then(output => {
             setSpoonResults(output)
@@ -69,7 +70,7 @@ export const FoodItemProvider = (props) => {
 
     // get ingredient details from spoonacular using ingredient id
     const getSpoonacularIngredById = (id) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=350c741bf82e41378e9b1359a60deadd`)
+        fetch(`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=684def93f3f54381b774a2f9763b05d7`)
         .then((res) => res.json())
         .then(output => {
             setSpoonDetails(output)
@@ -91,6 +92,7 @@ export const FoodItemProvider = (props) => {
         })
     }
 
+    // update existing FoodItem in SQL database
     const updateFoodItem = Item => {
         return getToken().then((token) => {
             fetch(`${apiUrl}/${Item.id}`, {
@@ -104,6 +106,17 @@ export const FoodItemProvider = (props) => {
         })
     }
 
+    const deleteFoodItem = Item => {
+        return getToken().then((token) => {
+            fetch(`${apiUrl}/${Item.id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        })
+    }
+
 
     return (
         <FoodItemContext.Provider
@@ -113,6 +126,7 @@ export const FoodItemProvider = (props) => {
             setSearchTerms,
             searchTerms,
             getGroceryList,
+            groceryItems,
             searchSpoonacularIngredients,
             spoonResults,
             getFoodById,
@@ -120,7 +134,8 @@ export const FoodItemProvider = (props) => {
             setSpoonResults,
             getSpoonacularIngredById,
             spoonDetails,
-            updateFoodItem
+            updateFoodItem,
+            deleteFoodItem
         }}>
             {props.children}
         </FoodItemContext.Provider>
@@ -131,5 +146,6 @@ export const FoodItemProvider = (props) => {
 
 
 // spoonyone@emberparr.com & temporary password API KEY: d77d78f9357b477094b10096abd85b71
+// spoonytwo@emberparr.com & initials w. bday APIKEY: 5c60c91675ec4b6299f1bc901dc8def9
 // devops gmail email API KEY: 66e7421be84e4b16a934c4ad2b86bfd4
 // ember21892 gmail API KEY: 350c741bf82e41378e9b1359a60deadd

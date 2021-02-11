@@ -38,52 +38,32 @@ namespace Shelf_Help.Controllers
 
 
         // get menus on a certain date
-        [HttpGet("day/{date}")]
-        public IActionResult GetByDate(DateTime date)
+        [HttpGet("day/{date}/{typeId}")]
+        public IActionResult GetByDate(DateTime date, int typeId)
         {
-            return Ok(_menuRepo.GetBySingleDate(date));
+            var currentUser = GetCurrentUserProfile();
+            var menu = _menuRepo.GetBySingleDate(date, typeId, currentUser.Id);
+            return Ok(menu);
         }
 
 
-        // get this users menu entries from database
-        //[HttpGet("getbyuser/{id}")]
-        //public IActionResult GetByUser(int userId)
-        //{
-        //    var currentUser = GetCurrentUserProfile();
-        //    if (currentUser.Id != userId)
-        //    {
-        //        return Unauthorized();
-        //    }
-        //    var menues = _menuRepo.GetUsersMenu(userId);
-        //    return Ok(menues);
-        //}
+        // get menus within a date range
+        [HttpGet("range/{startDate}/{endDate}")]
+        public IActionResult GetByDateRange(DateTime startDate, DateTime endDate)
+        {
+            var currentUser = GetCurrentUserProfile();
+            var menus = _menuRepo.GetByDateRange(startDate, endDate, currentUser.Id);
+            return Ok(menus);
+        }
 
 
-        // get a menu entry by it's id
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(int id)
-        //{
-        //    var currentUser = GetCurrentUserProfile();
-        //    var menu = _menuRepo.GetById(id);
-        //    if (menu == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (currentUser.Id != menu.UserId)
-        //    {
-        //        return Unauthorized();
-        //    }
-
-        //    var ingredients = _menuRepo.GetIngredients(id);
-        //    var menuDetails = new MenuDetails()
-        //    {
-        //        Menu = menu,
-        //        Ingredients = ingredients,
-        //    };
-
-        //    return Ok(menuDetails);
-        //}
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var currentUser = GetCurrentUserProfile();
+            var menu = _menuRepo.GetById(id, currentUser.Id);
+            return Ok(menu);
+        }
 
 
         // add a new menu entry
@@ -99,7 +79,8 @@ namespace Shelf_Help.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Menu menu)
         {
-            var originalMenu = _menuRepo.GetById(id);
+            var currentUser = GetCurrentUserProfile();
+            var originalMenu = _menuRepo.GetById(id, currentUser.Id);
             if(originalMenu == null)
             {
                 return NotFound();
@@ -119,7 +100,8 @@ namespace Shelf_Help.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var menuToDelete = _menuRepo.GetById(id);
+            var currentUser = GetCurrentUserProfile();
+            var menuToDelete = _menuRepo.GetById(id, currentUser.Id);
             if (menuToDelete == null)
             {
                 return NotFound();

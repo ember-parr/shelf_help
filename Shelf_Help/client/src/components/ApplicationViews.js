@@ -6,11 +6,16 @@ import Register from "../pages/Register";
 import Menu from "../pages/Menu"
 import Pantry from "../pages/Pantry"
 import GroceryList from "../pages/GroceryList";
-import Dashboard from "../pages/Dashboard";
+import { Dashboard } from "../pages/Dashboard";
 import {FoodItemProvider} from "../providers/FoodItemProvider";
 import {LocationProvider} from "../providers/LocationProvider";
+import {MealProvider} from "../providers/MealProvider";
 import GroceryForm from "./Groceries/GroceryForm";
 import PantryForm from "./FoodItems/PantryForm";
+import { MealForm } from "./MealMenu/MealForm";
+import { MealTypeProvider } from "../providers/MealTypeProvider";
+import { MealDetails } from "./MealMenu/MealDetails";
+import { Recipe } from "../pages/Recipe";
 
 const ApplicationViews = () => {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -18,13 +23,47 @@ const ApplicationViews = () => {
     return (
         <Switch>
             <UserProfileProvider >
+                <MealProvider>
             <Route path="/" exact>
                 {isLoggedIn ? <Dashboard /> : <Redirect to="/login" />}
             </Route>
+            </MealProvider>
 
-            <Route path="/menu">
-                {isLoggedIn ? <Menu /> : <Redirect to="/login" />}
-            </Route>
+            <MealProvider>
+                <MealTypeProvider>
+                    <Route path="/menu" exact>
+                        {isLoggedIn ? <Menu /> : <Redirect to="/login" />}
+                    </Route>
+                </MealTypeProvider>
+            </MealProvider>
+
+            <MealProvider>
+                <MealTypeProvider>
+                    <Route path="/menu/add/" exact>
+                        {isLoggedIn ? <MealForm /> : <Redirect to="/login" />}
+                    </Route>
+                </MealTypeProvider>
+            </MealProvider>
+
+            <MealProvider>
+                <FoodItemProvider>
+                    <MealTypeProvider>
+                        <Route path="/menu/details/:recipeId" exact>
+                            {isLoggedIn ? <MealDetails /> : <Redirect to="/login" />}
+                        </Route>
+                    </MealTypeProvider>
+                </FoodItemProvider>
+            </MealProvider>
+
+            <MealProvider>
+                <FoodItemProvider>
+                    <MealTypeProvider>
+                        <Route path="/recipe/:recipeId" exact>
+                            {isLoggedIn ? <Recipe /> : <Redirect to="/login" />}
+                        </Route>
+                    </MealTypeProvider>
+                </FoodItemProvider>
+            </MealProvider>
 
             <FoodItemProvider>
                 <LocationProvider>
@@ -36,7 +75,7 @@ const ApplicationViews = () => {
 
             <FoodItemProvider>
                 <LocationProvider>
-                    <Route path="/pantry/add">
+                    <Route path="/pantry/add" exact>
                         {isLoggedIn ? <PantryForm /> : <Redirect to="/login" />}
                     </Route>
                 </LocationProvider>

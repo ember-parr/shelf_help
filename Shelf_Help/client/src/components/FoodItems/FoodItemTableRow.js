@@ -12,8 +12,10 @@ export const FoodItemTableRow = ({item}) => {
     // PROVIDERS FOR DATA NEEDED WITHIN COMPONENT
     const { getCurrentUser } = useContext(UserProfileContext)
     const { locations, getLocations } = useContext(LocationContext)
-    const { getSpoonacularIngredById, updateFoodItem } = useContext(FoodItemContext);
+    const { deleteFoodItem, updateFoodItem } = useContext(FoodItemContext);
     const user = getCurrentUser();
+
+    
 
     // SET STATE NEEDED WITHIN COMPONENT FOR GENERAL FUNCTIONS
     const [isLoading, setIsLoading] = useState(true)
@@ -22,7 +24,6 @@ export const FoodItemTableRow = ({item}) => {
     const [modal, setModal] = useState(false);
     const [collapse, setCollapse] = useState(false);
     const toggle = () => setCollapse(!collapse);
-    const [details, setDetails] = useState(0)
 
     
     // FOR UPDATING & DISPLAYING QUANTITY OF FOOD ITEM
@@ -76,11 +77,12 @@ export const FoodItemTableRow = ({item}) => {
         })}
 
     const openEditModal = () => {
+        getSpoonDetails()
         setIsLoading(true)
         getLocations()
-        setModal(true)
         setIsLoading(false)
-        getSpoonDetails()}
+        setModal(true)
+    }
 
     const closeEditModal = () => {
         setModal(false)
@@ -118,6 +120,20 @@ export const FoodItemTableRow = ({item}) => {
         })
     }
 
+    // DELETING AN INGREDIENT IN THE DATABASE
+    const deleteIngredient = () => {
+        setIsLoading(true)
+        deleteFoodItem(item)
+        .then(() => {
+            setIsLoading(false)
+            toast.info(`${item.foodName} deleted`)
+            closeEditModal()
+        })
+        .then(()=> {
+            window.location.href="/mypantry"
+        })
+    }
+
     
     // DISPLAYING INFO ON DOM 
         return (
@@ -128,7 +144,7 @@ export const FoodItemTableRow = ({item}) => {
                     <td >{ item.quantity }</td>
                     <td  className="d-none d-sm-block">{ item.measurement }</td>
                     <td>{ item.location.name }</td>
-                    <td className="d-none d-md-block"> Using in some recipess.... EDIT THIS</td>
+                    {/* <td className="d-none d-md-block"> Using in some recipess.... EDIT THIS</td> */}
                 </tr>
             {/* END OF TABLE ROW FOR FOOD ITEM */}
 
@@ -147,7 +163,8 @@ export const FoodItemTableRow = ({item}) => {
                     {/* END OF IMAGE WITHIN MODAL */}
 
                     {/* START OF UNIT OF MEASUREMENT ROW WITHIN MODAL */}
-                        <Row style={centerItUp} className="mb-2">
+                                        {/* if spoonDails throws an error... api allowance has run out for the day.  */}
+                        {/* <Row style={centerItUp} className="mb-2">
                             <Col lg="1"></Col>
                             <Col lg="5"> unit of measurement </Col>
                             <Col lg="4">
@@ -156,14 +173,14 @@ export const FoodItemTableRow = ({item}) => {
                                     <DropdownMenu>
                                         <DropdownItem header>select one option</DropdownItem>
                                         <DropdownItem divider />
-                                        {spoonDetails?.possibleUnits.map(option => {
+                                        {spoonDetails?.possibleUnits.forEach(option => {
                                             return <DropdownItem onClick={() => setMeasurementChoice(option)}>{option}</DropdownItem>
                                         })}
                                     </DropdownMenu>
                                 </Dropdown>
                             </Col>
                             <Col lg="2"></Col>
-                        </Row>
+                        </Row> */}
                     {/* END OF UNIT OF MEASUREMENT ROW WITHIN MODAL */}
 
 
@@ -211,7 +228,7 @@ export const FoodItemTableRow = ({item}) => {
                         {/* MODAL FOOTER WITH SAVE UPDATE BUTTON */}
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={() => updateIngredient()}>Update</Button>{' '}
+                        <Button color="primary" onClick={() => updateIngredient()}>Update</Button>{' '}<Button color="danger" onClick={() => deleteIngredient()}>Delete</Button>
                     </ModalFooter>
                 </Modal>
             {/* END OF MODAL FOR UPDATING FOOD ITEM */}

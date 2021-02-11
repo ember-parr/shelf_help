@@ -29,11 +29,14 @@ set identity_insert [MealType] off
      ---   Menu Seed Data
 */
 set identity_insert [Menu] on
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (1, '2021-01-01', 1, 1, 2, 520);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (2, '2021-01-05', 2, 1, 2, 860);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (3, '2021-01-09', 3, 1, 2, 510);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (4, '2021-01-15', 4, 2, 2, 540);
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId]) VALUES (5, '2021-01-16', 1, 2, 2, 20);
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (1, '2021-02-21', 1, 1, 1, 636026, 'Breakfast Biscuits and Gravy');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (2, '2021-02-25', 2, 1, 1, 100547, 'Kadami (Lebanese Roasted Chick Peas)');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (3, '2021-02-19', 3, 1, 1, 15815, 'Lamb Chops with Frizzled Herbs');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (4, '2021-02-25', 4, 1, 1, 654959, 'Pasta With Tuna');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (5, '2021-02-16', 1, 1, 1, 81507, 'Yankee Beef Pot Roast');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (6, '2021-02-25', 1, 1, 1, 4107, 'Monkfish With Ratatouille');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (7, '2021-02-25', 4, 1, 1, 61581, 'Carrot Cake With Cream Cheese Frosting Ii');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (8, '2021-02-16', 3, 1, 1, 654883, 'Pasta Vegetable Soup');
 set identity_insert [Menu] off
 
 
@@ -66,4 +69,7 @@ INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [Spoonac
 INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (7, 1, 1, 2, 6970, 'tablespoons', 'low-salt chicken broth'); 
 INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (8, 1, 5, 4, 19034, 'bag', 'popcorn');
 INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (9, 1, 3, 4, 11052, 'cup', 'greenbeans'); 
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (10, 1, 3, 2, 20081, 'cup', 'flour'); 
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (11, 1, 1, 0, 11291, 'cup', 'green onions'); 
+
 set identity_insert [FoodItem] off
