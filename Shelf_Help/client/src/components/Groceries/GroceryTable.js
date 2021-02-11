@@ -61,12 +61,12 @@ export const GroceryTable = () => {
 
             </section> 
 
-            <Table hover responsive size="sm" >
+            <Table responsive size="sm" >
                 <thead>
                     <tr>
                         <th>Ingredient</th>
                         <th >Storage</th>
-                        <th className="d-none d-md-block">Used In...</th>
+                        {/* <th className="d-none d-md-block">Used In...</th> */}
                     </tr>
                 </thead>
 

@@ -77,11 +77,12 @@ export const FoodItemTableRow = ({item}) => {
         })}
 
     const openEditModal = () => {
+        getSpoonDetails()
         setIsLoading(true)
         getLocations()
-        setModal(true)
         setIsLoading(false)
-        getSpoonDetails()}
+        setModal(true)
+    }
 
     const closeEditModal = () => {
         setModal(false)
@@ -143,7 +144,7 @@ export const FoodItemTableRow = ({item}) => {
                     <td >{ item.quantity }</td>
                     <td  className="d-none d-sm-block">{ item.measurement }</td>
                     <td>{ item.location.name }</td>
-                    <td className="d-none d-md-block"> Using in some recipess.... EDIT THIS</td>
+                    {/* <td className="d-none d-md-block"> Using in some recipess.... EDIT THIS</td> */}
                 </tr>
             {/* END OF TABLE ROW FOR FOOD ITEM */}
 
@@ -162,7 +163,8 @@ export const FoodItemTableRow = ({item}) => {
                     {/* END OF IMAGE WITHIN MODAL */}
 
                     {/* START OF UNIT OF MEASUREMENT ROW WITHIN MODAL */}
-                        <Row style={centerItUp} className="mb-2">
+                                        {/* if spoonDails throws an error... api allowance has run out for the day.  */}
+                        {/* <Row style={centerItUp} className="mb-2">
                             <Col lg="1"></Col>
                             <Col lg="5"> unit of measurement </Col>
                             <Col lg="4">
@@ -178,7 +180,7 @@ export const FoodItemTableRow = ({item}) => {
                                 </Dropdown>
                             </Col>
                             <Col lg="2"></Col>
-                        </Row>
+                        </Row> */}
                     {/* END OF UNIT OF MEASUREMENT ROW WITHIN MODAL */}
 
 

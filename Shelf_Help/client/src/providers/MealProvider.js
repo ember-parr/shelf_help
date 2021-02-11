@@ -15,6 +15,14 @@ export const MealProvider = (props) => {
     const [ singleRecipe, setSingleRecipe ] = useState({})
     const [ singleIngredients, setSinglesIngredients] = useState()
     const [ singleInstructions, setSingleInstructions] = useState()
+    const [funFact, setFunFact] = useState()
+
+    const getFunFact = () => {
+        fetch ("https://api.spoonacular.com/food/jokes/random?apiKey=5c60c91675ec4b6299f1bc901dc8def9")
+        .then((res) => JSON.parse(res))
+        .then(output => setFunFact(output.keys))
+        
+    }
 
 
     // get this users menu entries
@@ -131,6 +139,16 @@ export const MealProvider = (props) => {
         })
     }
 
+    const dashboardMealIdeas = () => {
+        fetch(`https://api.spoonacular.com/mealplanner/generate?timeFrame=week&apiKey=5c60c91675ec4b6299f1bc901dc8def9`)
+        .then((res) => res.json())
+    }
+
+    const dashboardQuickSearch = (searchWords) => {
+        fetch(`https://api.spoonacular.com/recipes/quickAnswer${searchWords}&apiKey=5c60c91675ec4b6299f1bc901dc8def9`)
+        .then((res) => res.json())
+    }
+
 
 
 
@@ -152,7 +170,11 @@ export const MealProvider = (props) => {
             singleRecipe,
             addMenu,
             singleIngredients,
-            singleInstructions
+            singleInstructions,
+            getFunFact,
+            funFact,
+            dashboardQuickSearch,
+            dashboardMealIdeas
         }}>
             {props.children}
         </MealContext.Provider>
