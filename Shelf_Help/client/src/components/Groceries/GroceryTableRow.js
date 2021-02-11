@@ -1,8 +1,6 @@
 import React from "react"
-import { useHistory } from 'react-router-dom'
 
 export const GroceryTableRow = ({item}) => {
-    const history = useHistory();
 
     
         return (

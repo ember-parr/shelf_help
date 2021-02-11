@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef, useLayoutEffect, useCallback } from 'react';
 import { MealContext } from "../../providers/MealProvider"
-import { Jumbotron, Button, Container, Col, Row, Table, Modal, ModalBody, ModalHeader, FormGroup, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, ModalFooter } from 'reactstrap';
+import { Spinner, Jumbotron, Button, Container, Col, Row, Table, Modal, ModalBody, ModalHeader, FormGroup, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, ModalFooter } from 'reactstrap';
 import { useHistory, useParams } from 'react-router-dom';
 import { IngredientStatusTable } from "./IngredientsStatusTable";
 import { MealTypeContext } from '../../providers/MealTypeProvider';
@@ -11,38 +11,66 @@ import { UserProfileContext } from '../../providers/UserProfileProvider';
 
 
 export const MealDetails = () => {
-    const { getSingleSpoonacularRecipe, singleRecipe, addMenu } = useContext(MealContext)
+    const { getSingleSpoonacularRecipe,  addMenu, singleRecipe } = useContext(MealContext)
     const { getMealTypes, mealTypes } = useContext(MealTypeContext)
     const { getCurrentUser } = useContext(UserProfileContext)
     const user = getCurrentUser();
     const {recipeId} = useParams();
-    const history = useHistory();
-    const [ recipeIngredients, setRecipeIngredients] = useState([])
 
+    const history = useHistory();
+    
+    const [recipe, setRecipe] = useState({})
+    const [dateSelection, setDateSelection] = useState(new Date())
+    const [mealTypeChoice, setMealTypeChoice] = useState(6)
+    const [isLoading, setIsLoading] = useState(true)
+    const [dropdownMealTypeOpen, setDropdownMealTypeOpen] = useState(false);
+    
     // OPENING & CLOSING THE MODAL (open by clicking table row, close by clicking 'X' in modal or saving update)
     const [modal, setModal] = useState(false);
     const [collapse, setCollapse] = useState(false);
     const toggle = () => setCollapse(!collapse);
+    
+    console.log("recipe id: " + recipeId)
+    
+    
+    // useEffect(() => {
+    //     getSingleSpoonacularRecipe(recipeId)
+    //     console.log("useEffect in MealDetails")
+    //     setRecipe(singleRecipe)
+    //     console.log("recipe ingred: " + recipeIngredients)
+    // }, [])
+    
+    const recipeIngredients = recipe.extendedIngredients
+    const recipeInstructions  = recipe.analyzedInstructions
 
-    useEffect(() => {
-        getSingleSpoonacularRecipe(recipeId)
-        setRecipeIngredients(singleRecipe.extendedIngredients)
-    }, [])
+    // if (singleRecipe) {
+    //     setRecipe(singleRecipe)
+    //     console.log("single recipe loaded: " + recipe)
+    // }
+
+    // const firstRender = useRef(true);
+    // useLayoutEffect(() => {
+    //     if (firstRender.current) {
+    //         firstRender.current = false;
+    //         return;
+    //     }
+    //     getSingleSpoonacularRecipe(recipeId)
+    //     console.log("layoutEffect running... ")
+    // })
+
+    // useEffect(() => {
+    //     console.log("empty useEffect is running")
+    // }, [recipeId])
+    // getSingleSpoonacularRecipe(recipeId)
+    // setRecipeIngredients(recipe.extendedIngredients)
 
 
     // SIMPLE STYLING FOR MODAL CONSISTANCY
     const centerItUp = {
         textAlign: "center",
         flex: 1,
-    justifyContent: "center"
+        justifyContent: "center"
     }
-
-    // DATE AND MEALTYPE ARE INITIALIZED WITH THE MENUS DATA SO NO CHANGE ON UPDATEMENU FUNCTION
-    const [dateSelection, setDateSelection] = useState(new Date())
-    const [mealTypeChoice, setMealTypeChoice] = useState(6)
-
-    // SET STATE NEEDED WITHIN COMPONENT FOR GENERAL FUNCTIONS
-    const [isLoading, setIsLoading] = useState(true)
 
     // OPEN AND CLOSE THE EDIT MENU MODAL
     const openEditModal = () => {
@@ -56,28 +84,11 @@ export const MealDetails = () => {
     }
 
     // HANDLE BEHAVIOR AND FUNTIONALITY OF MEALTYPE DROPDOWN MENU AND HANDLING STATE CHANGE / UPDATED MENU SAVE
-    const [dropdownMealTypeOpen, setDropdownMealTypeOpen] = useState(false);
     const dropdownMealTypeToggle = () => {
         setDropdownMealTypeOpen(!dropdownMealTypeOpen)
     }
 
 
-    console.log(singleRecipe?.extendedIngredients)
-
-    const instructions = () => {
-        if (singleRecipe.analyzedInstructions) {
-            console.log("yes single recipe")
-            {singleRecipe.analyzedInstructions.map(step => {
-                <tr>
-                    <td>{step.name}</td>
-                </tr>
-            })}
-        } else {
-            console.log("no single recipe")
-            return(<tr>
-                <td>error</td>
-            </tr>)
-    }}
 
 
     const addMealEntry = () => {
@@ -89,11 +100,11 @@ export const MealDetails = () => {
         setIsLoading(true)
         const mealToAdd = {
             mealTypeId: mealTypeChoice.id,
-            name: singleRecipe.title,
+            name: recipe.title,
             date: dateSelection,
             userId: user.id,
             custom: false,
-            spoonacularIngredientId: singleRecipe.id
+            spoonacularIngredientId: recipe.id
         }
         addMenu(mealToAdd)
         .then(()=> toast.info(`${mealToAdd.name} was successfully added!`))
@@ -101,7 +112,19 @@ export const MealDetails = () => {
     }
 
     }
+
+    let instructionsToRender;
+    if(recipeInstructions) {
+        instructionsToRender = recipeInstructions.map(step => {
+            return <tr key={step.number}> <td>{step.number}</td> <td>{step.name}</td> <td></td></tr>
+        })
+    } else {
+        instructionsToRender = <tr><Spinner color="secondary" /></tr>
+    }
     
+    const alternateImage = {
+        backgroundImage: `https://spoonacular.com/cdn/ingredients_250x250/${recipe.image}`
+    }
 
 
     return (
@@ -109,18 +132,19 @@ export const MealDetails = () => {
         <div className="m-2">
             <Container className="themed-container" fluid="sm">
             <Jumbotron>
-                <h1 className="display-3"> {singleRecipe?.title} </h1>
-                <p className="lead"> &ensp; | &ensp; Ready in {singleRecipe.readyInMinutes} minutes &ensp; | &ensp; {singleRecipe.servings} servings &ensp; | &ensp;</p>
+                <h1 className="display-3"> {singleRecipe.title} </h1>
+                <p className="lead"> &ensp; | &ensp; Ready in {recipe.readyInMinutes} minutes &ensp; | &ensp; {recipe.servings} servings &ensp; | &ensp;</p>
                 <hr className="my-2" />
-                {/* <p>{singleRecipe.summary}</p> */}
-                
-                <Button color="secondary" href={singleRecipe.sourceUrl} target="_blank">Visit Source</Button>
-                <Button color="info" onClick={() => openEditModal()} >Add To Your Menu!</Button>
-                <br /><sub> Courtesy of: {singleRecipe.sourceName} | {singleRecipe.creditsText}</sub>
+                {/* <p>{recipe.summary}</p> */}
+                <Row className="justify-content-around">
+                <Button color="secondary" href={recipe.sourceUrl} target="_blank">Visit Source</Button>
+                <Button color="info" onClick={() => openEditModal} >Add To Your Menu!</Button>
+                </Row>
+                <br /><sub> Courtesy of: {recipe.sourceName} | {recipe.creditsText}</sub>
             </Jumbotron>
             <Row>
-                <Col lg="5">
-                    <img alt={singleRecipe.name} src={singleRecipe.image} />
+                <Col lg="5" style={alternateImage}>
+                    <img  alt={recipe.name} src={recipe.image} />
                 </Col>
                 <Col lg="2"></Col>
                 <Col lg="5">
@@ -137,9 +161,7 @@ export const MealDetails = () => {
                             <th>Instructions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {instructions()}
-                    </tbody>
+                    <tbody>{instructionsToRender}</tbody>
                 </Table>
             </Row>
             </Container>
@@ -149,7 +171,7 @@ export const MealDetails = () => {
 
 
         <Modal isOpen={modal} toggle={toggle} >
-            <ModalHeader toggle={() => closeEditModal()}>add {singleRecipe.name} to your meal plan</ModalHeader>
+            <ModalHeader toggle={() => closeEditModal()}>add {recipe.name} to your meal plan</ModalHeader>
             <ModalBody>
 
             {/* START OF UNIT OF DATE ROW WITHIN MODAL */}

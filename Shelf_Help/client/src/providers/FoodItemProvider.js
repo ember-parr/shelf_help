@@ -61,7 +61,7 @@ export const FoodItemProvider = (props) => {
 
     // this function searches spoonacular for an ingredient by query string (words searched in PantryForm.js)
     const searchSpoonacularIngredients = (searchedWords) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=66e7421be84e4b16a934c4ad2b86bfd4&metaInformation=true`)
+        fetch(`https://api.spoonacular.com/food/ingredients/search?query=${searchedWords}&number=8&addChildren=true&apiKey=350c741bf82e41378e9b1359a60deadd&metaInformation=true`)
         .then((res) => res.json())
         .then(output => {
             setSpoonResults(output)
@@ -70,7 +70,7 @@ export const FoodItemProvider = (props) => {
 
     // get ingredient details from spoonacular using ingredient id
     const getSpoonacularIngredById = (id) => {
-        fetch(`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=66e7421be84e4b16a934c4ad2b86bfd4`)
+        fetch(`https://api.spoonacular.com/food/ingredients/${id}/information?apiKey=350c741bf82e41378e9b1359a60deadd`)
         .then((res) => res.json())
         .then(output => {
             setSpoonDetails(output)

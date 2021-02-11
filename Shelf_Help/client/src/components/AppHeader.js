@@ -35,7 +35,7 @@ const AppHeader = () => {
         <NavbarBrand tag={Link} to="/">
           <img
             id="header-logo"
-            src="./images/favicon.png"
+            src="public/images/favicon-duo.jpeg"
             width="30"
             height="30"
             className="mr-1"

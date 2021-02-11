@@ -6,7 +6,6 @@ import { ToastContainer } from "react-toastify";
 import AppHeader from "./components/AppHeader"
 import "./Styles/App.css"
 import "react-toastify/dist/ReactToastify.css";
-import { Footer } from "./components/Footer";
 
 function App() {
   return (

@@ -15,6 +15,7 @@ import PantryForm from "./FoodItems/PantryForm";
 import { MealForm } from "./MealMenu/MealForm";
 import { MealTypeProvider } from "../providers/MealTypeProvider";
 import { MealDetails } from "./MealMenu/MealDetails";
+import { Recipe } from "../pages/Recipe";
 
 const ApplicationViews = () => {
     const { isLoggedIn } = useContext(UserProfileContext);
@@ -47,6 +48,16 @@ const ApplicationViews = () => {
                     <MealTypeProvider>
                         <Route path="/menu/details/:recipeId" >
                             {isLoggedIn ? <MealDetails /> : <Redirect to="/login" />}
+                        </Route>
+                    </MealTypeProvider>
+                </FoodItemProvider>
+            </MealProvider>
+
+            <MealProvider>
+                <FoodItemProvider>
+                    <MealTypeProvider>
+                        <Route path="/recipe/:recipeId" >
+                            {isLoggedIn ? <Recipe /> : <Redirect to="/login" />}
                         </Route>
                     </MealTypeProvider>
                 </FoodItemProvider>

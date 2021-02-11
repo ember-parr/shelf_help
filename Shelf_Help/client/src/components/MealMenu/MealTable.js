@@ -12,7 +12,6 @@ export const MealTable = () => {
     useEffect(() => {
         getMeals()
         .then(setIsLoading(false))
-        
     }, [])
 
     return (

@@ -12,7 +12,9 @@ export const MealProvider = (props) => {
     const [ singleMeal, setSingleMeal ] = useState([])
     const [ allMeals, setAllMeals ] = useState([])
     const [ spoonResults, setSpoonResults ] = useState([])
-    const [ singleRecipe, setSingleRecipe ] = useState([])
+    const [ singleRecipe, setSingleRecipe ] = useState({})
+    const [ singleIngredients, setSinglesIngredients] = useState()
+    const [ singleInstructions, setSingleInstructions] = useState()
 
 
     // get this users menu entries
@@ -87,10 +89,12 @@ export const MealProvider = (props) => {
 
     // get a single recipe from spoonacular
     const getSingleSpoonacularRecipe = (recipeId) => {
-        fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=66e7421be84e4b16a934c4ad2b86bfd4`)
+        fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=350c741bf82e41378e9b1359a60deadd`)
         .then((res) => res.json())
-        .then(output  => {
+        .then(output => {
             setSingleRecipe(output)
+            setSinglesIngredients(output.extendedIngredients)
+            setSingleInstructions(output.instructions)
         })
     }
 
@@ -146,9 +150,18 @@ export const MealProvider = (props) => {
             spoonResults,
             getSingleSpoonacularRecipe,
             singleRecipe,
-            addMenu
+            addMenu,
+            singleIngredients,
+            singleInstructions
         }}>
             {props.children}
         </MealContext.Provider>
     )
 }
+
+
+
+// spoonyone@emberparr.com & temporary password API KEY: d77d78f9357b477094b10096abd85b71 [out]
+// spoonytwo@emberparr.com & initials w. bday APIKEY: 5c60c91675ec4b6299f1bc901dc8def9 [out]
+// devops gmail email API KEY: 66e7421be84e4b16a934c4ad2b86bfd4 [out]
+// ember21892 gmail API KEY: 350c741bf82e41378e9b1359a60deadd
