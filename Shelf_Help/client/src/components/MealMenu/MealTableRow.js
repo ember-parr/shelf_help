@@ -159,7 +159,7 @@ export const MealTableRow = ({menu, spoonId}) => {
             {/* END OF MEAL TYPE ROW WITHIN MODAL */}
 
                 <Row style={centerItUp} className="mt-2">
-                    <Button color="info" size="md" onClick={ () => history.push(`/menu/details/${spoonId}`)}>View Details</Button>
+                    <Button color="info" size="md" onClick={ () => history.push(`/recipe/${spoonId}`)}>View Recipe</Button>
                 </Row>
 
             </ModalBody>

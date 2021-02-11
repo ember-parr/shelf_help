@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState, useRef, useLayoutEffect, useCallback } from 'react';
 import { MealContext } from "../../providers/MealProvider"

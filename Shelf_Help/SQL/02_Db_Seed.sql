@@ -34,7 +34,7 @@ INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRe
 INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (3, '2021-02-19', 3, 1, 1, 15815, 'Lamb Chops with Frizzled Herbs');
 INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (4, '2021-02-25', 4, 1, 1, 654959, 'Pasta With Tuna');
 INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (5, '2021-02-16', 1, 1, 1, 81507, 'Yankee Beef Pot Roast');
-INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (6, '2021-02-25', 1, 1, 1, 41071, 'Monkfish With Ratatouille');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (6, '2021-02-25', 1, 1, 1, 4107, 'Monkfish With Ratatouille');
 INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (7, '2021-02-25', 4, 1, 1, 61581, 'Carrot Cake With Cream Cheese Frosting Ii');
 INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (8, '2021-02-16', 3, 1, 1, 654883, 'Pasta Vegetable Soup');
 set identity_insert [Menu] off

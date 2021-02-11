@@ -62,7 +62,7 @@ export const MealProvider = (props) => {
 
     // search spoonacular for a recipe by query string
     const searchSpoonacularRecipes = (searchedWords) => {
-        fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchedWords}&number=8&addChildren=true&apiKey=66e7421be84e4b16a934c4ad2b86bfd4&metaInformation=true&addRecipeInformation=true`)
+        fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchedWords}&number=8&addChildren=true&apiKey=350c741bf82e41378e9b1359a60deadd&metaInformation=true&addRecipeInformation=true`)
         .then((res) => res.json())
         .then(output => {
             setSpoonResults(output)

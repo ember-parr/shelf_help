@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, {useContext, useEffect, useState, useRef} from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Spinner, Row, Col } from 'reactstrap';
@@ -10,21 +12,9 @@ export const Recipe = () => {
     const { getSingleSpoonacularRecipe, singleRecipe, singleIngredients, singleInstructions } = useContext(MealContext)
     const {recipeId} = useParams();
 
-
-    let recipeDetails;
-
-    
     useEffect(() => {
         getSingleSpoonacularRecipe(recipeId)
     }, [])
-
-
-    
-
-    
-
-
-
 
 
     return (

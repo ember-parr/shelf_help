@@ -14,13 +14,6 @@ export const MealFormListItem = ({recipe}) => {
     const history = useHistory();
     
 
-
-    const viewDetails = (recId) => {
-
-    }
-
-
-
     return (
         <>
             <Col sm="4" className="mb-4">
@@ -31,7 +24,7 @@ export const MealFormListItem = ({recipe}) => {
                         <img width="100%" src={`${recipe.image}`} alt={`${recipe.title}`} />
                     </CardBody>
                     
-                        <Button onClick={() => history.push(`/menu/details/${recipe.id}`)}>View Details</Button>
+                        <Button onClick={() => history.push(`/recipe/${recipe.id}`)}>View Recipe</Button>
                     
                 </Card>
             </Col>
