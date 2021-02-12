@@ -17,12 +17,16 @@ export const MealProvider = (props) => {
     const [ singleInstructions, setSingleInstructions] = useState()
     const [funFact, setFunFact] = useState()
     const [ mealIdeas, setMealIdeas ] = useState()
+    const [ searchResult, setSearchResult ] = useState()
+    const [ searchMedia, setSearchMedia ] = useState()
     const spoonKey = process.env.REACT_APP_SPOON_KEY
 
     const getFunFact = () => {
         fetch (`https://api.spoonacular.com/food/jokes/random?apiKey=${spoonKey}`)
-        .then((res) => JSON.parse(res))
-        .then(output => setFunFact(output.keys))
+        .then((res) => res.json())
+        .then(output => {
+            setFunFact(output.text)
+        })
         
     }
 
@@ -150,8 +154,12 @@ export const MealProvider = (props) => {
     }
 
     const dashboardQuickSearch = (searchWords) => {
-        fetch(`https://api.spoonacular.com/recipes/quickAnswer${searchWords}&apiKey=${spoonKey}`)
+        fetch(`https://api.spoonacular.com/food/converse?text=${searchWords}&apiKey=${spoonKey}`)
         .then((res) => res.json())
+        .then(output => {
+            setSearchResult(output.answerText)
+            setSearchMedia(output.media)
+        })
     }
 
 
@@ -180,7 +188,9 @@ export const MealProvider = (props) => {
             funFact,
             dashboardQuickSearch,
             dashboardMealIdeas,
-            mealIdeas
+            mealIdeas,
+            searchResult,
+            searchMedia
         }}>
             {props.children}
         </MealContext.Provider>

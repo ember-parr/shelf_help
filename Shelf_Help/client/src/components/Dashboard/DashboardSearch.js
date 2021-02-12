@@ -6,17 +6,41 @@ import { toast } from "react-toastify";
 import { MealContext } from '../../providers/MealProvider';
 
 
-export const DashboardSearch = ({searchWords}) => {
+export const DashboardSearch = () => {
     const history = useHistory();
+    const { dashboardQuickSearch, searchResult } = useContext(MealContext)
+
+    const [userInput, setUserInput] = useState('')
+
+    const submitSearch = () => {
+        dashboardQuickSearch(userInput)
+    }
+
+
+
+
     
 
-    if (searchWords) {
+    if (searchResult) {
     return (
     <>
-                        <Card body outline color="info">
-                            <CardTitle tag="h5"> </CardTitle>
-                            <CardText></CardText>
-                        </Card>
+        <p className="lead">Lets have some fun... </p>
+            <FormGroup>
+                <Input
+                type="search"
+                name="search"
+                id="exampleSearch"
+                placeholder="type to search... "
+                onChange={(event) => setUserInput(event.target.value)}
+                />
+                <Button onClick={() => submitSearch(userInput)}>Enter</Button>
+            </FormGroup>
+
+
+            <Card body outline color="info">
+                <CardTitle tag="h5"> </CardTitle>
+                <CardText>{searchResult}</CardText>
+            </Card>
 
 
     </>

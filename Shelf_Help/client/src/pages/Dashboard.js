@@ -7,10 +7,13 @@ import { Container, Spinner, Row, Col, Jumbotron, Button } from 'reactstrap';
 import { MealContext } from "../providers/MealProvider";
 import HorizontalLogo  from "../Styles/HorizontalLogo.png";
 import { MealIdeas } from "../components/Dashboard/DashboardMealIdeas";
+import { DashboardSearch } from "../components/Dashboard/DashboardSearch";
 
 
 export const Dashboard = () => {
     const { getFunFact, funFact, dashboardMealIdeas, mealIdeas  } = useContext(MealContext)
+
+
     const parentSizing = {
         display: "flex",
         flexDirection: "column",
@@ -35,6 +38,9 @@ export const Dashboard = () => {
     useEffect(() => {
         dashboardMealIdeas()
     }, [])
+
+    
+
 
 
     return (
@@ -62,19 +68,7 @@ export const Dashboard = () => {
                     </Col>
                     <Col lg="1"></Col>
                     <Col lg="3">
-                        <p className="lead">You have Questions... We Have Answers...  </p>
-                        <FormGroup>
-                            <Input
-                            type="search"
-                            name="search"
-                            id="exampleSearch"
-                            placeholder="search placeholder"
-                            />
-                        </FormGroup>
-                        <Card body outline color="info">
-                            <CardTitle tag="h5"> </CardTitle>
-                            <CardText></CardText>
-                        </Card>
+                            <DashboardSearch />
                     </Col>
                 </Row>
             </Container>
