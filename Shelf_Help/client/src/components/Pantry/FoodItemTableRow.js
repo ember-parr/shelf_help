@@ -56,7 +56,7 @@ export const FoodItemTableRow = ({item}) => {
             <>
             <tr >
                     <td>{ item.foodName }</td>
-                    <td> <span  href="#" id="TooltipAdd" onClick={() => moveToGrocery()}> 〰 </span> &emsp; <span  href="#" id="TooltipDelete" onClick={() => deleteItem()}> ✖ </span> </td>
+                    <td> <span onClick={() => moveToGrocery()}> 〰 </span> &emsp; <span onClick={() => deleteItem()}> ✖ </span> </td>
                     
                 </tr>
             </>
