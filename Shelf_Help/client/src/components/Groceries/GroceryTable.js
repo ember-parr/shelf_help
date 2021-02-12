@@ -28,24 +28,6 @@ export const GroceryTable = () => {
     }, [])
 
 
-    let todayIngredients = () => {
-        setFiltered(todayFoodItems)
-    }
-
-    let weekIngredients = () => {
-        setFiltered(weekFoodItems)
-    }
-
-    let allIngredients = () => {
-        setFiltered(allFoods)
-    }
-
-    let openMyModal = (word) => {
-        domHistory.push("/grocery/add")
-    }
-
-    
-
     return (
         <>
             <section className="m-2">
@@ -65,8 +47,7 @@ export const GroceryTable = () => {
                 <thead>
                     <tr>
                         <th>Ingredient</th>
-                        <th >Storage</th>
-                        {/* <th className="d-none d-md-block">Used In...</th> */}
+                        <th className="d-none d-md-block">Purchased <span style={{fontSize: "0.7rem", color:"grey"}} >-or-</span> Delete </th>
                     </tr>
                 </thead>
 

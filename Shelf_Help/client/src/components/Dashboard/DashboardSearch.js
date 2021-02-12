@@ -12,7 +12,7 @@ export const DashboardSearch = () => {
 
     const [userInput, setUserInput] = useState('')
 
-    const submitSearch = () => {
+    const submitSearch = (userInput) => {
         dashboardQuickSearch(userInput)
     }
 
@@ -21,20 +21,16 @@ export const DashboardSearch = () => {
 
     
 
-    if (searchResult) {
+    
     return (
     <>
         <p className="lead">Lets have some fun... </p>
-            <FormGroup>
-                <Input
-                type="search"
-                name="search"
-                id="exampleSearch"
-                placeholder="type to search... "
-                onChange={(event) => setUserInput(event.target.value)}
-                />
-                <Button onClick={() => submitSearch(userInput)}>Enter</Button>
-            </FormGroup>
+            <Button onClick={() => submitSearch('tell me a joke')}>Joke</Button>
+            &emsp;
+            <Button onClick={() => submitSearch('tell me a food fact')}>Fun Fact</Button>
+            <br />
+            <br />
+            
 
 
             <Card body outline color="info">
@@ -44,9 +40,5 @@ export const DashboardSearch = () => {
 
 
     </>
-    )} else {
-        return (<>
-            <i>  </i>
-        </>)
-    }
+    )
 }

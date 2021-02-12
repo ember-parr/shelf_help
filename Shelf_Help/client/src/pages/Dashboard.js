@@ -26,14 +26,6 @@ export const Dashboard = () => {
         height: "auto",
     }
     
-    
-    // useEffect(() => {
-    //     getFunFact()
-    //     setTimeout(function() {
-
-    //         console.log(funFact)
-    //     }, 750 )
-    // }, [])
 
     useEffect(() => {
         dashboardMealIdeas()
@@ -53,10 +45,7 @@ export const Dashboard = () => {
                     <Media  object src="https://res.cloudinary.com/emberparr/image/upload/v1613093575/Shelf%20Help/Horizontal-Logo_dcrrx7_2_xkij4a.png" style={imgSizing} alt="Generic placeholder image" />
                 </Media></Col>
                     <p className="lead"> Created by Ember Parr &emsp; | &emsp; Full Stack Capstone Project &emsp; | &emsp; February 2022 </p>
-                    <hr className="my-2" />
-                    <Row className="justify-content-around">
-                        <p>{funFact ? {funFact} : " "}</p>
-                        </Row>
+        
                         
                 </Jumbotron>
             

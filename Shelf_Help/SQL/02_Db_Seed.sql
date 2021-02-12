@@ -37,6 +37,12 @@ INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRe
 INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (6, '2021-02-25', 1, 1, 1, 4107, 'Monkfish With Ratatouille');
 INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (7, '2021-02-25', 4, 1, 1, 61581, 'Carrot Cake With Cream Cheese Frosting Ii');
 INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (8, '2021-02-16', 3, 1, 1, 654883, 'Pasta Vegetable Soup');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (9, '2021-02-16', 4, 1, 0, 648190, N'Italian Pasta Salad with organic Arugula');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (10, '2021-02-16', 4, 1, 0, 640690, N'Creamy Ranch Pasta Salad');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (11, '2021-02-16', 4, 1, 0, 1096260, N'Baked Lemon Salmon');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (12, '2021-02-16', 4, 1, 0, 660257, N'Slow Braised Spicy Pork');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (13, '2021-02-16', 3, 1, 0, 665678, N'Zomppa''s Moroccan Meatballs');
+INSERT INTO Menu ([Id], [Date], [MealTypeId], [UserId], [Custom], [SpoonacularRecipeId], [Name]) VALUES (15, '2021-02-28', 1, 1, 0, 638989, N'Chocolate Cupcakes with Vanilla Whipped Cream Frosting');
 set identity_insert [Menu] off
 
 
@@ -74,4 +80,17 @@ INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [Spoonac
 INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (12, 1, 4, 1, 19296, 'cup', 'honey'); 
 INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (13, 1, 3, 1, 1002030, 'cup', 'black pepper'); 
 INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (14, 1, 1, 0, 2047, 'cup', 'salt'); 
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (15, 1, 1, 1, 1062047, N' ', 'garlic salt')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (16, 1, 2, 3, 10211215, N' ', 'garlic clove')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (17, 1, 6, 0, 11282, N'', 'onion')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (18, 1, 6, 0, 11215, N'', 'garlic')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (19, 1, 2, 1, 16223, N' ', 'soymilk')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (20, 1, 6, 0, 2049, N'',  'thyme')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (21, 1, 6, 0, 2044, N'',  'basil')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (22, 1, 2, 1, 1077, N' ', 'milk')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (23, 1, 6, 0, 2027, N'',  'oregano')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (24, 1, 2, 1, 1230, N' ',  'buttermilk')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (25, 1, 6, 0, 10211821, N'',  'bell pepper')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (26, 1, 6, 0, 1033, N'',  'parmesan cheese')
+INSERT INTO [dbo].[FoodItem] ([Id], [UserId], [LocationId], [Quantity], [SpoonacularIngredientId], [Measurement], [FoodName]) VALUES (27, 1, 6, 0, 20420, N'',  'pasta')
 set identity_insert [FoodItem] off
