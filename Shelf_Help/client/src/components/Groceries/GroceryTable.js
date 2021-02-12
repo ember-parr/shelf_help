@@ -31,16 +31,7 @@ export const GroceryTable = () => {
     return (
         <>
             <section className="m-2">
-                    {/* <Button size="sm" className="addNew-btn m-2" onClick={() => openMyModal()}>Add An Item</Button> */}
-                
-            {/* <hr /> */}
-                {/* <ButtonGroup size="sm" className="mb-3">
-                    <Button> This Week's Shopping List </Button>
-                    <Button> Ingredients Needed Today </Button>
-                    <Button> Entire Grocery List</Button>
-                </ButtonGroup>
-                <br /> */}
-
+            <Button className="addNew-btn mb-3" onClick={() => domHistory.push("/grocery/add")}>Manually Add Item</Button>
             </section> 
 
             <Table responsive size="sm" >
