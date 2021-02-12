@@ -15,7 +15,7 @@ export const FoodItemTableRow = ({item}) => {
     const { deleteFoodItem, updateFoodItem } = useContext(FoodItemContext);
     const user = getCurrentUser();
 
-    
+    console.log("FoodItemTableRow just ran")
 
     // SET STATE NEEDED WITHIN COMPONENT FOR GENERAL FUNCTIONS
     const [isLoading, setIsLoading] = useState(true)
@@ -60,13 +60,6 @@ export const FoodItemTableRow = ({item}) => {
     // ACTIONS OCCUR WHEN MODAL STATE IS CHANGED
     const [spoonDetails, setSpoonDetails] = useState(null)
 
-    useEffect(() => {
-        if (spoonDetails) {
-            console.log("this ran when spoon details changed.... ")
-            console.log("spoonDetails.name inside useEffect... " + spoonDetails?.name)
-            console.log("spoonDetails.possibleUnits inside useEffect: " + typeof(spoonDetails.possibleUnits))
-        }
-    }, [spoonDetails])
 
     const getSpoonDetails = () => {
         console.log("getSpoonDetails function has run... ")
@@ -86,7 +79,6 @@ export const FoodItemTableRow = ({item}) => {
 
     const closeEditModal = () => {
         setModal(false)
-        console.log("modal closed!")
     }
 
 
@@ -108,7 +100,7 @@ export const FoodItemTableRow = ({item}) => {
             locationId: storageChoice.id,
             foodName: item.foodName
         }
-        console.log("foodToUpdate: " + foodToUpdate.quantity + " " + foodToUpdate.measurement + " " + foodToUpdate.locationId + " aka: " + storageChoice.name)
+        
         updateFoodItem(foodToUpdate)
         .then(() => {
             setIsLoading(false)
@@ -182,7 +174,7 @@ export const FoodItemTableRow = ({item}) => {
                             <Col lg="2"></Col>
                         </Row> */}
                     {/* END OF UNIT OF MEASUREMENT ROW WITHIN MODAL */}
-
+                    
 
                     {/* START OF QUANTITY ROW WITHIN MODAL */}
                         <Row style={centerItUp} className="mb-2">

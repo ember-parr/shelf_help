@@ -3,9 +3,9 @@
 import React, {useContext, useEffect, useState, useRef} from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Spinner, Row, Col } from 'reactstrap';
-import { RecipeHeader } from '../components/MealMenu/MealDetails/RecipeHeader';
-import { RecipeIngredients } from '../components/MealMenu/MealDetails/RecipeIngredients';
-import { RecipeInstructions } from '../components/MealMenu/MealDetails/RecipeInstructions';
+import { RecipeHeader } from '../components/Recipe/RecipeHeader';
+import { RecipeIngredients } from '../components/Recipe/RecipeIngredients';
+import { RecipeInstructions } from '../components/Recipe/RecipeInstructions';
 import { MealContext } from '../providers/MealProvider';
 
 export const Recipe = () => {

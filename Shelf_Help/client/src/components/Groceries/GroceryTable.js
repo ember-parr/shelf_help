@@ -17,7 +17,7 @@ export const GroceryTable = () => {
     const weekFoodItems = []
     const domHistory = useHistory();
 
-    
+    console.log("GroceryTable just ran")
 
     useEffect(() => {
         getGroceryList()

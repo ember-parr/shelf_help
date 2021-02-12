@@ -10,11 +10,8 @@ import { Dashboard } from "../pages/Dashboard";
 import {FoodItemProvider} from "../providers/FoodItemProvider";
 import {LocationProvider} from "../providers/LocationProvider";
 import {MealProvider} from "../providers/MealProvider";
-import GroceryForm from "./Groceries/GroceryForm";
-import PantryForm from "./FoodItems/PantryForm";
-import { MealForm } from "./MealMenu/MealForm";
+import PantryForm from "./Pantry/PantryForm";
 import { MealTypeProvider } from "../providers/MealTypeProvider";
-import { MealDetails } from "./MealMenu/MealDetails";
 import { Recipe } from "../pages/Recipe";
 
 const ApplicationViews = () => {
@@ -35,24 +32,6 @@ const ApplicationViews = () => {
                         {isLoggedIn ? <Menu /> : <Redirect to="/login" />}
                     </Route>
                 </MealTypeProvider>
-            </MealProvider>
-
-            <MealProvider>
-                <MealTypeProvider>
-                    <Route path="/menu/add/" exact>
-                        {isLoggedIn ? <MealForm /> : <Redirect to="/login" />}
-                    </Route>
-                </MealTypeProvider>
-            </MealProvider>
-
-            <MealProvider>
-                <FoodItemProvider>
-                    <MealTypeProvider>
-                        <Route path="/menu/details/:recipeId" exact>
-                            {isLoggedIn ? <MealDetails /> : <Redirect to="/login" />}
-                        </Route>
-                    </MealTypeProvider>
-                </FoodItemProvider>
             </MealProvider>
 
             <MealProvider>
@@ -85,14 +64,6 @@ const ApplicationViews = () => {
             <Route path="/grocerylist" exact>
                     {isLoggedIn ? <GroceryList /> : <Redirect to="/login" />}
             </Route>
-
-            <FoodItemProvider>
-                <LocationProvider>
-                    <Route path="/grocery/add" exact>
-                        {isLoggedIn ? <GroceryForm /> : <Redirect to="/login" />}
-                    </Route>
-                </LocationProvider>
-            </FoodItemProvider>
 
             <Route path="/login">
                 <Login />

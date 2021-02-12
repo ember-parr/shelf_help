@@ -25,7 +25,7 @@ export const FoodItemTable = () => {
         })
         
     }, [])
-
+    console.log("FoodItemTable just ran")
 
     let todayIngredients = () => {
         setFiltered(todayFoodItems)

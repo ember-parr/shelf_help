@@ -2,7 +2,7 @@ import React from "react"
 
 export const GroceryTableRow = ({item}) => {
 
-    
+    console.log("groceryTableRowJustRan")
         return (
             <>
                 <tr >

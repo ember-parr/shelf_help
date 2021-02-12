@@ -12,7 +12,7 @@ import { LocationContext } from "../../providers/LocationProvider";
 
 export const MealFormListItem = ({recipe}) => {
     const history = useHistory();
-    
+    console.log("MealFormListItem just ran")
 
     return (
         <>

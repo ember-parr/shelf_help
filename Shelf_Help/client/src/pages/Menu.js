@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { MealTable } from "../components/MealMenu/MealTable";
+import { MealTable } from "../components/Menu/MealTable";
 // import { MenuProvider } from "../providers/MealProvider";
 import { Button, ButtonGroup, Row, Col, Input, Form, FormGroup, Container } from "reactstrap";
 import { useHistory } from "react-router-dom";

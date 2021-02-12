@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState,  } from "react";
 import { Card, CardImg, CardColumns, CardBody, CardTitle, CardSubtitle, CardText, FormGroup, Input } from "reactstrap"
 import { Container, Spinner, Row, Col, Jumbotron, Button } from 'reactstrap';
 import { MealContext } from "../providers/MealProvider";
-import { MealIdeas } from "../components/DashboardMealIdeas";
+import { MealIdeas } from "../components/Dashboard/DashboardMealIdeas";
 
 
 export const Dashboard = () => {
@@ -18,11 +18,8 @@ export const Dashboard = () => {
     //     }, 750 )
     // }, [])
 
-    
-
     useEffect(() => {
         dashboardMealIdeas()
-        
     }, [])
 
 

@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
-import { FoodItemContext } from '../../../providers/FoodItemProvider';
+import { FoodItemContext } from '../../providers/FoodItemProvider';
 import { ListGroup, ListGroupItem, Badge, CardColumns, Card, CardBody, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import { UserProfileContext } from '../../../providers/UserProfileProvider';
+import { UserProfileContext } from '../../providers/UserProfileProvider';
 import { toast } from "react-toastify"
 
 export const RecipeIngredients = ({ingredients}) => {

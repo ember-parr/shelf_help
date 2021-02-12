@@ -4,7 +4,7 @@ import React, { useState, useRef, useContext, useEffect } from 'react';
 import { useHistor, useHistory } from "react-router-dom";
 import { Jumbotron, Card, CardBody, CardText, Button, Container, Col, Row, Table, Modal, ModalBody, ModalHeader, FormGroup, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, ModalFooter, CardColumns } from 'reactstrap';
 import { toast } from "react-toastify";
-import { MealContext } from '../providers/MealProvider';
+import { MealContext } from '../../providers/MealProvider';
 
 
 export const MealIdeas = ({mealIdeas}) => {

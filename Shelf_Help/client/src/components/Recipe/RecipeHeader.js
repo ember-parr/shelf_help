@@ -2,9 +2,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import { Jumbotron, Button, Container, Col, Row, Table, Modal, ModalBody, ModalHeader, FormGroup, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, ModalFooter } from 'reactstrap';
-import { MealContext } from '../../../providers/MealProvider';
-import { MealTypeContext } from '../../../providers/MealTypeProvider';
-import { UserProfileContext } from '../../../providers/UserProfileProvider';
+import { MealContext } from '../../providers/MealProvider';
+import { MealTypeContext } from '../../providers/MealTypeProvider';
+import { UserProfileContext } from '../../providers/UserProfileProvider';
 import { toast } from "react-toastify";
 
 
@@ -46,7 +46,6 @@ export const RecipeHeader = ({recipe}) => {
         setDropdownMealTypeOpen(!dropdownMealTypeOpen)
     }
 
-console.log("recipe.id: " + recipe.id)
 
     const addMealEntry = () => {
         if (!dateSelection) {

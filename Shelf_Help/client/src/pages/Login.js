@@ -21,7 +21,6 @@ const Login = () => {
             setLoading(false);
             toast.info(`Welcome back ${user.displayName}`);
             history.push("/");
-            console.log("should have loaded to home page.... ")
         })
         .catch((err) => {
             setLoading(false);

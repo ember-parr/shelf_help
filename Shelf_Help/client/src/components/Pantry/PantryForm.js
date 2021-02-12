@@ -24,7 +24,7 @@ const PantryForm = () => {
         searchSpoonacularIngredients(wordsToSearch)
         setIsLoading(false)
     }
-
+    console.log("pantry form just ran")
     
 
     return (
