@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, {useState, useContext} from "react"
 import { toast } from "react-toastify";
 import { FoodItemContext } from "../../providers/FoodItemProvider";
