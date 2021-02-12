@@ -12,6 +12,7 @@ import {
   NavbarText,
 } from "reactstrap";
 import { UserProfileContext } from "../providers/UserProfileProvider";
+import { Image, Transformation } from "cloudinary-react";
 
 const AppHeader = () => {
   const { getCurrentUser, logout } = useContext(UserProfileContext);
@@ -34,14 +35,9 @@ const AppHeader = () => {
     <div>
       <Navbar color="dark" dark expand="md">
         <NavbarBrand tag={Link} to="/">
-          {/* <img
-            id="header-logo"
-            src="./../../public/images/favicon-duo.png"
-            width="30"
-            height="30"
-            className="mr-1"
-            alt="Shelfy"
-          /> */}
+        <Image cloudName="emberparr" publicId="Shelf%20Help/White_Icon_hxajk6.png" className="mr-1">
+          <Transformation width="40" crop="scale" />
+        </Image>
           Shelf Help
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />

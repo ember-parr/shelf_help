@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState,  } from "react";
+import { Image, Transformation } from "cloudinary-react";
 import { Card, CardImg, CardColumns, CardBody, CardTitle, CardSubtitle, CardText, FormGroup, Input } from "reactstrap"
 import { Container, Spinner, Row, Col, Jumbotron, Button } from 'reactstrap';
 import { MealContext } from "../providers/MealProvider";
@@ -28,8 +29,11 @@ export const Dashboard = () => {
             <div className="m-2">
             <Container className="theamed-container" fluid="sm">
                 <Jumbotron>
-                    <h1 className="display-3"> Shelf Help </h1>
-                    
+                    {/* <h1 className="display-3"> Shelf Help </h1> */}
+                    <h1 className="display-3">
+                    <Image cloudName="emberparr" publicId="Shelf%20Help/Horizontal-Logo_dcrrx7_2_xkij4a.png" >
+                        <Transformation width="1000" crop="scale" />
+                    </Image></h1>
                     <p className="lead"> Created by Ember Parr &emsp; | &emsp; Full Stack Capstone Project &emsp; | &emsp; February 2022 </p>
                     <hr className="my-2" />
                     <Row className="justify-content-around">
