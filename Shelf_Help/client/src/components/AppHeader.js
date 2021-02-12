@@ -22,11 +22,12 @@ const AppHeader = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   const logoutAndReturn = () => {
-    window.confirm("Are You Sure You Want To Log Out?")
+    if(window.confirm("Are You Sure You Want To Log Out?")) {
     return logout().then(() => {
       toast.dark("You are now logged out");
       history.push("/login");
     });
+  }
   };
 
   return (
