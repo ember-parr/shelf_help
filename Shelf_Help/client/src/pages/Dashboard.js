@@ -1,74 +1,67 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState,  } from "react";
-import { Card, CardImg, CardColumns, CardBody, CardTitle, CardSubtitle, CardText, FormGroup, Input } from "reactstrap"
+import { Image, Transformation } from "cloudinary-react";
+import { Card, Media, CardTitle, CardSubtitle, CardText, FormGroup, Input } from "reactstrap"
 import { Container, Spinner, Row, Col, Jumbotron, Button } from 'reactstrap';
 import { MealContext } from "../providers/MealProvider";
-import { MealIdeas } from "../components/DashboardMealIdeas";
+import HorizontalLogo  from "../Styles/HorizontalLogo.png";
+import { MealIdeas } from "../components/Dashboard/DashboardMealIdeas";
+import { DashboardSearch } from "../components/Dashboard/DashboardSearch";
 
 
 export const Dashboard = () => {
     const { getFunFact, funFact, dashboardMealIdeas, mealIdeas  } = useContext(MealContext)
-    
-    // useEffect(() => {
-    //     getFunFact()
-    //     setTimeout(function() {
 
-    //         console.log(funFact)
-    //     }, 750 )
-    // }, [])
 
+    const parentSizing = {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+    }
+    const imgSizing ={
+        justifyContent: "center",
+        width: "99%",
+        height: "auto",
+    }
     
 
     useEffect(() => {
         dashboardMealIdeas()
-        
     }, [])
+
+    
+
 
 
     return (
         <>
             <div className="m-2">
-            <Container className="theamed-container" fluid="sm">
-                <Jumbotron>
-                    <h1 className="display-3"> Shelf Help </h1>
-                    
+            <Container  fluid="sm">
+                <Jumbotron className="pt-0" style={parentSizing}>
+                    <Col >
+                <Media  fluid>
+                    <Media  object src="https://res.cloudinary.com/emberparr/image/upload/v1613093575/Shelf%20Help/Horizontal-Logo_dcrrx7_2_xkij4a.png" style={imgSizing} alt="Generic placeholder image" />
+                </Media></Col>
                     <p className="lead"> Created by Ember Parr &emsp; | &emsp; Full Stack Capstone Project &emsp; | &emsp; February 2022 </p>
-                    <hr className="my-2" />
-                    <Row className="justify-content-around">
-                        <p>{funFact ? {funFact} : " "}</p>
-                        </Row>
+        
                         
                 </Jumbotron>
-            </Container>
-        </div>
-            <Container fluid="md">
+            
 
                 <Row>
-
                     <Col lg="8">
                         
-                            {mealIdeas ? <MealIdeas mealIdeas={mealIdeas} /> : <Spinner color="secondary" />}
+                            {mealIdeas ? <MealIdeas mealIdeas={mealIdeas.recipes} /> : <i>unable to load recipe ideas</i>}
                     </Col>
                     <Col lg="1"></Col>
                     <Col lg="3">
-                        {/* <p className="lead">You have Questions... We Have Answers...  </p>
-                        <FormGroup>
-                            <Input
-                            type="search"
-                            name="search"
-                            id="exampleSearch"
-                            placeholder="search placeholder"
-                            />
-                        </FormGroup>
-                        <Card body outline color="info">
-                            <CardTitle tag="h5"> </CardTitle>
-                            <CardText></CardText>
-                        </Card> */}
+                            <DashboardSearch />
                     </Col>
                 </Row>
             </Container>
-
+        </div>
 
         </>
     )

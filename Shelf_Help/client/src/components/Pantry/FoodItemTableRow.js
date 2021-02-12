@@ -1,18 +1,25 @@
 /* eslint-disable no-unused-vars */
 import React, {useState, useContext} from "react"
+import {FoodItemContext} from "../../providers/FoodItemProvider"
 import { toast } from "react-toastify";
-import { FoodItemContext } from "../../providers/FoodItemProvider";
 
-export const GroceryTableRow = ({item}) => {
-    const [isLoading, setIsLoading] = useState(true)
+
+
+export const FoodItemTableRow = ({item}) => {
     const { deleteFoodItem, updateFoodItem } = useContext(FoodItemContext);
 
-    const moveToPantry = () => {
+    console.log("FoodItemTableRow just ran")
+
+    // SET STATE NEEDED WITHIN COMPONENT FOR GENERAL FUNCTIONS
+    const [isLoading, setIsLoading] = useState(true)
+
+
+    const moveToGrocery = () => {
         setIsLoading(true)
         console.log("add clicked : " + item.id)
         const foodToUpdate = {
             id: item.id,
-            quantity: 1,
+            quantity: 0,
             spoonacularIngredientId: item.spoonacularIngredientId,
             measurement: " ",
             userId: item.userId,
@@ -25,9 +32,10 @@ export const GroceryTableRow = ({item}) => {
             toast.info(`${item.foodName} successfully updated!`)
         })
         .then(()=> {
-            window.location.href="/grocerylist"
+            window.location.href="/mypantry"
         })
     }
+
 
     const deleteItem = () => {
         setIsLoading(true)
@@ -38,19 +46,19 @@ export const GroceryTableRow = ({item}) => {
             toast.info(`${item.foodName} deleted`)
         })
         .then(()=> {
-            window.location.href="/grocerylist"
+            window.location.href="/mypantry"
         })
     }
 
-
+    
+    // DISPLAYING INFO ON DOM 
         return (
             <>
-                <tr >
+            <tr >
                     <td>{ item.foodName }</td>
-                    <td> <span onClick={() => moveToPantry()}> ✔ </span> &emsp; <span onClick={() => deleteItem()}> ✖ </span> </td>
+                    <td> <span onClick={() => moveToGrocery()}> 〰 </span> &emsp; <span onClick={() => deleteItem()}> ✖ </span> </td>
                     
                 </tr>
-
             </>
         )
     

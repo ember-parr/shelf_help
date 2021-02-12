@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { FoodItemTable } from "../components/FoodItems/FoodItemTable";
+import { FoodItemTable } from "../components/Pantry/FoodItemTable";
 import {FoodItemProvider} from "../providers/FoodItemProvider";
 import {Container} from "reactstrap"
 

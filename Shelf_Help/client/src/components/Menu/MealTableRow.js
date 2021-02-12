@@ -19,6 +19,8 @@ export const MealTableRow = ({menu, spoonId}) => {
     const [dateSelection, setDateSelection] = useState(menu.date)
     const [mealTypeChoice, setMealTypeChoice] = useState(menu.mealType)
 
+    console.log("MealTableRow file ran")
+
     // SET STATE NEEDED WITHIN COMPONENT FOR GENERAL FUNCTIONS
     const [isLoading, setIsLoading] = useState(true)
 
@@ -30,7 +32,6 @@ export const MealTableRow = ({menu, spoonId}) => {
     // HELP DATE APPEAR LESS AWFUL & RE-RENDER WHEN MENUS ARE UPDATED OR RELOADED. (strange behavior with date-fns, betterDate function solved but is not pretty)
     useEffect(() => {
         betterDate()
-        console.log("in use effect spoon id is: " + spoonId)
     }, [menu])
 
     let betterDate =() => {
@@ -47,7 +48,6 @@ export const MealTableRow = ({menu, spoonId}) => {
 
     // OPEN AND CLOSE THE EDIT MENU MODAL
     const openEditModal = () => {
-        console.log("on open edit spoon id is: " + menu.spoonacularRecipeId)
         setIsLoading(true)
         getMealTypes()
         setModal(true)
@@ -73,7 +73,7 @@ export const MealTableRow = ({menu, spoonId}) => {
             date: dateSelection,
             userId: menu.userId,
             custom: false,
-            spoonacularIngredientId: menu.spoonacularRecipeId,
+            spoonacularRecipeId: menu.spoonacularRecipeId,
         }
         updateMenu(mealToUpdate)
         .then(() => {
@@ -100,15 +100,6 @@ export const MealTableRow = ({menu, spoonId}) => {
         })
     }
 
-    const goToDetails = () => {
-        let spoonyId = menu.spoonacularIngredientId
-        console.log("spoon id is: " + menu.spoonacularIngredientId)
-        if (menu.spoonacularIngredientId) {
-            history.push(`/menu/details/${menu.spoonacularIngredientId}`)
-        } else {
-            console.log("error on GoToDetails function")
-        }
-    }
 
     return (
     <>

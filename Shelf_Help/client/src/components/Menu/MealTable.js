@@ -8,7 +8,7 @@ import { Table } from "reactstrap";
 export const MealTable = () => {
     const { getMeals, allMeals } = useContext(MealContext)
     const [ isLoading, setIsLoading ] = useState(false)
-
+    console.log("MealTable just ran")
     useEffect(() => {
         getMeals()
         .then(setIsLoading(false))

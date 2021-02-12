@@ -38,7 +38,7 @@ export const RecipeInstructions = ({instructions}) => {
                 <hr />
                 <big>Instructions</big>
                 <hr />
-                <p>{instructions}</p>
+                <div className="content" dangerouslySetInnerHTML={{__html: instructions}}></div>
                 </>
             )
         }

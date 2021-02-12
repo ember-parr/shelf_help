@@ -2,23 +2,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import { Jumbotron, Button, Container, Col, Row, Table, Modal, ModalBody, ModalHeader, FormGroup, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, ModalFooter } from 'reactstrap';
-import { MealContext } from '../../../providers/MealProvider';
-import { MealTypeContext } from '../../../providers/MealTypeProvider';
-import { UserProfileContext } from '../../../providers/UserProfileProvider';
+import { MealContext } from '../../providers/MealProvider';
+import { MealTypeContext } from '../../providers/MealTypeProvider';
+import { UserProfileContext } from '../../providers/UserProfileProvider';
 import { toast } from "react-toastify";
 
 
 
 export const RecipeHeader = ({recipe}) => {
-    const { addMenu, singleRecipe } = useContext(MealContext)
+    const { addMenu } = useContext(MealContext)
     const { getMealTypes, mealTypes } = useContext(MealTypeContext)
     const { getCurrentUser } = useContext(UserProfileContext)
     const user = getCurrentUser();
     const [modal, setModal] = useState(false);
     const [collapse, setCollapse] = useState(false);
     const toggle = () => setCollapse(!collapse);
-    const [dateSelection, setDateSelection] = useState(new Date())
-    const [mealTypeChoice, setMealTypeChoice] = useState(6)
+    const [dateSelection, setDateSelection] = useState()
+    const [mealTypeChoice, setMealTypeChoice] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [dropdownMealTypeOpen, setDropdownMealTypeOpen] = useState(false);
 
@@ -46,7 +46,6 @@ export const RecipeHeader = ({recipe}) => {
         setDropdownMealTypeOpen(!dropdownMealTypeOpen)
     }
 
-console.log("recipe.id: " + recipe.id)
 
     const addMealEntry = () => {
         if (!dateSelection) {
@@ -120,7 +119,7 @@ console.log("recipe.id: " + recipe.id)
                 <Row style={centerItUp} className="mb-4">
                     <big>Meal Type: &ensp;</big>
                         <Dropdown size="sm" isOpen={dropdownMealTypeOpen} toggle={dropdownMealTypeToggle}> 
-                            { mealTypeChoice.name ? <DropdownToggle caret>{mealTypeChoice.name}</DropdownToggle> : <DropdownToggle caret>Options</DropdownToggle> } 
+                            { mealTypeChoice ? <DropdownToggle caret>{mealTypeChoice.name}</DropdownToggle> : <DropdownToggle caret>Options</DropdownToggle> } 
                             <DropdownMenu>
                                 <DropdownItem header>select one option</DropdownItem>
                                 <DropdownItem divider />
