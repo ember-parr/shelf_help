@@ -142,7 +142,7 @@ export const MealProvider = (props) => {
     }
 
     const dashboardMealIdeas = () => {
-        fetch(`https://api.spoonacular.com/mealplanner/generate?timeFrame=week&apiKey=${spoonKey}`)
+        fetch(`https://api.spoonacular.com/recipes/random?number=10&apiKey=${spoonKey}`)
         .then((res) => res.json())
         .then(output => {
             setMealIdeas(output)

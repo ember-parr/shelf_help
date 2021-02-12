@@ -11,6 +11,7 @@ import { MealIdeas } from "../components/Dashboard/DashboardMealIdeas";
 export const Dashboard = () => {
     const { getFunFact, funFact, dashboardMealIdeas, mealIdeas  } = useContext(MealContext)
     
+    
     // useEffect(() => {
     //     getFunFact()
     //     setTimeout(function() {
@@ -28,12 +29,10 @@ export const Dashboard = () => {
         <>
             <div className="m-2">
             <Container className="theamed-container" fluid="sm">
-                <Jumbotron>
-                    {/* <h1 className="display-3"> Shelf Help </h1> */}
-                    <h1 className="display-3">
+                <Jumbotron className="pt-0">
                     <Image cloudName="emberparr" publicId="Shelf%20Help/Horizontal-Logo_dcrrx7_2_xkij4a.png" >
                         <Transformation width="1000" crop="scale" />
-                    </Image></h1>
+                    </Image>
                     <p className="lead"> Created by Ember Parr &emsp; | &emsp; Full Stack Capstone Project &emsp; | &emsp; February 2022 </p>
                     <hr className="my-2" />
                     <Row className="justify-content-around">
@@ -49,7 +48,7 @@ export const Dashboard = () => {
 
                     <Col lg="8">
                         
-                            {mealIdeas ? <MealIdeas mealIdeas={mealIdeas} /> : <Spinner color="secondary" />}
+                            {mealIdeas ? <MealIdeas mealIdeas={mealIdeas.recipes} /> : <i>unable to load recipe ideas</i>}
                     </Col>
                     <Col lg="1"></Col>
                     <Col lg="3">
