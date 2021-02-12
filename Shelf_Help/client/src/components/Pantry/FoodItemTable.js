@@ -55,10 +55,7 @@ export const FoodItemTable = () => {
                 <thead>
                     <tr>
                         <th>Ingredient</th>
-                        <th>Quantity</th>
-                        {/* <th  className="d-none d-sm-block">Measurement</th> */}
-                        <th >Storage</th>
-                        {/* <th className="d-none d-md-block">Used In...</th> */}
+                        <th>Move to Grocery List <span style={{fontSize: "0.7rem", color:"grey"}} >-or-</span> Delete</th>
                     </tr>
                 </thead>
 

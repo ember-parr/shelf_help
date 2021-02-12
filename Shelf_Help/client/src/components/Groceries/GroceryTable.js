@@ -12,9 +12,6 @@ import {Button, ButtonGroup, Table, Modal, ModalHeader, ModalBody, ModalFooter, 
 export const GroceryTable = () => {
     const { getGroceryList, groceryItems } = useContext(FoodItemContext);
     const [ allFoods, setAllFoods ] = useState({});
-    const [filteredFoods, setFiltered ] = useState([]);
-    const todayFoodItems = []
-    const weekFoodItems = []
     const domHistory = useHistory();
 
     console.log("GroceryTable just ran")

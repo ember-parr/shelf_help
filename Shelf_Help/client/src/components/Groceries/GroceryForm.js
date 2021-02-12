@@ -2,16 +2,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 
-import React, { useContext, useState, useEffect, createRef } from 'react';
-import { useParams } from "react-router-dom";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup, Container, Row } from 'reactstrap';
+import React, { useContext, useState, useEffect,  } from 'react';
+import { Button, Input, Form, FormGroup, Container, Row } from 'reactstrap';
 import { FoodItemContext } from "../../providers/FoodItemProvider";
-import { LocationContext } from "../../providers/LocationProvider";
 import { GroceryFormListItem } from './GroceryFormListItem';
 
 
 const GroceryForm = () => {
-    const { searchSpoonacularIngredients, spoonResults, foodItems, getFoodById, setSpoonResults } = useContext(FoodItemContext)
+    const { searchSpoonacularIngredients, spoonResults, setSpoonResults } = useContext(FoodItemContext)
     const [isLoading, setIsLoading] = useState(true);
     const [snoopy, setSnoopy] = useState('')
 
@@ -50,7 +48,6 @@ const GroceryForm = () => {
                 <Row>
                     {spoonResults.results?.map(ingredientOption => {
                         return <GroceryFormListItem key={ingredientOption.id} food={ingredientOption} />
-                        // return <p key={ingredientChoice.id}>{ingredientChoice.name}</p>
                     })}
                 </Row>
             </div>
