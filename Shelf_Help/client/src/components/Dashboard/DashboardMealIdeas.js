@@ -7,7 +7,7 @@ import { Card, CardBody, CardText, CardColumns } from 'reactstrap';
 
 export const MealIdeas = ({mealIdeas}) => {
     const history = useHistory();
-    if (mealIdeas.length > 0) {
+    if (mealIdeas) {
         return (
         <>
             <p className="lead">We've gathered some recipe ideas for you to try something new! </p>
