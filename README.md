@@ -38,7 +38,9 @@ You will need to create an account on Spoonacular's site, the api key will be in
 5. from terminal navigae to `client` folder of repository
 6. execute `npm run` to install necessary node packages
 7. create a `env.local` file & paste the following code (with your keys)
-    ``` REACT_APP_API_KEY=FirebaseAPIKey
+    ``` 
+    REACT_APP_API_KEY=FirebaseAPIKey
     REACT_APP_SPOONACULAR_KEY=SpoonacularKey
+    ```
 8. execute `npm run` from client folder to start app
 9. run server from local machine for SQL data. 
